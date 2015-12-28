@@ -4,7 +4,7 @@
 // import 载入外挂
 var gulp = require('gulp'),
     del = require('del'), //删除文件
-    //sass = require('gulp-sass'),
+    sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     nano = require('gulp-cssnano'), // CSS压缩
     eslint = require('gulp-eslint'),
@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     clean = require('gulp-rimraf'),
     concat = require('gulp-concat'),
+    changed = require('gulp-changed'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
@@ -25,20 +26,20 @@ var gulp = require('gulp'),
     utils = require("./tools/utils");
 
 // compile css from sass files
-gulp.task('styles', function() {
-    return gulp.src('src/styles/sass/**/*.scss')
+gulp.task('sass', function() {
+    return gulp.src('src/stylesheets/sass/' + pkg.name + '.scss')
         .pipe(concat(pkg.name + '.scss'))
         .pipe(sass({
             style: 'expanded'
         }).on('error', sass.logError))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9',
             'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('dev/styles'))
+        .pipe(gulp.dest('dev/stylesheets'))
         .pipe(rename({
             suffix: '.min'
         }))
         .pipe(nano())
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('dist/stylesheets'))
         .pipe(livereload())
         .pipe(notify({
             message: 'Styles task complete'
@@ -96,31 +97,44 @@ gulp.task('images', function() {
 });
 
 //parse template
-gulp.task('templates', function() {
-    return gulp.src('src/templates/**/*')
-        .pipe(utils.paseData({
-            path: ''
-        }))
-        .pipe(gulp.dest('dist'))
-        .pipe(livereload())
+gulp.task('template', function() {
+    // return gulp.src('src/templates/**/*')
+    //     .pipe(utils.paseData({
+    //         path: ''
+    //     }))
+    //     .pipe(gulp.dest('dist'))
+    //     .pipe(livereload())
+    //     .pipe(notify({
+    //         message: 'Template task complete'
+    //     }));
+});
+
+//assets
+gulp.task('assets', function() {
+
+    return gulp.src('src/assets/**/*')
+        .pipe(changed('dev/assets'))
+        .pipe(changed('dist/assets'))
         .pipe(notify({
-            message: 'Template task complete'
+            message: 'Assets task complete'
         }));
 });
 
 gulp.task('build', function() {
-    var build_path = 'build\\' + pkg.name + '\\' + pkg.version + '\\';
+    gulp.start('images');
+    var build_path = 'dist\\' + pkg.name + '\\' + pkg.version +
+        '\\';
     var cwd = process.cwd();
     gulp.src([
-            'dist/css/**/*',
+            'dev/css/**/*',
             //'dist/file/**/*',
-            'dist/images/**/*',
-            'dist/styles/**/*.min.css',
-            'dist/scripts/**/*.min.js',
-            'dist/**/*.html'
+            'dev/stylesheets/**/*.min.css',
+            'dev/scripts/**/*.min.js',
+            'dev/**/*.html'
         ])
         .pipe(gulp.dest(function(file) {
-            var path = build_path + file.base.replace(cwd +
+            var path = build_path + file.base.replace(
+                cwd +
                 '\\dist\\', '');
             return path;
         }));
@@ -128,7 +142,8 @@ gulp.task('build', function() {
 
 // cleanup
 gulp.task('clean', function() {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images',
+    return gulp.src(['dist/stylesheets', 'dist/scripts',
+            'dist/images',
             'dist/*.html'
         ], {
             read: false
@@ -138,14 +153,14 @@ gulp.task('clean', function() {
 
 // watch for changes in files
 gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'images');
+    gulp.start('sass', 'scripts', 'template', 'assets');
 });
 
 // monitoring 监听
 gulp.task('watch', function() {
 
     // 监听所有.scss档
-    gulp.watch('src/styles/**/*.scss', ['styles']);
+    gulp.watch('src/stylesheets/**/*.scss', ['styles']);
 
     // 监听所有.js档
     gulp.watch('src/scripts/**/*.js', ['scripts']);

@@ -10,9 +10,5 @@ npm-debug.log
 dist/*
 dev/*
 build/*
-sandbox/*
 
 .cache
-
-sandbox/*
-!sandbox/*.example
