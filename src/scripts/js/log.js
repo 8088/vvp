@@ -17,6 +17,7 @@ var log = (function(){
             'error': noop
     };
 
+    var _vvp_log_flag = _vvp_log_flag || undefined;
     var  _log = function(type,args){
 
         if(typeof _vvp_log_flag == 'undefined' || !_vvp_log_flag){
@@ -48,7 +49,7 @@ var log = (function(){
     };
     var log = function(){
         _log('log',arguments);
-    }
+    };
 
     log.error = function(){
         _log('error',arguments);

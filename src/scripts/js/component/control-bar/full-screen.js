@@ -2,7 +2,7 @@
  * 全屏
  * @type {vvp.CoreObject|vjs.CoreObject}
  */
-vvp.component.FullScreen = verge.CoreObject.extend({
+vvp.component.FullScreen = vvp.CoreObject.extend({
     init:function(options){
         //<div class="x-fullscreen">
         //    <!--button class="x-control-btn" type="button" title="全屏模式" rol="button"><b class="x-zoomin"><em>全屏</em></b></button>-->
@@ -34,13 +34,9 @@ vvp.component.FullScreen = verge.CoreObject.extend({
         var isFullScreen = options.isFullScreen;
         var setStyle = function(isFullScreen) {
             if(isFullScreen){
-                b.removeClass('x-zoomin').addClass('x-zoomout').html("<em>退出全屏</em>");
-                //b.class = "x-zoomout";
-                //b.innerHTML = "<em>退出全屏</em>";
+                b.removeClass('x-zoomin').addClass('x-zoomout').html('<em>退出全屏</em>');
             }else{
-                b.removeClass('x-zoomout').addClass('x-zoomin').html("<em>全屏</em>");
-                //b.class = "x-zoomin";
-                //b.innerHTML = "<em>全屏</em>";
+                b.removeClass('x-zoomout').addClass('x-zoomin').html('<em>全屏</em>');
             }
         };
         setStyle(isFullScreen);

@@ -15,7 +15,7 @@
 
     vQ.extend({
         htmlPrefilter: function (html) {
-            return html.replace(rxhtmlTag, "<$1></$2>");
+            return html.replace(rxhtmlTag, '<$1></$2>');
         }
     });
 
@@ -102,7 +102,7 @@
             for (; ( elem = this[i] ) != null; i++) {
                 if (elem.nodeType === 1) {
                     // Remove any remaining nodes
-                    elem.textContent = "";
+                    elem.textContent = '';
                 }
             }
             return this;
@@ -185,7 +185,7 @@
             } else if ( node.nodeType === 3 || node.nodeType === 4 ) {
                 return node.nodeValue;
             }
-            return "";
+            return '';
         }
     });
 }());

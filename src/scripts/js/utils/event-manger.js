@@ -7,7 +7,7 @@
  * @author zhengzk
  **/
 
-verge.EventManager = verge.CoreObject.extend({
+verge.EventManager = vvp.CoreObject.extend({
     init:function(data){
         this._guid = 0;
         this._handlers = {};
@@ -126,7 +126,7 @@ verge.EventManager = verge.CoreObject.extend({
         var handlers = own._handlers[type];
         if (handlers) {
             for(var k in handlers){
-                var context = context || own._contexts[handlers[k].$$guid];
+                context = context || own._contexts[handlers[k].$$guid];
                 handlers[k].apply(context || this , args );
             }
         }

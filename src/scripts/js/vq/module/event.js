@@ -8,7 +8,7 @@
  **/
 (function () {
 
-    var event = verge.objectCreate({
+    var event = ObjectCreate({
         /**
          * 为元素绑定方法
          * @param element
@@ -36,7 +36,7 @@
             if (context) {
                 _handler = function () {
                     handler.apply(context, arguments);
-                }
+                };
                 own._contextHandler[handler.$$guid] = _handler;
                 _handler.$$guid = handler.$$guid = handler.$$guid || own._guid++;
             }
@@ -56,14 +56,14 @@
                 if (!handlers) {
                     handlers = element.events[type] = {};
                     // store the existing event handler (if there is one)
-                    if (element["on" + type]) {
-                        handlers[0] = element["on" + type];
+                    if (element['on' + type]) {
+                        handlers[0] = element['on' + type];
                     }
                 }
                 // store the event handler in the hash table
                 handlers[_handler.$$guid] = _handler;
                 // assign a global event handler to do all the work
-                element["on" + type] = own._handleEvent;
+                element['on' + type] = own._handleEvent;
             }
         },
         /**

@@ -2,7 +2,7 @@
  * 播放时间view
  * @type {vvp.CoreObject|vjs.CoreObject}
  */
-vvp.component.TimePanel = verge.CoreObject.extend({
+vvp.component.TimePanel = vvp.CoreObject.extend({
     init:function(options){
         //    <div class="x-time-display">
         //        <span class="x-time-current">122:23</span>
@@ -43,7 +43,7 @@ vvp.component.TimePanel = verge.CoreObject.extend({
                     }
                 }
             }
-        }
+        };
 
         setTime(options.time,options.duration);
 

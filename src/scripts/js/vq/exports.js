@@ -8,34 +8,31 @@
  **/
 //amd 方式引用支持
 if (typeof define === 'function' && define['amd']) {
-    //define('vvp', [], function(){ return vvp; });
-    define('@NAME', [], function(){ return vvp; });
+    define('@NAME', [], function(){ return vQ; });
 
 // checking that module is an object too because of umdjs/umd#35
 } else if (typeof exports === 'object' && typeof module === 'object') {
-    //module['vvp'] = vvp;
-    module['@NAME'] = vvp;
+    module['@NAME'] = vQ;
 }
 
-if(exports){
+if(typeof exports === 'object'){
     // Expose vQ to the exports object
-    var _vvp = exports['@NAME'];
+    var _vQ = exports['@NAME'];
 
-    vvp.extend({
+    vQ.extend({
         /**
-         * 释放并返回vvp 解决命名冲突
+         * 释放并返回vQ 解决命名冲突
          * @param flag
          * @returns {Function}
          */
         noConflict: function () {
-            if (exports['@NAME'] == vvp) {
-                exports['@NAME'] = _vvp;
+            if (exports['@NAME'] == _vQ) {
+                exports['@NAME'] = _vQ;
             }
-            return vvp;
+            return vQ;
         }
     });
-
-    exports['@NAME'] = vvp;
+    exports['@NAME'] = vQ;
 }else{
-    return vvp;
+    return vQ;
 }

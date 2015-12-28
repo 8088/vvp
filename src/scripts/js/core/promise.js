@@ -12,8 +12,8 @@
     };
 
     var Promise = exports.Promise = function (fn) {
-        if (typeof this !== "object") throw new TypeError("Promises must be constructed via new");
-        if (typeof fn !== "function") throw new TypeError("not a function");
+        if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
+        if (typeof fn !== 'function') throw new TypeError('not a function');
         var state = null; // 状态，null：pending，true：fulfilled，false：rejected
         var value = null; // 当前promise的状态事件处理函数（onFulfilled或onRejected）的入参
         var deferreds = []; // 当前promise的状态事件处理函数和promise链表中下一个promise的状态转换发起函数
@@ -73,10 +73,12 @@
         // promise的状态转换发起函数，触发promise的状态从pending->fulfilled
         function resolve(newValue) {
             try {
-                if (newValue === self) throw new TypeError("A promise cannot be resolved with itself.");
-                if (newValue && (typeof newValue === "object" || typeof newValue === "function")) {
+                if (newValue === self) {
+                    throw new TypeError('A promise cannot be resolved with itself.');
+                }
+                if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
                     var then = newValue.then;
-                    if (typeof then === "function") {
+                    if (typeof then === 'function') {
                         // 将控制权移交thenable和promise对象，由它们来设置当前pormise的状态和状态转换事件处理函数的实参
                         doResolve(then.bind(newValue), resolve, reject);
                         return;
@@ -103,11 +105,11 @@
         }
         // 执行构造函数的工厂方法，由工厂方法触发promise的状态转换
         doResolve(fn, resolve, reject);
-    }
+    };
     // 构造promise的链表逻辑结构
     function Handler(onFulfilled, onRejected, resolve, reject) {
-        this.onFulfilled = typeof onFulfilled === "function" ? onFulfilled : null;
-        this.onRejected = typeof onRejected === "function" ? onRejected : null;
+        this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+        this.onRejected = typeof onRejected === 'function' ? onRejected : null;
         this.resolve = resolve;
         this.reject = reject;
     }
@@ -136,7 +138,7 @@
     // 其then方法则返回一个真正的Promise对象
     function ValuePromise(value) {
         this.then = function(onFulfilled) {
-            if (typeof onFulfilled !== "function") return this;
+            if (typeof onFulfilled !== 'function') return this;
             return new Promise(function(resolve, reject) {
                 asap(function() {
                     try {
@@ -161,7 +163,7 @@
     var NULL = new ValuePromise(null);
     var UNDEFINED = new ValuePromise(undefined);
     var ZERO = new ValuePromise(0);
-    var EMPTYSTRING = new ValuePromise("");
+    var EMPTYSTRING = new ValuePromise('');
     Promise.resolve = function(value) {
         if (value instanceof Promise) return value;
         if (value === null) return NULL;
@@ -169,11 +171,11 @@
         if (value === true) return TRUE;
         if (value === false) return FALSE;
         if (value === 0) return ZERO;
-        if (value === "") return EMPTYSTRING;
-        if (typeof value === "object" || typeof value === "function") {
+        if (value === '') return EMPTYSTRING;
+        if (typeof value === 'object' || typeof value === 'function') {
             try {
                 var then = value.then;
-                if (typeof then === "function") {
+                if (typeof then === 'function') {
                     return new Promise(then.bind(value));
                 }
             } catch (ex) {
@@ -191,9 +193,9 @@
             var remaining = args.length;
             function res(i, val) {
                 try {
-                    if (val && (typeof val === "object" || typeof val === "function")) {
+                    if (val && (typeof val === 'object' || typeof val === 'function')) {
                         var then = val.then;
-                        if (typeof then === "function") {
+                        if (typeof then === 'function') {
                             then.call(val, function(val) {
                                 // 对于thenable和promise对象则订阅onFulfilled事件获取处理结果值
                                 res(i, val);
@@ -207,8 +209,8 @@
                         resolve(args);
                     }
                 } catch (ex) {
-                    throw ex;
                     reject(ex);
+                    throw ex;
                 }
             }
             for (var i = 0; i < args.length; i++) {
@@ -230,7 +232,7 @@
             });
         });
     };
-    Promise.prototype["catch"] = function(onRejected) {
+    Promise.prototype['catch'] = function(onRejected) {
         return this.then(null, onRejected);
     };
-}(verge));
+}(vvp));

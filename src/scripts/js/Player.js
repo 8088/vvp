@@ -2,6 +2,7 @@
  * 带基础view的播放器
  * Copyright 2015, player.js
  * MIT Licensed
+ * @class
  * @since 2015/9/2.
  * @modify 2015/10/25.
  * @author zhengzk
@@ -26,8 +27,8 @@ vvp.Player = vvp.VideoPlayer.extend({
             progress: true,
             time: true,
             quality: true
-        }
-        if (options.type == "live") {
+        };
+        if (options.type == 'live') {
             cfg.progress = false;
             cfg.time = false;
             cfg.quality = false;
@@ -188,10 +189,13 @@ vvp.Player = vvp.VideoPlayer.extend({
             own.play();
         });
 
-        this.one(['onError','onPlay'],function(){
+        this.bind(['onError','onPlay','onPlaying','onWaiting'],function(){
             root.hide();
         });
 
+        own.bind('onPause', function () {
+            root.show();
+        });
         this.root.append(root);
         //this.videoButton = root;
     },
@@ -231,6 +235,14 @@ vvp.Player = vvp.VideoPlayer.extend({
             root.bind('click', function () {
                 //own.dashboard.toggle();
                 own.controls(!own.controls());//toggle
+            });
+
+            own.bind(['onPlay','onPlaying'], function () {
+                root.show();
+            });
+
+            own.bind('onPause', function () {
+                root.hide();
             });
         });
         this.root.append(root);
@@ -287,7 +299,6 @@ vvp.Player = vvp.VideoPlayer.extend({
         } else {
             root.hide();
         }
-
         own.bind('onFullscreenChange',function(flag){
             if (flag) {
                 if (vvp.isIPAD) {

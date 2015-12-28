@@ -2,7 +2,7 @@
  * 进度条
  * @type {vvp.CoreObject|vjs.CoreObject}
  */
-vvp.component.Progress = verge.CoreObject.extend({
+vvp.component.Progress = vvp.CoreObject.extend({
     init:function(options){
         //<div class="x-progress">
         //    <div class="x-progress-track">

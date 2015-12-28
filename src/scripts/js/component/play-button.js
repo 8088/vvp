@@ -2,7 +2,7 @@
  * 播放按钮
  * @type {vvp.CoreObject}
  */
-vvp.component.PlayButton = verge.CoreObject.extend({
+vvp.component.PlayButton = vvp.CoreObject.extend({
     init:function(options){
         //<div class="x-play-control">
         //    <!--button class="x-control-btn"><b class="x-playing"><em>播放</em></b></button-->
@@ -30,11 +30,11 @@ vvp.component.PlayButton = verge.CoreObject.extend({
         root.append(btn);
         var setStyle = function(isPlaying){
             if(isPlaying){//播放状态 显示为暂停按钮
-                b.removeClass('x-playing').addClass("x-pause").html('<em>暂停</em>');
+                b.removeClass('x-playing').addClass('x-pause').html('<em>暂停</em>');
             }else{//暂停状态  显示为播放按钮
-                b.removeClass('x-pause').addClass("x-playing").html('<em>播放</em>');
+                b.removeClass('x-pause').addClass('x-playing').html('<em>播放</em>');
             }
-        }
+        };
         var isPlaying = options.playing;
         setStyle(isPlaying);
         /**

@@ -7,8 +7,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     nano = require('gulp-cssnano'), // CSS压缩
-    eslint = require('gulp-eslint'),
-    uglify = require('gulp-uglify'),
+    //eslint = require('gulp-eslint'),
+    //uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     htmlmin = require('gulp-htmlmin'),
     rename = require('gulp-rename'),
@@ -18,12 +18,11 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
-    addsrc = require('gulp-add-src'), // 分发文件
     browserSync = require('browser-sync'), // 浏览器同步
 
     pkg = require('./package.json'),
     //自定义的一些处理方法
-    utils = require("./tools/utils");
+    build = require("./tools/build");//合并脚本
 
 // compile css from sass files
 gulp.task('sass', function() {
@@ -48,36 +47,20 @@ gulp.task('sass', function() {
 
 // concatenate & minify js
 gulp.task('scripts', function() {
-    //return gulp.src('src/scripts/**/*.js')
-    return gulp.src([
-            'src/scripts/js/verge.js',
-            'src/scripts/js/base/**/*.js',
-            'src/scripts/js/log.js',
-            'src/scripts/js/vvp.js',
-            'src/scripts/js/utils/vq.js',
-            'src/scripts/js/utils/vq/*.js',
-            'src/scripts/js/utils/*.js',
-            'src/scripts/js/video-player.js',
-            'src/scripts/js/component/**/*.js',
-            'src/scripts/js/player.js',
-            'src/scripts/js/vvp-player.js',
-            'src/scripts/js/ready.js',
-            'src/scripts/js/exports.js'
-        ])
-        .pipe(eslint('.eslintrc'))
-        .pipe(concat(pkg.name + '.js')) //'.' + pkg.version
-        //.pipe(eslint.reporter('default'))
-        .pipe(utils.paseData())
-        .pipe(gulp.dest('dev/scripts'))
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(uglify())
-        .pipe(utils.addNote())
-        .pipe(gulp.dest('dist/scripts'))
+    return build('src/scripts/js/')
         .pipe(livereload())
         .pipe(notify({
             message: 'Scripts task complete'
+        }));
+});
+
+//build vQ.js
+gulp.task('vq', function () {
+    //var config = require("./src/config.json");
+    return build('src/scripts/js/vq/')
+        .pipe(livereload())
+        .pipe(notify({
+            message: 'vQ task complete'
         }));
 });
 

@@ -7,13 +7,14 @@
  * @author zhengzk
  **/
 
+// HTML5 Element Shim for IE8
+if (typeof HTMLVideoElement === 'undefined') {
+    document.createElement('video');
+    document.createElement('audio');
+    document.createElement('track');
+}
 
-//避免已有的 vvp 被重写
-var _vvp = window.vvp,
-//避免已有的 vvp 被重写
-    _vvp = window.vvp,
-
-    vvp = function (selector, options) {
+var vvp = function (selector, options) {
         return new vvp.fn.init(selector, options);
     };
 
@@ -53,32 +54,10 @@ vvp.fn.init.prototype = vvp.fn;
 
 vvp.extend = vvp.fn.extend = function () {
     verge.extend.apply(this, arguments);
-}
+};
 
 vvp.extend({
-    version: '@VERSION',
-    //解决命名冲突
-    /**
-     * vvp加载完成
-     */
-    ready: function () {
-        log('vvpjs is ready');
-    },
-    /**
-     * 释放并返回vvp 解决命名冲突
-     * @param flag
-     * @returns {Function}
-     */
-    noConflict: function (flag) {
-        if (window.vvp == vvp) {
-            window.vvp = _vvp;
-        }
-
-        if (flag && window.vvp == vvp) {
-            window.vvp = _vvp;
-        }
-        return vvp;
-    }
+    version: '@VERSION'
 });
 
 verge.routes('vvp.component');

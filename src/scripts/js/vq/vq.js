@@ -6,11 +6,6 @@
  * @author zhengzk
  * @modify 2015/10/29.
  */
-
-
-//var slice = [].slice,
-//    hasOwnProp = Object.prototype.hasOwnProperty;
-
 var vQ = function (selector, context) {
     return new vQ.fn.init(selector, context);
 };
@@ -36,13 +31,14 @@ vQ.fn = vQ.prototype = {
                 this[i] = nodeList[i];
             }
             //DOMElement
-        } else if (verge.isArray(selector)) {
+        } else if (vQ.isArray(selector)) {//数组
             this.length = selector.length;
-            for (var i = 0; i < selector.length; i += 1) {
-                this[i] = selector[i];
+            for (var j = 0; j < selector.length; j += 1) {
+                this[j] = selector[j];
             }
-        } else if (verge.isFunction(selector)) {
+        } else if (vQ.isFunction(selector)) {//function
             //ready func
+            vQ.ready(selector);
 
         } else if (selector.nodeType) {//DOM元素
             this[0] = selector;
@@ -127,17 +123,86 @@ vQ.fn = vQ.prototype = {
 vQ.fn.init.prototype = vQ.fn;
 
 vQ.extend = vQ.fn.extend = function () {
-    verge.extend.apply(this, arguments);
-}
+    var options, name, src, copy, copyIsArray, clone,
+        target = arguments[0] || {},
+        i = 1,
+        length = arguments.length,
+        deep = false;
+
+    // Handle a deep copy situation
+    if (typeof target === 'boolean') {
+        deep = target;
+
+        // Skip the boolean and the target
+        target = arguments[i] || {};
+        i++;
+    }
+
+    // Handle case when target is a string or something (possible in deep copy)
+    if (typeof target !== 'object' && !vQ.isFunction(target)) {
+        target = {};
+    }
+
+    // Extend jQuery itself if only one argument is passed
+    if (i === length) {
+        target = this;
+        i--;
+    }
+
+    for (; i < length; i++) {
+
+        // Only deal with non-null/undefined values
+        if (( options = arguments[i] ) != null) {
+
+            // Extend the base object
+            for (name in options) {
+                src = target[name];
+                copy = options[name];
+
+                // Prevent never-ending loop
+                if (target === copy) {
+                    continue;
+                }
+
+                // Recurse if we're merging plain objects or arrays
+                if (deep && copy && ( vQ.isPlainObject(copy) ||
+                    ( copyIsArray = vQ.isArray(copy) ) )) {
+
+                    if (copyIsArray) {
+                        copyIsArray = false;
+                        clone = src && vQ.isArray(src) ? src : [];
+
+                    } else {
+                        clone = src && vQ.isPlainObject(src) ? src : {};
+                    }
+
+                    // Never move original objects, clone them
+                    target[name] = vQ.extend(deep, clone, copy);
+
+                    // Don't bring in undefined values
+                } else if (copy !== undefined) {
+                    target[name] = copy;
+                }
+            }
+        }
+    }
+
+    // Return the modified object
+    return target;
+};
 
 vQ.extend({
+    version: '@VERSION',
     /**
      * 判断是否是Object
      * @param obj
      * @returns {boolean}
      */
     isPlainObject: function (obj) {
-        return verge.isPlainObject(obj);
+        return !!obj
+            && typeof obj === 'object'
+            && obj.toString() === '[object Object]'
+            && obj.constructor === Object;
     },
     /**
      * 判断是否是空节点
@@ -145,7 +210,11 @@ vQ.extend({
      * @returns {boolean}
      */
     isEmptyObject: function (obj) {
-        return verge.isEmptyObject(obj);
+        var t;
+        for(t in obj){
+            return true;
+        }
+        return false;
     },
     /**
      * 判断arr是否是Array
@@ -153,8 +222,7 @@ vQ.extend({
      * @returns {boolean}
      */
     isArray: function (arr) {
-        return verge.isArray(arr);
-        //Object.prototype.toString.call(arr) === '[object Array]';
+        return Object.prototype.toString.call(arr) === '[object Array]';
     },
     /**
      * 判断fn是否是Function
@@ -162,8 +230,7 @@ vQ.extend({
      * @returns {boolean}
      */
     isFunction: function (fn) {
-        return verge.isFunction(fn);
-        //'[object Function]' === Object.prototype.toString.call(fn);
+        return '[object Function]' === Object.prototype.toString.call(fn);
     },
     /**
      * 获取元素节点名称
@@ -202,8 +269,7 @@ vQ.extend({
     /**
      * 空function
      */
-    noop: function () {
-    },
+    noop: function () {},
     /**
      *
      * @param first {Object}
@@ -211,29 +277,14 @@ vQ.extend({
      * @returns {*}
      */
     merge: function (first, second) {
-        return verge.merge(first, second);
-    }
-});
-
-
-verge.extend({
-    /**
-     * 创建一个DOM元素并转换为vQ对象
-     * @param tagName
-     * @param attrs
-     */
-    create: function (tagName, attrs) {
-        tagName = tagName || 'div';
-        var ele = document.createElement(tagName);
-        var ret = vQ(ele);
-        if (attrs) {
-            ret.attr(attrs);
+        if (!second) {
+            return first;
         }
-        //ret.attr(attrs);
-        return ret;
+        for (var key in second) {
+            if (hasOwnProp.call(second, key)) {
+                first[key] = second[key];
+            }
+        }
+        return first;
     }
-});
-
-vvp.extend({
-    vQ: vQ
 });

@@ -2,7 +2,7 @@
  * 清晰度
  * @type {vvp.CoreObject|vjs.CoreObject}
  */
-vvp.component.QualityPanel = verge.CoreObject.extend({
+vvp.component.QualityPanel = vvp.CoreObject.extend({
     init:function(options){
         //<div class="x-quality">
         //  <button class="x-control-btn" title="画质设置">标清</button>
@@ -10,7 +10,7 @@ vvp.component.QualityPanel = verge.CoreObject.extend({
         //      <ul>
         //          <li><span class="x-quality-sd">超清</span></li>
         //          <li><span class="x-quality-hd">高清</span></li>
-        //          <li class="selected"><span class="x-quality-nd">标清</span></li>
+        //          <li class='selected'><span class="x-quality-nd">标清</span></li>
         //      </ul>
         //  </div>
         //</div>
@@ -33,7 +33,7 @@ vvp.component.QualityPanel = verge.CoreObject.extend({
             'mp4':'x-quality-nd',
             'hd2':'x-quality-sd',
             'hd3':'x-quality-hd'
-        }
+        };
 
         var root = verge.create('div',{
             class:'x-quality'
@@ -65,7 +65,7 @@ vvp.component.QualityPanel = verge.CoreObject.extend({
             if(childs[key]){
                 setOptions(options.qualitys,key);
             }
-        }
+        };
         var childs = [];
         var setOptions = function(qualitys,quality){
             //var _ul = document.createElement('ul');
@@ -85,7 +85,7 @@ vvp.component.QualityPanel = verge.CoreObject.extend({
                 li.append(span);
                 childs[key] = li;
                 if(key == currentQuality){
-                    li.addClass("selected");
+                    li.addClass('selected');
                     currentLi = li;
                     btn.html(options.qualitys[currentQuality]);
                     //btn.innerHTML = options.qualitys[currentQuality];
@@ -96,7 +96,7 @@ vvp.component.QualityPanel = verge.CoreObject.extend({
                         return;
                     }
                     //var childNodes = ul.childNodes
-                    li.addClass("selected");
+                    li.addClass('selected');
                     if(currentLi){
                         currentLi.removeClass('selected');
                     }

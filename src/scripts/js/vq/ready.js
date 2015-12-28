@@ -15,7 +15,7 @@
     function completed() {
         document.removeEventListener('DOMContentLoaded', completed);
         window.removeEventListener('load', completed);
-        vvp.ready();
+        vQ.ready();
     }
 
 // Catch cases where $(document).ready() is called
@@ -26,7 +26,7 @@
     if (document.readyState === 'complete') {
 
         // Handle it asynchronously to allow scripts the opportunity to delay ready
-        window.setTimeout(vvp.ready);
+        window.setTimeout(vQ.ready);
 
     } else {
 
@@ -37,7 +37,7 @@
         window.addEventListener('load', completed);
     }
 
-    vvp.extend({
+    vQ.extend({
         isReady: false,
         readyWait: 1,
         /**
@@ -45,24 +45,24 @@
          * @param arg
          */
         ready: function (arg) {
-            if (verge.isFunction(arg)) {
-                if (!vvp.isReady) {
+            if (vQ.isFunction(arg)) {
+                if (!vQ.isReady) {
                     readyList.push(arg);
                 } else {
-                    arg.apply(document, [vvp]);
+                    arg.apply(document, [vQ]);
                 }
             } else {
-                if (arg === true ? --vvp.readyWait : vvp.isReady) {
+                if (arg === true ? --vQ.readyWait : vQ.isReady) {
                     return;
                 }
-                vvp.isReady = true;
+                vQ.isReady = true;
 
-                if (arg !== true && --vvp.readyWait > 0) {
+                if (arg !== true && --vQ.readyWait > 0) {
                     return;
                 }
 
-                verge.objectEach(readyList, function (inx, func) {
-                    func.apply(document, [vvp]);
+                vQ.each(readyList, function (inx, func) {
+                    func.apply(document, [vQ]);
                 });
 
             }

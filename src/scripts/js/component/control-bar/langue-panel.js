@@ -2,7 +2,7 @@
  * 多语言选择
  * @type {vvp.CoreObject|vjs.CoreObject}
  */
-vvp.component.LanguePanel = verge.CoreObject.extend({
+vvp.component.LanguePanel = vvp.CoreObject.extend({
     init:function(options){
         //<div class="x-localization pressed">
         //  <button class="x-control-btn">国语</button>

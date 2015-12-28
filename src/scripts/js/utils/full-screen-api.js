@@ -70,8 +70,8 @@
     var fsApi = {};
 // map the browser API names to the spec API names
     if (browserApi) {
-        for (var i = 0; i < browserApi.length; i++) {
-            fsApi[specApi[i]] = browserApi[i];
+        for (var j = 0; j < browserApi.length; j++) {
+            fsApi[specApi[j]] = browserApi[j];
         }
     }
     //添加到verge对象上去

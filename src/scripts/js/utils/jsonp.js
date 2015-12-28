@@ -23,7 +23,7 @@ var CallBackEventNamePrefix = '@NAME' + '.jsonp.';//Callback名称前缀
             clearTimeout(script.timer);
         }
 
-        if (script.jsonp != "success") {
+        if (script.jsonp != 'success') {
             fail && fail({message: (script.jsonp || '获取数据失败')});
         }
 
@@ -45,7 +45,7 @@ var CallBackEventNamePrefix = '@NAME' + '.jsonp.';//Callback名称前缀
 
         options = options || {};//设定默认值
         if (!options.url) { //校验url参数
-            throw new TypeError("url参数不合法");
+            throw new TypeError('Param Error');
         }
         var callback = options.callback || 'callback';//callback name
         var data = options.data || {};
@@ -71,12 +71,12 @@ var CallBackEventNamePrefix = '@NAME' + '.jsonp.';//Callback名称前缀
                 log('-- JSONP --');
                 log(e);
             }
-        }
+        };
 
         //超时处理
         if (time) {
             script.timer = setTimeout(function () {
-                script.jsonp = "timeout";
+                script.jsonp = 'timeout';
                 removeScript(script, name, options.fail);
                 //options.fail && options.fail({ message: "超时" });
             }, time);
@@ -94,8 +94,8 @@ var CallBackEventNamePrefix = '@NAME' + '.jsonp.';//Callback名称前缀
         };
 
         script.src = url;
-        document.getElementsBytagName('head')[0].appendChild(script);
-    }
+        document.getElementsByTagName('head')[0].appendChild(script);
+    };
 
     //添加到vvp对象上去
     exports.jsonp = JSONP;

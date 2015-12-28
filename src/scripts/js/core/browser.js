@@ -6,45 +6,40 @@
  * @modify 2015/10/22.
  * @author zhengzk
  **/
-(function (exports){
+(function (exports) {
     /**
      * 检查是否支持flash
      * @returns {{f: number, v: number, e: number}}
      */
     function flashChecker() {
-        var hasFlash=0; //是否安装了flash
-        var flashVersion=0;   //flash版本
+        var hasFlash = 0; //是否安装了flash
+        var flashVersion = 0;   //flash版本
         var exception = 0;
-        try{
-            if(document.all)
-            {
-                var swf = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-                if(swf) {
-                    hasFlash=1;
-                    VSwf=swf.GetVariable("$version");
-                    flashVersion=parseInt(VSwf.split(" ")[1].split(",")[0]);
+        try {
+            var ActiveXObject = ActiveXObject || function(){return undefined;};
+            if (document.all) {
+                var swf1 = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+                if (swf1) {
+                    hasFlash = 1;
+                    var VSwf = swf1.GetVariable('$version');
+                    flashVersion = parseInt(VSwf.split(' ')[1].split(',')[0]);
                 }
-            }else{
-                if (navigator.plugins && navigator.plugins.length > 0)
-                {
-                    var swf=navigator.plugins["Shockwave Flash"];
-                    if (swf)
-                    {
-                        hasFlash=1;
-                        var words = swf.description.split(" ");
-                        for (var i = 0; i < words.length; ++i)
-                        {
-                            if (isNaN(parseInt(words[i]))) continue;
-                            flashVersion = parseInt(words[i]);
-                        }
+            } else if (navigator.plugins && navigator.plugins.length > 0) {
+                var swf2 = navigator.plugins['Shockwave Flash'];
+                if (swf2) {
+                    hasFlash = 1;
+                    var words = swf2.description.split(' ');
+                    for (var i = 0; i < words.length; ++i) {
+                        if (isNaN(parseInt(words[i]))) continue;
+                        flashVersion = parseInt(words[i]);
                     }
                 }
             }
-        }catch(e){
+        } catch (e) {
             hasFlash = 1;
             exception = 1;
         }
-        return {f:hasFlash,v:flashVersion,e:exception};
+        return {f: hasFlash, v: flashVersion, e: exception};
     }
 
     var retObj = {};
@@ -59,7 +54,7 @@
         isMac: 'Mac',
         isSafari: 'Safari',
         isChrome: 'Chrome',
-        isFirefox:'Firefox',
+        isFirefox: 'Firefox',
         isIPAD: 'iPad',
         isIPAD7: 'iPad; CPU OS 7',
         isIPHONE: 'iPhone',
@@ -69,8 +64,8 @@
         isAndroid: 'Android',
         isAndroid4: 'Android 4.',
         isAndroid41: 'Android 4.1',
-        isSonyDTV: "SonyDTV",
-        isBlackBerry: "BlackBerry",
+        isSonyDTV: 'SonyDTV',
+        isBlackBerry: 'BlackBerry',
         isMQQBrowser: 'MQQBrowser',
         isMobile: 'Mobile',
         isSamSung: 'SAMSUNG',
@@ -81,7 +76,7 @@
     };
     retObj.supportHTML5Video = false;
     retObj.isIOS = false;
-    retObj.os = "";
+    retObj.os = '';
     if (video.canPlayType) {
         retObj.supportHTML5Video = true;
         for (var type in videoType) {
@@ -96,7 +91,7 @@
     for (var os in osType) {
         if (ua.indexOf(osType[os]) !== -1) {
             retObj[os] = true;
-            retObj.os += osType[os] + " ";
+            retObj.os += osType[os] + ' ';
         } else {
             retObj[os] = false;
         }
@@ -105,7 +100,7 @@
             var andr = ua.substr(ind, 10);
             if (andr > osType.isAndroid4) {
                 retObj.isAndroid4 = true;
-                retObj.os += andr + " ";
+                retObj.os += andr + ' ';
             }
         }
     }
@@ -143,4 +138,4 @@
 
     exports.browser = retObj;
     //vvp.extend(retObj);
-}(verge));
+}(vvp));

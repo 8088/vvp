@@ -7,12 +7,12 @@
  * @author zhengzk
  **/
 
-vvp.VideoPlayer = verge.CoreObject.extend({
+vvp.VideoPlayer = vvp.CoreObject.extend({
     init: function (video,options) {
         var own = this;
         own.video = video;
         options = verge.merge({
-            isWeixin:verge.browser.isWeixin
+            isWeixin:vvp.browser.isWeixin
         },options);
         own._initOptions(options);
         own.bindEvents();
@@ -23,7 +23,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
             loop: options.loop, /*将会传递至video*/
             muted: options.muted, /*将会传递至video*/
             preload: options.preload/*将会传递至video*/
-        }
+        };
 
         if (options.src) {
             op.src = options.src;
@@ -39,10 +39,9 @@ vvp.VideoPlayer = verge.CoreObject.extend({
             });
         }
         this.attr(op);
-
         // Load plugins
         if (options.plugins) {
-            var plugins = options.plugins;
+            //var plugins = options.plugins;
 
             verge.objectEach(options.plugins,function(name,param){
                 if(verge.isFunction(this[name])){
@@ -56,13 +55,13 @@ vvp.VideoPlayer = verge.CoreObject.extend({
     currentTime: function (time, callback) {
         var own = this;
         if (arguments.length > 0) {
-
-            var  clearTimer = function(timer){
-                if (timer) {
-                    clearTimeout(timer);
-                    delete timer;
+            var _switchTimer;
+            var  clearTimer = function(){
+                if (_switchTimer) {
+                    clearTimeout(_switchTimer);
+                    _switchTimer = undefined;
                 }
-            }
+            };
 
             var timefun = function () {
                 own.video.currentTime = time;
@@ -70,9 +69,9 @@ vvp.VideoPlayer = verge.CoreObject.extend({
                     callback();
                 }
 
-                clearTimer(own._switchTimer);
+                clearTimer();
                 own.video.play();
-            }
+            };
 
 
             var seeks = this.video.seekable;
@@ -88,9 +87,9 @@ vvp.VideoPlayer = verge.CoreObject.extend({
                 }
 
             } else {//间隔一定时间后 重新调用当前方法
-                clearTimer(own._switchTimer);
+                clearTimer();
                 var _seek = arguments.callee;
-                own._switchTimer = setTimeout(function () {
+                _switchTimer = setTimeout(function () {
                     _seek.apply(own, arguments);
                 }, 100);
             }
@@ -104,14 +103,22 @@ vvp.VideoPlayer = verge.CoreObject.extend({
      */
     src: function (src) {
         if (arguments.length > 0) {
-            var prepaused = this.video.paused;
+            var prepaused = false;//!this.options.autoplay;
+            if(this.video.src){
+                prepaused = this.video.paused;
+            }
             if (!this.video.paused) {
                 this.video.pause();
             }
             this.video.src = src;
             this.video.load();
+
             if (!prepaused) {
-                this.video.play();
+                var own = this;
+                this.one('canplay',function(){
+                    own.play();
+                });
+                this.play();
             }
         }
         return this.video.src;
@@ -124,7 +131,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
     fullScreen:function(flag){
         if(arguments.length > 0 && flag != this.isFullscreen){
             var own = this;
-            if(flag == true){
+            if(flag){
                 if(vvp.isIPAD){//PAD 走css全屏
                     own._enterFullWindow();
                     own.trigger('onFullscreenChange', [own.isFullWindow]);
@@ -150,7 +157,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
         var own = this;
         this.isFullscreen = true;
 
-        if (verge.browser.supportsFullScreen) {
+        if (vvp.browser.supportsFullScreen) {
             // we can't take the video.js controls fullscreen but we can go fullscreen
             // with native controls
             //this.techCall('enterFullScreen');
@@ -224,7 +231,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
     },
     _fullWindowOnEscKey:function(event){
         if (event.keyCode === 27) {
-            if (this.isFullscreen() === true) {
+            if (this.isFullscreen === true) {
                 this.exitFullscreen();
             } else {
                 this._exitFullWindow();
@@ -240,7 +247,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
         var fsApi = verge.fullscreenAPI;
         own.isFullscreen = false;
 
-        if (verge.browser.supportsFullScreen) {
+        if (vvp.browser.supportsFullScreen) {
             own.video.webkitExitFullScreen();
         } else {
             this._exitFullWindow();
@@ -292,7 +299,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
                 if(typeof ret == 'undefined' || ret){
                     own.trigger(fun, arguments); //外部传入回掉事件 不更改当前对象
                 }
-            }
+            };
             vQ.bind(own.video, event, _fun);
             own[fun].eventTarget = _fun;// eventTarget解除事件绑定时用
         });
@@ -312,7 +319,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
                     var flag = false;
 
                     //用string的 indexof 替代？
-                    for(var i = 0,len = readonlyAttrs.length ; i < len; i++){
+                    for(var i = 0,len1 = readonlyAttrs.length ; i < len1; i++){
                         //排除只读属性
                         if(attr.toLowerCase() == readonlyAttrs[i].toLowerCase()){
                             flag = true;
@@ -321,10 +328,10 @@ vvp.VideoPlayer = verge.CoreObject.extend({
                     }
                     //非只读属性
                     if(!flag){
-                        for(var i = 0,len = readwriteAttrs.length ; i < len; i++){
-                            if(attr.toLowerCase() == readwriteAttrs[i].toLowerCase()){
+                        for(var j = 0,len2 = readwriteAttrs.length ; j < len2; j ++){
+                            if(attr.toLowerCase() == readwriteAttrs[j].toLowerCase()){
                                 flag = true;
-                                own[readwriteAttrs[i]](slice.call(arguments,1));
+                                own[readwriteAttrs[j]].apply(own,slice.call(arguments,1));//apply方式 确保多个参数
                                 break;
                             }
                         }
@@ -341,7 +348,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
                 for(var i = 0,len = attrs.length ; i < len; i++){
                     if(arg.toLowerCase() == attrs[i].toLowerCase()){
                         //不用过滤是否可写 属性方法中已判断
-                        return this[attrs[i]].apply(this,slice.call(arguments,1));//apply方式 确保多个参数
+                        return own[attrs[i]].apply(own,slice.call(arguments,1));//apply方式 确保多个参数
                         //return this[attrs[i]](arguments[1]);
                     }
                 }
@@ -354,7 +361,7 @@ vvp.VideoPlayer = verge.CoreObject.extend({
     plugin:function(name,init){
         this.expand({
             name:init
-        })
+        });
         return this;
     }
 });
@@ -392,7 +399,7 @@ vvp.VideoPlayer.expand(function(){
             args[0] = funs;
             events[fun].apply(events, args);
             return own;
-        }
+        };
     });
 
     //play load pause video原生方法
@@ -401,14 +408,14 @@ vvp.VideoPlayer.expand(function(){
             var own = this;
             own.video[fun].apply(own.video, arguments);
             return own;
-        }
+        };
     });
 
     //duration 等只读属性 转换为方法
     verge.objectEach(attrs.readonly.concat(attrs.specialReadonly),function(inx,attr){
         extend[attr] = function() {
             return vQ.attr(this.video,attr);
-        }
+        };
     });
 
     //autoplay 等设置&读取属性
@@ -418,7 +425,7 @@ vvp.VideoPlayer.expand(function(){
                 return vQ.attr(this.video,attr,val);
             }
             return vQ.attr(this.video,attr);
-        }
+        };
     });
 
     //回掉函数
@@ -426,7 +433,7 @@ vvp.VideoPlayer.expand(function(){
         var _fun = verge.callbacks[fun.toLowerCase()] || fun;
         extend[_fun] = function() {
             log(_fun,arguments);
-        }
+        };
     });
 
     return extend;

@@ -10,64 +10,61 @@
 vvp.fn.extend(function () {
     var ext = {},
         methods = verge.methods,
-        callbacks = verge.callbacks,
         attrs = verge.attrs;
+
     //    , 'attr'
     //    , 'plugin'
+
     //可调用方法 无返回值 返回vvp
     //bind unbind one load
-    verge.objectEach(methods.events.concat(methods.native).concat(['plugin'])
-        , function (inx, fun) {
+    verge.objectEach(methods.events.concat(methods.native).concat(['plugin']), function (inx, fun) {
             ext[fun] = function () {
                 var args = slice.call(arguments);
                 this.each(function (i, player) {
                     player[fun].apply(player, args);
                 });
                 return this;
-            }
+            };
         });
 
     //回掉函数和方法重名处理
     //play pause
-    verge.objectEach(methods.specialNative
-        , function (inx, fun) {
+    verge.objectEach(methods.specialNative, function (inx, fun) {
             ext[fun] = function (arg, flag) {
                 if (arguments.length > 0) {
                     if (verge.isFunction(arg)) {//参数为function
-                        var args = [fun].concat(slice.call(arguments));
+                        var args1 = [fun].concat(slice.call(arguments));
                         this.each(function (i, player) {
-                            player['bind'].apply(player, args);
+                            player['bind'].apply(player, args1);
                         });
                     }
                 }
-                if (flag != false) {
-                    var args = slice.call(arguments); //兼容处理传递arguments
+                if (flag !== false) {
+                    var args2 = slice.call(arguments); //兼容处理传递arguments
                     this.each(function (i, player) {
-                        player[fun].apply(player, args);
+                        player[fun].apply(player, args2);
                     });
                 }
                 return this;
-            }
+            };
         });
 
 
     //需要返回值  只读属性
     //duration
-    verge.objectEach(attrs.readonly
-        , function (inx, fun) {
+    verge.objectEach(attrs.readonly, function (inx, fun) {
             ext[fun] = function () {
                 var player = this[0];
                 if (player) {
                     return player[fun].apply(player, arguments);
                 }
                 //return undefined;
-            }
+            };
         });
 
     //ended seeking error
     //回掉函数和只读获取属性的方法重名处理
-    verge.objectEach(attrs.specialReadonly
-        , function (inx, attr) {
+    verge.objectEach(attrs.specialReadonly, function (inx, attr) {
             ext[attr] = function (arg) {
                 if (arguments.length > 0) {
                     if (verge.isFunction(arg)) {
@@ -82,33 +79,31 @@ vvp.fn.extend(function () {
                     return player[attr].apply(player, arguments);
                 }
                 //return undefined;
-            }
+            };
         });
 
     //可以设置or读取属性的方法
     //autoplay
-    verge.objectEach(attrs.readwrite.concat(attrs.specialReadwrite).concat(['attr'])
-        , function (inx, attr) {
+    verge.objectEach(attrs.readwrite.concat(attrs.specialReadwrite).concat(['attr']), function (inx, attr) {
             ext[attr] = function () {
                 var player = this[0];
                 if (player) {
                     return player[attr].apply(player, arguments);
                 }
                 //return undefined;
-            }
+            };
         });
 
     /**
      * 增加外部函数入口
      */
-    verge.objectEach(methods.callbacks
-        , function (inx, fun) {
+    verge.objectEach(methods.callbacks, function (inx, fun) {
             ext[fun] = function () {
                 var args = [fun].concat(slice.call(arguments));
                 this.each(function (i, player) {
                     player['bind'].apply(player, args);
                 });
-            }
+            };
         });
 
     return ext;

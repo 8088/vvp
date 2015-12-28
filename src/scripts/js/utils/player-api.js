@@ -10,109 +10,109 @@
 verge.extend({
     methods: {
         events: [//事件相关方法
-            'bind' //绑定事件
-            , 'unbind'//解绑事件
-            , 'one' //只执行一次的方法
-            , 'trigger' //触发回掉方法
+            'bind', //绑定事件
+            'unbind',//解绑事件
+            'one', //只执行一次的方法
+            'trigger' //触发回掉方法
         ],
         native: [//原生video事件
             //'play',
             //'pause',
             'load'
             //以下方法暂不支持
-            //,'addTextTrack'//添加新的文本轨道
+            //'addTextTrack'//添加新的文本轨道
         ],
         //expand: [//拓展的方法
-        //    , 'attr'
-        //    , 'plugin'
+        //    'attr',
+        //    'plugin'
         //],
         specialNative: [//与回掉函数重名
-            'play'
-            , 'pause'
+            'play',
+            'pause'
         ],
         callbacks: [//回掉函数名称
-            'abort'
-            , 'canPlay'
-            , 'canPlaythrough'
-            , 'durationChange'
-            , 'emptied'
-            //,'ended'
-            //,'error'
-            , 'loadedData'
-            , 'loadedMetaData'
-            , 'loadStart'
-            //,'pause'
-            //,'play'
-            , 'playing'
-            , 'progress'
-            , 'rateChange'
-            , 'readyStateChange'
-            , 'seeked'
-            //,'seeking'
-            , 'stalled'
-            , 'suspend'
-            , 'timeUpdate'
-            , 'volumeChange'
-            , 'waiting'
-            , 'fullScreenChange' //全屏状态发生变化
-            , 'fullWindowChange' //css方式全屏发生变化
+            'abort',
+            'canPlay',
+            'canPlayThrough',
+            'durationChange',
+            'emptied',
+            //'ended',
+            //'error',
+            'loadedData',
+            'loadedMetaData',
+            'loadStart',
+            //'pause'
+            //'play'
+            'playing',
+            'progress',
+            'rateChange',
+            'readyStateChange',
+            'seeked',
+            //'seeking',
+            'stalled',
+            'suspend',
+            'timeUpdate',
+            'volumeChange',
+            'waiting',
+            'fullScreenChange', //全屏状态发生变化
+            'fullWindowChange' //css方式全屏发生变化
         ]
     },
     attrs: {//属性
         //ReadOnly Property
         readonly: [
-            'duration' //视频的长度
-            //,'ended' //是否已结束
-            //,'error' //视频错误状态 MediaError
-            , 'currentSrc' //当前视频的 URL
-            , 'buffered' //已缓冲部分 TimeRanges
-            , 'played' //已播放部分 TimeRanges
-            , 'readyState' //视频当前的就绪状态
-            , 'seekable' //视频可寻址部分 TimeRanges
-            //,'seeking'  //是否正在视频中进行查找
-            , 'networkState' //网络状态
-            , 'canPlaytype'//能够播放指定的视频类型
-            , 'videoWidth'
-            , 'videoHeight'
+            'duration', //视频的长度
+            //'ended', //是否已结束
+            //'error', //视频错误状态 MediaError
+            'currentSrc', //当前视频的 URL
+            'buffered', //已缓冲部分 TimeRanges
+            'played', //已播放部分 TimeRanges
+            'readyState', //视频当前的就绪状态
+            'seekable', //视频可寻址部分 TimeRanges
+            //,'seeking',  //是否正在视频中进行查找
+            'networkState', //网络状态
+            'canPlayType',//能够播放指定的视频类型
+            'videoWidth',
+            'videoHeight',
             //以下属性暂不支持
-            //,'startDate' //当前时间偏移 Date
-            //,'textTracks' //文本轨道 TextTrackList
-            //,'videoTracks' //视频轨道 VideoTrackList
-            //,'audioTracks' //音频轨道对象 AudioTrackList
-            //,'controller' //视频当前媒体控制器 MediaController
+            //'startDate', //当前时间偏移 Date
+            //'textTracks', //文本轨道 TextTrackList
+            //'videoTracks', //视频轨道 VideoTrackList
+            //'audioTracks', //音频轨道对象 AudioTrackList
+            //'controller', //视频当前媒体控制器 MediaController
         ],
         specialReadonly: [//特殊的只读属性 与回掉函数重名
-            'ended'
-            , 'error'
-            , 'seeking'
+            'ended',
+            'error',
+            'seeking'
         ],
         //ReadWrite Property
         readwrite: [
-            'autoplay'
-            , 'height'
-            , 'width'
-            , 'loop'
-            //,'src'
-            //,'currentTime'//当前播放位置
-            , 'preload'
-            , 'paused' //视频是否暂停
-            , 'poster' //缩略图
-            , 'muted' //是否关闭声音
-            , 'volume'
-            , 'controls'
-            //,'fullScreen'
-            //,'fullWindow'
-            //以下属性暂不支持
-            , 'playbackRate' //视频播放的速度
-            //,'defaultMuted' //默认是否静音
-            //,'defaultPlaybackRate' //默认播放速度
-            //,'crossOrigin' //视频的 CORS 设置
-            //,'mediaGroup' //媒介组合的名称
+            'autoplay',
+            'height',
+            'width',
+            'loop',
+            //'src',
+            //'currentTime',//当前播放位置
+            'preload',
+            'paused', //视频是否暂停
+            'poster', //缩略图
+            'muted', //是否关闭声音
+            'volume',
+            'controls',
+            //,'fullScreen',
+            //,'fullWindow',
+            //以下属性暂不支持,
+            'playbackRate' //视频播放的速度
+            //,'defaultMuted' ,//默认是否静音
+            //,'defaultPlaybackRate', //默认播放速度
+            //,'crossOrigin', //视频的 CORS 设置
+            //,'mediaGroup', //媒介组合的名称
         ],
         specialReadwrite: [
-            'src' //视频播放源
-            , 'currentTime'//当前播放位置
-            , 'fullScreen' //全屏
+            'src', //视频播放源
+            'currentTime',//当前播放位置
+            'fullScreen' //全屏
         ]
     },
     /**

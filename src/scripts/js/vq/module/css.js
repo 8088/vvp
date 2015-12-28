@@ -27,7 +27,7 @@
      * @returns {boolean}
      */
     function isHidden(ele){
-        return currentStyle(ele,'display') === "none" || !vQ.contains(ele.ownerDocument,ele);
+        return currentStyle(ele,'display') === 'none' || !vQ.contains(ele.ownerDocument,ele);
     }
 
     /**
@@ -40,7 +40,7 @@
         if ( show ) {
             if ( display === 'none' ) {
                 // Restore a pre-hide() value if we have one
-                ele.style.display = ele.prevDisplay || "block";
+                ele.style.display = ele.prevDisplay || 'block';
             }
         } else {
             if ( display !== 'none' ) {
@@ -92,7 +92,7 @@ vQ.extend( {
      * @returns {*}
      */
     toggle: function( ele,state ) {
-        if ( typeof state === "boolean" ) {
+        if ( typeof state === 'boolean' ) {
             return state ? this.show() : this.hide();
         }
 
@@ -158,7 +158,7 @@ vQ.fn.extend( {
      */
     toggle: function( state ) {
 
-        if ( typeof state === "boolean" ) {
+        if ( typeof state === 'boolean' ) {
             return state ? this.show() : this.hide();
         }
         this.each( function() {

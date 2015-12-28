@@ -9,7 +9,7 @@
  * @since 2015/8/24.
  */
 
-(function(exports) {
+(function (exports) {
 
     /**
      * 这 initializing 变量意思很直接, 它是boolean来检查Class Function(稍后介绍)什么时候被调用.
@@ -31,15 +31,16 @@
      * 浏览器不支持 Function serialisation 将会始终返回 true, 那么会始终对 _super 进行额外的操作,
      * 导致这些新的方法不能在 _super 中使用. 这会有一些小的性能消耗. 但能保证在所有浏览器中 正常执行.
      */
-    var fnTest = /xyz/.test(function() {
-        xyz;
+    var fnTest = /'xyz'/.test(function () {
+        'xyz';
     }) ? /\b_super\b/ : /.*/;
 
     /**
      * 创建一个空的构造方法, 放到全局变量中. 这将会是最上层的构造方法. 它没有定义内容, 或一个原型对象.
      * 除了下面的 extends 方法. this 指的是window对象. 使 vvp(Class) 变量为全局对象.
      */
-    var CoreObject = function() {};
+    var CoreObject = function () {
+    };
 
     /**
      * CoreObject.extend
@@ -53,7 +54,7 @@
      * @this {*}
      */
 
-    CoreObject.extend = function(prop) {
+    CoreObject.extend = function (prop) {
 
         /**
          * 将当前对象的原型对象存储在 _super中. this.prototype是被扩展对象的原型, 它可以访问父级方法在你需要的地方,
@@ -70,40 +71,64 @@
         var prototype = new this();
         initializing = false;
 
+        function factory(name, fn) {
+            return function () {
+                /**
+                 * 对 super 的特殊处理, 我们首先要存储 已存在 _super 属性和类的一些参数. 存储在 临时 tmp 里,
+                 * 这是为了防止 _super 中已存在的方法被重写完事儿后我们将 tmp 在赋给 this._super 这样它就可以正常工作了.
+                 * 下一步, 我们将 _super[name] 方法赋给 当前对象的 this._super，
+                 * 这样当 fn 通过 apply 被执行的时候 this._super()就会指向 父类方法, 这个父类方法中的 this 也同样可以访问 当前对象.
+                 * 最后我们将返回值存储在 ret 中， 在将 _super 设置回来后返回该对象.
+                 */
+                var tmp = this._super;
+
+                // Add a new ._super() method that is the same method
+                // but on the super-class
+                this._super = _super[name];
+
+                // The method only need to be bound temporarily, so we
+                // remove it when we're done executing
+                var ret = fn.apply(this, arguments);
+                this._super = tmp;
+                return ret;
+            };
+        }
+
         // Copy the properties over onto the new prototype
         /**
          * 使用一个 for 循环, 我们迭代出 prop 里的属性和方法.
          * 该属性是通过 extend 方法传递进来的, 除了一些对 _super 的特殊处理, 我们将值赋给 prototype 属性.
          * 当我们遍历 prop 里的每个对象时,
-         * 如果 满足 (typeof prop[name] == "function")  (typeof _super[name] == "function") (fnTest.test(prop[name]) == true)
+         * 如果 满足 (typeof prop[name] == 'function')  (typeof _super[name] == 'function') (fnTest.test(prop[name]) == true)
          * 我们将会加入新的方法来处理 绑定到 父类 新的方法 以及 原始方法.
          */
         for (var name in prop) {
             // Check if we're overwriting an existing function
             prototype[name] = typeof prop[name] == 'function' &&
             typeof _super[name] == 'function' && fnTest.test(prop[name]) ?
-                (function(name, fn) {
-                    return function() {
-                        /**
-                         * 对 super 的特殊处理, 我们首先要存储 已存在 _super 属性和类的一些参数. 存储在 临时 tmp 里,
-                         * 这是为了防止 _super 中已存在的方法被重写完事儿后我们将 tmp 在赋给 this._super 这样它就可以正常工作了.
-                         * 下一步, 我们将 _super[name] 方法赋给 当前对象的 this._super，
-                         * 这样当 fn 通过 apply 被执行的时候 this._super()就会指向 父类方法, 这个父类方法中的 this 也同样可以访问 当前对象.
-                         * 最后我们将返回值存储在 ret 中， 在将 _super 设置回来后返回该对象.
-                         */
-                        var tmp = this._super;
-
-                        // Add a new ._super() method that is the same method
-                        // but on the super-class
-                        this._super = _super[name];
-
-                        // The method only need to be bound temporarily, so we
-                        // remove it when we're done executing
-                        var ret = fn.apply(this, arguments);
-                        this._super = tmp;
-                        return ret;
-                    };
-                })(name, prop[name]) :
+                factory(name, prop[name]) :
+                //(function (name, fn) {
+                //    return function () {
+                //        /**
+                //         * 对 super 的特殊处理, 我们首先要存储 已存在 _super 属性和类的一些参数. 存储在 临时 tmp 里,
+                //         * 这是为了防止 _super 中已存在的方法被重写完事儿后我们将 tmp 在赋给 this._super 这样它就可以正常工作了.
+                //         * 下一步, 我们将 _super[name] 方法赋给 当前对象的 this._super，
+                //         * 这样当 fn 通过 apply 被执行的时候 this._super()就会指向 父类方法, 这个父类方法中的 this 也同样可以访问 当前对象.
+                //         * 最后我们将返回值存储在 ret 中， 在将 _super 设置回来后返回该对象.
+                //         */
+                //        var tmp = this._super;
+                //
+                //        // Add a new ._super() method that is the same method
+                //        // but on the super-class
+                //        this._super = _super[name];
+                //
+                //        // The method only need to be bound temporarily, so we
+                //        // remove it when we're done executing
+                //        var ret = fn.apply(this, arguments);
+                //        this._super = tmp;
+                //        return ret;
+                //    };
+                //})(name, prop[name]) :
                 prop[name];
         }
 
@@ -137,7 +162,7 @@
          * 将赋其自身, 通过  arguments.callee, 在本例中表示 “自身” 其实这里我们可以 避免使用 arguments.callee ,
          * 如果我们修改一下我的原生方法(e.g Class.extend = function extend(prop)) 之后我们就可以通过 使用
          */
-        // And make this class extendable
+            // And make this class extendable
         Class.extend = arguments.callee;
 
         //确保子类也能使用create方法
@@ -161,7 +186,7 @@
      * @return {vvp.CoreObject} 返回一个继承自CoreObject的子类
      * @this {*}
      */
-    CoreObject.create = function() {
+    CoreObject.create = function () {
         // 创建一个继承自该对象原型的新对象
         var inst = verge.objectCreate(this.prototype);
 
@@ -175,9 +200,9 @@
      * 对CoreObject进行拓展
      * @param object
      */
-    CoreObject.expand = function(object){
-        verge.extend.apply(this.prototype,arguments);
+    CoreObject.expand = function (object) {
+        verge.extend.apply(this.prototype, arguments);
     };
 
     exports.CoreObject = CoreObject;
-})(verge);
+})(vvp);
