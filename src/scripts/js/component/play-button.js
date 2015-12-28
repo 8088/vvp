@@ -1,8 +1,8 @@
 /**
  * 播放按钮
- * @type {ytv.CoreObject}
+ * @type {vvp.CoreObject}
  */
-ytv.component.PlayButton = yt.CoreObject.extend({
+vvp.component.PlayButton = verge.CoreObject.extend({
     init:function(options){
         //<div class="x-play-control">
         //    <!--button class="x-control-btn"><b class="x-playing"><em>播放</em></b></button-->
@@ -10,7 +10,7 @@ ytv.component.PlayButton = yt.CoreObject.extend({
         //</div>
 
         //设置默认值
-        options = yQuery.merge({
+        options = vQ.merge({
             playing:false,
             text:['播放','暂停'],
             cb_click:function(){
@@ -18,14 +18,14 @@ ytv.component.PlayButton = yt.CoreObject.extend({
             }
         },options);
 
-        var root = yt.create('div',{
+        var root = verge.create('div',{
             class:'x-play-control'
         });
-        var btn = yt.create('button',{
+        var btn = verge.create('button',{
             class:'x-control-btn'
         });
 
-        var b = yt.create('b');
+        var b = verge.create('b');
         btn.append(b);
         root.append(btn);
         var setStyle = function(isPlaying){

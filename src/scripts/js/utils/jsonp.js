@@ -94,9 +94,9 @@ var CallBackEventNamePrefix = '@NAME' + '.jsonp.';//Callback名称前缀
         };
 
         script.src = url;
-        document.getElementsByTagName('head')[0].appendChild(script);
+        document.getElementsBytagName('head')[0].appendChild(script);
     }
 
-    //添加到ytv对象上去
+    //添加到vvp对象上去
     exports.jsonp = JSONP;
-}(ytv));
+}(vvp));

@@ -1,11 +1,11 @@
 组件 Components
 ===
-ytv.js有一套简单的自定义组件，可以通过class名来对组件进行继承和扩展。
+vvp.js有一套简单的自定义组件，可以通过class名来对组件进行继承和扩展。
 
 ```js
-ytv.Control = ytvjs.Component.extend();
-ytv.Button = ytvjs.Control.extend();
-ytv.PlayToggle = ytvjs.Button.extend();
+vvp.Control = vvpjs.Component.extend();
+vvp.Button = vvpjs.Control.extend();
+vvp.PlayToggle = vvpjs.Button.extend();
 ```
 
 UI组件可以方便的进扩展和添加组件功能，以便建立一个完整的用户界面，例如：
@@ -25,13 +25,13 @@ myPlayer.addChild('BigPlayButton');
 
 ```html
     <!-- Player Element -->
-    <div class="ytv-js">
+    <div class="vvp-js">
       <!-- BigPlayButton Element -->
-      <div class="ytv-big-play-button"></div>
+      <div class="vvp-big-play-button"></div>
     </div>
 ```
 
-ytv.js的组件结构如下表：(仅包含基础播放器逻辑)
+vvp.js的组件结构如下表：(仅包含基础播放器逻辑)
 
 ```
 Player

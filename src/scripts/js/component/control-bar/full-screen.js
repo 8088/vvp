@@ -1,15 +1,15 @@
 /**
  * 全屏
- * @type {ytv.CoreObject|vjs.CoreObject}
+ * @type {vvp.CoreObject|vjs.CoreObject}
  */
-ytv.component.FullScreen = yt.CoreObject.extend({
+vvp.component.FullScreen = verge.CoreObject.extend({
     init:function(options){
         //<div class="x-fullscreen">
         //    <!--button class="x-control-btn" type="button" title="全屏模式" rol="button"><b class="x-zoomin"><em>全屏</em></b></button>-->
         //    <button class="x-control-btn" type="button" title="全屏模式" rol="button"><b class="x-zoomout"><em>退出全屏</em></b></button>
         //</div>
         //设置默认值
-        options = yQuery.merge({
+        options = vQ.merge({
             title:'全屏模式',
             isFullScreen:false,
             cb_click:function(){
@@ -17,16 +17,16 @@ ytv.component.FullScreen = yt.CoreObject.extend({
             }
         },options);
 
-        var root = yt.create('div',{
+        var root = verge.create('div',{
             class:'x-fullscreen'
         });
-        var btn = yt.create('button',{
+        var btn = verge.create('button',{
             class:'x-control-btn',
             type:'button',
             rol:'button',
             title:options.title
         });
-        var b = yt.create('b');
+        var b = verge.create('b');
 
         btn.append(b);
         root.append(btn);
@@ -42,7 +42,7 @@ ytv.component.FullScreen = yt.CoreObject.extend({
                 //b.class = "x-zoomin";
                 //b.innerHTML = "<em>全屏</em>";
             }
-        }
+        };
         setStyle(isFullScreen);
         /**
          * 设置播放状态

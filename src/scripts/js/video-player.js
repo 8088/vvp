@@ -7,12 +7,12 @@
  * @author zhengzk
  **/
 
-ytv.VideoPlayer = yt.CoreObject.extend({
+vvp.VideoPlayer = verge.CoreObject.extend({
     init: function (video,options) {
         var own = this;
         own.video = video;
-        options = yt.merge({
-            isWeixin:yt.browser.isWeixin
+        options = verge.merge({
+            isWeixin:verge.browser.isWeixin
         },options);
         own._initOptions(options);
         own.bindEvents();
@@ -34,7 +34,7 @@ ytv.VideoPlayer = yt.CoreObject.extend({
         }
 
         if(options.attr){
-            yt.objectEach(options.attr,function(key,val){
+            verge.objectEach(options.attr,function(key,val){
                 op[key] = val;
             });
         }
@@ -44,8 +44,8 @@ ytv.VideoPlayer = yt.CoreObject.extend({
         if (options.plugins) {
             var plugins = options.plugins;
 
-            yt.objectEach(options.plugins,function(name,param){
-                if(yt.isFunction(this[name])){
+            verge.objectEach(options.plugins,function(name,param){
+                if(verge.isFunction(this[name])){
                     this[name](param);
                 }else{
                     log.error('Unable to find plugin:', name);
@@ -66,7 +66,7 @@ ytv.VideoPlayer = yt.CoreObject.extend({
 
             var timefun = function () {
                 own.video.currentTime = time;
-                if (yt.isFunction(callback)) {
+                if (verge.isFunction(callback)) {
                     callback();
                 }
 
@@ -119,20 +119,20 @@ ytv.VideoPlayer = yt.CoreObject.extend({
     /**
      * 全屏入口
      * @param flag
-     * @returns {boolean|*|ytv.Player.isFullscreen}
+     * @returns {boolean|*|vvp.Player.isFullscreen}
      */
     fullScreen:function(flag){
         if(arguments.length > 0 && flag != this.isFullscreen){
             var own = this;
             if(flag == true){
-                if(ytv.isIPAD){//PAD 走css全屏
+                if(vvp.isIPAD){//PAD 走css全屏
                     own._enterFullWindow();
                     own.trigger('onFullscreenChange', [own.isFullWindow]);
                 }else{
                     this.requestFullscreen();
                 }
             }else{
-                if(ytv.isIPAD) {
+                if(vvp.isIPAD) {
                     own._exitFullWindow();
                     own.trigger('onFullscreenChange', [own.isFullWindow]);
                 }else{
@@ -144,13 +144,13 @@ ytv.VideoPlayer = yt.CoreObject.extend({
     },
     /**
      * 进入全屏状态
-     * @returns {ytv.Player}
+     * @returns {vvp.Player}
      */
     requestFullscreen: function () {
         var own = this;
         this.isFullscreen = true;
 
-        if (yt.browser.supportsFullScreen) {
+        if (verge.browser.supportsFullScreen) {
             // we can't take the video.js controls fullscreen but we can go fullscreen
             // with native controls
             //this.techCall('enterFullScreen');
@@ -174,10 +174,10 @@ ytv.VideoPlayer = yt.CoreObject.extend({
         var video = this.video;
 
         if ('webkitDisplayingFullscreen' in video) {
-            yQuery.one(video,'webkitbeginfullscreen', function () {
+            vQ.one(video,'webkitbeginfullscreen', function () {
                 own.isFullscreen = true;
 
-                yQuery.one(video,'webkitendfullscreen', function () {
+                vQ.one(video,'webkitendfullscreen', function () {
                     own.isFullscreen = false;
                     own.trigger('onFullscreenChange', [own.isFullscreen]);
                 });
@@ -212,13 +212,13 @@ ytv.VideoPlayer = yt.CoreObject.extend({
         own.docOrigOverflow = document.documentElement.style.overflow;
 
         // Add listener for esc key to exit fullscreen
-        yQuery.bind(document, 'keydown',own._fullWindowOnEscKey,own);
+        vQ.bind(document, 'keydown',own._fullWindowOnEscKey,own);
 
         // Hide any scroll bars
         document.documentElement.style.overflow = 'hidden';
 
         // Apply fullscreen styles
-        yQuery.addClass(document.body, 'ytv-full-window');
+        vQ.addClass(document.body, 'vvp-full-window');
 
         own.trigger('onFullWindowChange',[own.isFullWindow]);
     },
@@ -233,14 +233,14 @@ ytv.VideoPlayer = yt.CoreObject.extend({
     },
     /**
      * 退出全屏
-     * @returns {ytv.Player}
+     * @returns {vvp.Player}
      */
     exitFullscreen: function () {
         var own = this;
-        var fsApi = yt.fullscreenAPI;
+        var fsApi = verge.fullscreenAPI;
         own.isFullscreen = false;
 
-        if (yt.browser.supportsFullScreen) {
+        if (verge.browser.supportsFullScreen) {
             own.video.webkitExitFullScreen();
         } else {
             this._exitFullWindow();
@@ -255,13 +255,13 @@ ytv.VideoPlayer = yt.CoreObject.extend({
      */
     _exitFullWindow:function(){
         this.isFullWindow = false;
-        yQuery.unbind(document, 'keydown', this._fullWindowOnEscKey);
+        vQ.unbind(document, 'keydown', this._fullWindowOnEscKey);
 
         // Unhide scroll bars.
         document.documentElement.style.overflow = this.docOrigOverflow;
 
         // Remove fullscreen styles
-        yQuery.removeClass(document.body, 'ytv-full-window');
+        vQ.removeClass(document.body, 'vvp-full-window');
 
         // Resize the box, controller, and poster to original sizes
         // this.positionAll();
@@ -274,9 +274,9 @@ ytv.VideoPlayer = yt.CoreObject.extend({
     removeEvent: function () {
         var own = this;
         //遍历事件类型及函数，开始绑定
-        yt.objectEach(yt.callbacks, function (event, fun) {
+        verge.objectEach(verge.callbacks, function (event, fun) {
             var _fun = own[fun].eventTarget;
-            yQuery.unbind(own.video, event, _fun);
+            vQ.unbind(own.video, event, _fun);
         });
     },
     /**
@@ -286,14 +286,14 @@ ytv.VideoPlayer = yt.CoreObject.extend({
     bindEvents: function () {
         var own = this;
         //遍历事件类型及函数，开始绑定
-        yt.objectEach(yt.callbacks, function (event, fun) {
+        verge.objectEach(verge.callbacks, function (event, fun) {
             var _fun = function () {
                 var ret = own[fun].apply(own, arguments);//apply的方式 能确保当前对象是Player
                 if(typeof ret == 'undefined' || ret){
                     own.trigger(fun, arguments); //外部传入回掉事件 不更改当前对象
                 }
             }
-            yQuery.bind(own.video, event, _fun);
+            vQ.bind(own.video, event, _fun);
             own[fun].eventTarget = _fun;// eventTarget解除事件绑定时用
         });
     },
@@ -302,13 +302,13 @@ ytv.VideoPlayer = yt.CoreObject.extend({
      * @returns attrValue or undefined
      */
     attr:function(arg){
-        var readonlyAttrs = yt.attrs.readonly.concat(yt.attrs.specialReadonly);
-        var readwriteAttrs = yt.attrs.readwrite.concat(yt.attrs.specialReadwrite);
+        var readonlyAttrs = verge.attrs.readonly.concat(verge.attrs.specialReadonly);
+        var readwriteAttrs = verge.attrs.readwrite.concat(verge.attrs.specialReadwrite);
         var own = this;
-            if(yt.isPlainObject(arg)){
+            if(verge.isPlainObject(arg)){
                 //批量给属性赋值
                 var _arg = {};
-                yt.objectEach(arg,function(attr,val){
+                verge.objectEach(arg,function(attr,val){
                     var flag = false;
 
                     //用string的 indexof 替代？
@@ -334,7 +334,7 @@ ytv.VideoPlayer = yt.CoreObject.extend({
                         _arg[attr] = val;
                     }
                 });
-                yQuery.attr(this.video,_arg);
+                vQ.attr(this.video,_arg);
             }else if(typeof arg == 'string'){
                 //获取属性值 or 给该属性值赋值
                 var attrs = readonlyAttrs.concat(readwriteAttrs);
@@ -345,7 +345,7 @@ ytv.VideoPlayer = yt.CoreObject.extend({
                         //return this[attrs[i]](arguments[1]);
                     }
                 }
-                return yQuery.attr.apply(yQuery,[this.video].concat(slice.call(arguments)));
+                return vQ.attr.apply(vQ,[this.video].concat(slice.call(arguments)));
             }
     },
     /**
@@ -361,20 +361,20 @@ ytv.VideoPlayer = yt.CoreObject.extend({
 
 
 //为VideoPlayer 拓展api方法
-ytv.VideoPlayer.expand(function(){
+vvp.VideoPlayer.expand(function(){
     var extend = {},
-        methods = yt.methods,
-        callbacks = yt.callbacks,
-        attrs = yt.attrs,
-        events = new yt.EventManager();//统一管理回掉
+        methods = verge.methods,
+        callbacks = verge.callbacks,
+        attrs = verge.attrs,
+        events = new verge.EventManager();//统一管理回掉
     //bind unbind one 事件处理
-    yt.objectEach(methods.events,function(inx,fun){
+    verge.objectEach(methods.events,function(inx,fun){
         extend[fun] = function() {
             var own = this;
             var args = slice.call(arguments);
             var funs = [];
-            if(yt.isArray(args[0])){
-                yt.objectEach(args[0],function(inx,_fun){
+            if(verge.isArray(args[0])){
+                verge.objectEach(args[0],function(inx,_fun){
                     if('on'.indexOf(_fun) < 0){
                         _fun = callbacks[_fun.toLowerCase()] || _fun;
                     }
@@ -396,7 +396,7 @@ ytv.VideoPlayer.expand(function(){
     });
 
     //play load pause video原生方法
-    yt.objectEach(methods.native.concat(methods.specialNative),function(inx,fun){
+    verge.objectEach(methods.native.concat(methods.specialNative),function(inx,fun){
         extend[fun] = function() {
             var own = this;
             own.video[fun].apply(own.video, arguments);
@@ -405,25 +405,25 @@ ytv.VideoPlayer.expand(function(){
     });
 
     //duration 等只读属性 转换为方法
-    yt.objectEach(attrs.readonly.concat(attrs.specialReadonly),function(inx,attr){
+    verge.objectEach(attrs.readonly.concat(attrs.specialReadonly),function(inx,attr){
         extend[attr] = function() {
-            return yQuery.attr(this.video,attr);
+            return vQ.attr(this.video,attr);
         }
     });
 
     //autoplay 等设置&读取属性
-    yt.objectEach(attrs.readwrite,function(inx,attr){
+    verge.objectEach(attrs.readwrite,function(inx,attr){
         extend[attr] = function(val) {
             if (arguments.length > 0) {
-                return yQuery.attr(this.video,attr,val);
+                return vQ.attr(this.video,attr,val);
             }
-            return yQuery.attr(this.video,attr);
+            return vQ.attr(this.video,attr);
         }
     });
 
     //回掉函数
-    yt.objectEach(methods.callbacks.concat(methods.specialNative).concat(attrs.specialReadonly),function(inx,fun){
-        var _fun = yt.callbacks[fun.toLowerCase()] || fun;
+    verge.objectEach(methods.callbacks.concat(methods.specialNative).concat(attrs.specialReadonly),function(inx,fun){
+        var _fun = verge.callbacks[fun.toLowerCase()] || fun;
         extend[_fun] = function() {
             log(_fun,arguments);
         }

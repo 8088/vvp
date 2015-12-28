@@ -4,7 +4,7 @@
 // import 载入外挂
 var gulp = require('gulp'),
     del = require('del'), //删除文件
-    sass = require('gulp-sass'),
+    //sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     nano = require('gulp-cssnano'), // CSS压缩
     eslint = require('gulp-eslint'),
@@ -49,19 +49,19 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
     //return gulp.src('src/scripts/**/*.js')
     return gulp.src([
-            'src/scripts/js/yt.js',
+            'src/scripts/js/verge.js',
             'src/scripts/js/base/**/*.js',
-            'src/jscripts/s/log.js',
-            'src/scripts/js/ytv.js',
-            'src/scripts/js/utils/yQuery.js',
-            'src/scripts/js/utils/yQuery/*.js',
+            'src/scripts/js/log.js',
+            'src/scripts/js/vvp.js',
+            'src/scripts/js/utils/vq.js',
+            'src/scripts/js/utils/vq/*.js',
             'src/scripts/js/utils/*.js',
             'src/scripts/js/video-player.js',
             'src/scripts/js/component/**/*.js',
             'src/scripts/js/player.js',
-            'src/scripts/js/ytv-player.js',
+            'src/scripts/js/vvp-player.js',
             'src/scripts/js/ready.js',
-            'src/scripts/js/umd.js'
+            'src/scripts/js/exports.js'
         ])
         .pipe(eslint('.eslintrc'))
         .pipe(concat(pkg.name + '.js')) //'.' + pkg.version

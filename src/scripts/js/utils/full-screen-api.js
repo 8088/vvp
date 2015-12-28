@@ -74,8 +74,8 @@
             fsApi[specApi[i]] = browserApi[i];
         }
     }
-    //添加到yt对象上去
-    yt.extend({
+    //添加到verge对象上去
+    verge.extend({
         fullscreenAPI:fsApi
     });
 }());

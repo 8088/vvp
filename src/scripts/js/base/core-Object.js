@@ -37,7 +37,7 @@
 
     /**
      * 创建一个空的构造方法, 放到全局变量中. 这将会是最上层的构造方法. 它没有定义内容, 或一个原型对象.
-     * 除了下面的 extends 方法. this 指的是window对象. 使 ytv(Class) 变量为全局对象.
+     * 除了下面的 extends 方法. this 指的是window对象. 使 vvp(Class) 变量为全局对象.
      */
     var CoreObject = function() {};
 
@@ -49,7 +49,7 @@
      *     var Dog = Animal.extend();
      *
      * @param {Object} 选择一个对象作为参数
-     * @return {ytv.CoreObject} 返回一个继承自CoreObject的对象
+     * @return {vvp.CoreObject} 返回一个继承自CoreObject的对象
      * @this {*}
      */
 
@@ -154,16 +154,16 @@
 
     /**
      * CoreObject.create
-     * 创建一个ytv class的对象实例
+     * 创建一个vvp class的对象实例
      *
      *     var myAnimal = Animal.create();
      *
-     * @return {ytv.CoreObject} 返回一个继承自CoreObject的子类
+     * @return {vvp.CoreObject} 返回一个继承自CoreObject的子类
      * @this {*}
      */
     CoreObject.create = function() {
         // 创建一个继承自该对象原型的新对象
-        var inst = yt.objectCreate(this.prototype);
+        var inst = verge.objectCreate(this.prototype);
 
         // 将此构造函数用语新对象
         this.apply(inst, arguments);
@@ -176,8 +176,8 @@
      * @param object
      */
     CoreObject.expand = function(object){
-        yt.extend.apply(this.prototype,arguments);
+        verge.extend.apply(this.prototype,arguments);
     };
 
     exports.CoreObject = CoreObject;
-})(yt);
+})(verge);

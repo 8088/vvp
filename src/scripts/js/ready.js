@@ -14,7 +14,7 @@
     function completed() {
         document.removeEventListener('DOMContentLoaded', completed);
         window.removeEventListener('load', completed);
-        ytv.ready();
+        vvp.ready();
     }
 
 // Catch cases where $(document).ready() is called
@@ -25,7 +25,7 @@
     if (document.readyState === 'complete') {
 
         // Handle it asynchronously to allow scripts the opportunity to delay ready
-        window.setTimeout(ytv.ready);
+        window.setTimeout(vvp.ready);
 
     } else {
 
@@ -36,28 +36,28 @@
         window.addEventListener('load', completed);
     }
 
-    ytv.extend({
+    vvp.extend({
        isReady:false,
        readyWait:1,
        ready:function(arg){
-           if(yt.isFunction(arg)){
-               if(!ytv.isReady) {
+           if(verge.isFunction(arg)){
+               if(!vvp.isReady) {
                    readyList.push(arg);
                }else{
-                   arg.apply(document,[ytv]);
+                   arg.apply(document,[vvp]);
                }
            }else{
-               if( arg === true ? -- ytv.readyWait : ytv.isReady){
+               if( arg === true ? -- vvp.readyWait : vvp.isReady){
                    return;
                }
-               ytv.isReady = true;
+               vvp.isReady = true;
 
-               if( arg !== true && -- ytv.readyWait > 0 ){
+               if( arg !== true && -- vvp.readyWait > 0 ){
                    return;
                }
 
-               yt.objectEach(readyList,function(inx,func){
-                   func.apply(document,[ytv]);
+               verge.objectEach(readyList,function(inx,func){
+                   func.apply(document,[vvp]);
                });
 
            }

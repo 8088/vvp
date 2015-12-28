@@ -15,7 +15,7 @@
     }
 
 
-    ytv.fn.extend({
+    vvp.fn.extend({
         advertise:function(options){
 
             this.bind('onPlay',function(){

@@ -19,7 +19,7 @@ var log = (function(){
 
     var  _log = function(type,args){
 
-        if(typeof _ytv_log_flag == 'undefined' || !_ytv_log_flag){
+        if(typeof _vvp_log_flag == 'undefined' || !_vvp_log_flag){
             return;
         }
 

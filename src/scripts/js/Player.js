@@ -6,11 +6,11 @@
  * @modify 2015/10/25.
  * @author zhengzk
  **/
-ytv.Player = ytv.VideoPlayer.extend({
+vvp.Player = vvp.VideoPlayer.extend({
     //player -->{video videobutton loading dashboard}
     init: function (target, options) {
         //初始化参数
-        options = yt.merge({
+        options = verge.merge({
             autoplay: false, /*将会传递至video*/
             loop: false, /*将会传递至video*/
             preload: false, /*将会传递至video*/
@@ -33,7 +33,7 @@ ytv.Player = ytv.VideoPlayer.extend({
             cfg.quality = false;
         }
         //<div class="x-player"></div> root
-        this.root = yt.create('div', {
+        this.root = verge.create('div', {
             class: 'x-player'
         });
         //创建必要节点
@@ -45,7 +45,7 @@ ytv.Player = ytv.VideoPlayer.extend({
         this._createDashboard(options.controls, cfg);
         this._createPrompt();
         this._createTrigger();
-        yQuery(target).append(this.root);
+        vQ(target).append(this.root);
 
         own.bind('onFullscreenChange',function(flag){
             if(flag){
@@ -57,11 +57,11 @@ ytv.Player = ytv.VideoPlayer.extend({
     },
     /**
      * 进入全屏状态 重写
-     * @returns {ytv.Player}
+     * @returns {vvp.Player}
      */
     requestFullscreen: function () {
         var own = this;
-        var fsApi = yt.fullscreenAPI;
+        var fsApi = verge.fullscreenAPI;
         this.isFullscreen = true;
 
         if (fsApi['requestFullscreen']) {
@@ -73,11 +73,11 @@ ytv.Player = ytv.VideoPlayer.extend({
             // when canceling fullscreen. Otherwise if there's multiple
             // players on a page, they would all be reacting to the same fullscreen
             // events
-            yQuery.bind(document, fsApi['fullscreenchange'],function documentFullscreenChange(){
+            vQ.bind(document, fsApi['fullscreenchange'],function documentFullscreenChange(){
                 own.isFullscreen = !!document[fsApi.fullscreenElement];
                 // If cancelling fullscreen, remove event listener.
                 if (own.isFullscreen === false) {
-                    yQuery.unbind(document, fsApi['fullscreenchange'], documentFullscreenChange);
+                    vQ.unbind(document, fsApi['fullscreenchange'], documentFullscreenChange);
                 }
 
                 own.trigger('onFullscreenChange',[own.isFullscreen]);
@@ -91,11 +91,11 @@ ytv.Player = ytv.VideoPlayer.extend({
     },
     /**
      * 退出全屏 重写
-     * @returns {ytv.Player}
+     * @returns {vvp.Player}
      */
     exitFullscreen: function () {
         var own = this;
-        var fsApi = yt.fullscreenAPI;
+        var fsApi = verge.fullscreenAPI;
         own.isFullscreen = false;
 
         // Check for browser element fullscreen support
@@ -142,7 +142,7 @@ ytv.Player = ytv.VideoPlayer.extend({
      */
     _createVideo: function () {
         //<video id="x-video-player" class="x-video-player"></video>
-        var video = yt.create('video', {
+        var video = verge.create('video', {
             class: 'x-video-player'
         });
         this.root.append(video);
@@ -150,11 +150,11 @@ ytv.Player = ytv.VideoPlayer.extend({
     },
     _createPoster: function (poster) {
         //<div class="x-video-poster"></div>
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-video-poster'
         });
         if (poster) {
-            var img = yt.create('img', {
+            var img = verge.create('img', {
                 src: poster
             });
             root.append(img);
@@ -175,10 +175,10 @@ ytv.Player = ytv.VideoPlayer.extend({
         //    <div class="x-video-play-ico"></div>
         //</div>
         var own = this;
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-video-button'
         });
-        var icon = yt.create('div', {
+        var icon = verge.create('div', {
             class: 'x-video-play-ico'
         });
         root.append(icon);
@@ -203,10 +203,10 @@ ytv.Player = ytv.VideoPlayer.extend({
         //<div class="x-video-loading">
         //    <div class="x-video-loading-ico"></div>
         //</div>
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-video-loading'
         });
-        var icon = yt.create('div', {
+        var icon = verge.create('div', {
             class: 'x-video-loading-ico'
         });
         root.append(icon);
@@ -224,7 +224,7 @@ ytv.Player = ytv.VideoPlayer.extend({
     _createTrigger: function (cb_click) {
         //<div class="x-trigger"></div>
         var own = this;
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-trigger'
         });
         own.one('onPlay',function(){
@@ -240,10 +240,10 @@ ytv.Player = ytv.VideoPlayer.extend({
         //<div class="x-prompt-txt x-prompt-center">播放出错请稍后再试</div>
         //</div>
         var own = this;
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-prompt'
         });
-        var text = yt.create('div', {
+        var text = verge.create('div', {
             class: 'x-prompt-txt x-prompt-center'
         });
         //this.prompt = text;
@@ -267,15 +267,15 @@ ytv.Player = ytv.VideoPlayer.extend({
         var own = this;
         //<div class="x-dashboard"></div> root
         //  <div class="x-console x-fs-console"> </div> //root
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-dashboard'
         });
-        var parent = yt.create('div', {
+        var parent = verge.create('div', {
             class: 'x-console'
         });
 
         if (cfg.progress) {
-            var progress = new ytv.component.Progress();
+            var progress = new vvp.component.Progress();
             this._createControls();
             parent.append(progress.root);
         }
@@ -290,12 +290,12 @@ ytv.Player = ytv.VideoPlayer.extend({
 
         own.bind('onFullscreenChange',function(flag){
             if (flag) {
-                if (ytv.isIPAD) {
+                if (vvp.isIPAD) {
                     parent.addClass('x-fs-console');
                 }
                 own.controls(false);
             } else {
-                if (ytv.isIPAD) {
+                if (vvp.isIPAD) {
                     parent.removeClass('x-fs-console');
                 }
                 own.controls(true);
@@ -313,10 +313,10 @@ ytv.Player = ytv.VideoPlayer.extend({
     //controls -->{playbutton time setting}
     _createControls: function (cfg) {
         var own = this;
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-controls'
         });
-        var playButton = new ytv.component.PlayButton({
+        var playButton = new vvp.component.PlayButton({
             cb_click: function (flag) {
                 if(!own.error()){
                     if (flag) {
@@ -332,7 +332,7 @@ ytv.Player = ytv.VideoPlayer.extend({
 
         root.append(playButton.root);
         if (cfg.time) {
-            var time = new ytv.component.TimePanel();
+            var time = new vvp.component.TimePanel();
             this.time = time;
             root.append(time.root);
         }
@@ -353,12 +353,12 @@ ytv.Player = ytv.VideoPlayer.extend({
     //setting -->{language Quality Fullscreen}
     _createSettings: function (cfg) {
         var own = this;
-        var root = yt.create('div', {
+        var root = verge.create('div', {
             class: 'x-settings'
         });
         if (cfg.quality) {
-            //var language = new ytv.component.Language();ßßß
-            var quality = new ytv.component.QualityPanel({
+            //var language = new vvp.component.Language();ßßß
+            var quality = new vvp.component.QualityPanel({
                 cb_click: function (quality) {
                     own.trigger('onQualitySelect', [quality]);
                 }
@@ -366,7 +366,7 @@ ytv.Player = ytv.VideoPlayer.extend({
             root.append(quality.root);
             this.quality = quality;
         }
-        var fullscreen = new ytv.component.FullScreen({
+        var fullscreen = new vvp.component.FullScreen({
             cb_click: function (flag) {
                 var _flag = own.fullScreen(flag);
                 //fullscreen.fullScreen(flag);

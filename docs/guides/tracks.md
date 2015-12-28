@@ -1,7 +1,7 @@
 字幕 Tracks
 ======
 
-通过视频的时间轨道触发了字幕的功能，ytv.js提供了一个夸浏览器兼容的字幕功能，当前有五种字幕类型:
+通过视频的时间轨道触发了字幕的功能，vvp.js提供了一个夸浏览器兼容的字幕功能，当前有五种字幕类型:
 
 - **字幕 Subtitles**: 根据视频中音频对话，给予文字注解或翻译，展示在视频上。
 - **标题 Captions**: 当视频使用者有对视频内容的需求或是有听力等其他障碍时，视频当中的对话、音效、音乐加以文字的说明，将该说明展示在视频上。
@@ -15,9 +15,9 @@
 
 当创建字幕文件时晴参考该技术文档， [caption formatting techniques] (http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/SCC_FORMAT.HTML#style)如果你想深入了解相关的技术细节请参看以下链接  [Captioning Key](http://www.dcmp.org/captioningkey/), 但是以上技术细节不是所有特性都支持WebVTT格式。
 
-向ytv.js添加字幕
+向vvp.js添加字幕
 ------------------
-如果你创建了一个WebVTT格式的文件，你就可以向ytv.js添加到视频中。使用 track 标签放置到video标签内，然后设置好文件的src和一些必要的参数。
+如果你创建了一个WebVTT格式的文件，你就可以向vvp.js添加到视频中。使用 track 标签放置到video标签内，然后设置好文件的src和一些必要的参数。
 
 ```html
 <video id="example_video_1" class="video-js vjs-default-skin"  

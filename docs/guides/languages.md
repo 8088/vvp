@@ -1,11 +1,11 @@
 多语言 Languages
 =========
 
-多语言是为了支持非汉语(普通话)的用户，更方便的使用播放器服务。ytv.js实例化了一个字典通过键/值的方式来支持多语言的维护。
+多语言是为了支持非汉语(普通话)的用户，更方便的使用播放器服务。vvp.js实例化了一个字典通过键/值的方式来支持多语言的维护。
 
 创建多语言文件
 --------------------------
-ytv.js通过一个JSON格式的列表来对照支持多语言,示例如下：
+vvp.js通过一个JSON格式的列表来对照支持多语言,示例如下：
 
 ```JSON
 {
@@ -41,22 +41,22 @@ ytv.js通过一个JSON格式的列表来对照支持多语言,示例如下：
 - 文件格式必须是 `XX.json`, where `XX` 文件名是两个字母的国家缩写 (具体选项请参看该文档底部列表).
 - 添加语言文件到`/lang` 目录下 (任何添加参看下面文档).
 
-添加多语言到ytv.js
+添加多语言到vvp.js
 ----------------------------
-为ytv.js添加多语言支持
+为vvp.js添加多语言支持
 
-1. 创建一个自定义的gulp任务 `ytvlanguages`. 该任务将自动运行把符合的语言配置分发到 `src`/`dist` 目录，一旦创建了该脚本，您可以在应用中方便的使用它。
+1. 创建一个自定义的gulp任务 `vvplanguages`. 该任务将自动运行把符合的语言配置分发到 `src`/`dist` 目录，一旦创建了该脚本，您可以在应用中方便的使用它。
 
-注意: 该脚本依赖 ytv.js的核心脚本才能运行。
+注意: 该脚本依赖 vvp.js的核心脚本才能运行。
 
 
-2. 通过 ytv.lang API把该对象添加到JSON对象中，最要放置到 HEAD 标签里。
+2. 通过 vvp.lang API把该对象添加到JSON对象中，最要放置到 HEAD 标签里。
 
 ```html
 <head>
 <script>
-  ytv.options.flash.swf = '../node_modules/ytvjs-swf/dist/video-js.swf';
-  ytv.lang('es', {
+  vvp.options.flash.swf = '../node_modules/vvpjs-swf/dist/video-js.swf';
+  vvp.lang('es', {
     "Play": "Reproducción",
     "Pause": "Pausa",
     "Current Time": "Tiempo reproducido",

@@ -2,13 +2,13 @@
 ============================
 视频播放相关技术是浏览器提供的定义或者相关插件技术，用来对视频或者音频进行播放的技术。HTML5便是浏览器通过video标签和audio标签 然后提供一系列的接口来实现视频或者音频的播放。其他播放技术包括Flash、Silverlight、Quicktime等其他插件，同时这些技术也提供了大量的API使用户对其播放控制的交互操作。
 
-本质上讲，我们使用的是HTML5规范定义的视频解码器的浏览器实现，然后在HTML中用Javascript来创建一些列的API来对ytv.js进行操作。
+本质上讲，我们使用的是HTML5规范定义的视频解码器的浏览器实现，然后在HTML中用Javascript来创建一些列的API来对vvp.js进行操作。
 
 优酷对视频格式相关的文档请参看[]
 
 API封装
 -----------------------
-以下只是列举了一些方法和事件完整的请看源码，或者API文档 [ytv.js](https://github.com/yuanliang/ytvjs/tree/master/src) 
+以下只是列举了一些方法和事件完整的请看源码，或者API文档 [vvp.js](https://github.com/yuanliang/vvpjs/tree/master/src) 
 
 方法
 ----------------
@@ -47,7 +47,7 @@ Adding Playback Technology
     <video data-setup='{"techOrder": ["html5", "flash", "other supported tech"]}'
 
 ### Object Method: ###
-    ytv("videoID", {
+    vvp("videoID", {
       techOrder: ["html5", "flash", "other supported tech"]
     });
 

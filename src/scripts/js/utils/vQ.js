@@ -1,6 +1,6 @@
 /**
  * 内部实现的简版jQuery
- * Copyright 2015, yQuery.js
+ * Copyright 2015, vQ.js
  * MIT Licensed
  * @since 2015/8/24.
  * @author zhengzk
@@ -11,14 +11,14 @@
 //var slice = [].slice,
 //    hasOwnProp = Object.prototype.hasOwnProperty;
 
-var yQuery = function (selector, context) {
-    return new yQuery.fn.init(selector, context);
+var vQ = function (selector, context) {
+    return new vQ.fn.init(selector, context);
 };
 
 //dom.fn上绑定的方法与每个对象
 //dom上直接绑定的方法为单列
-yQuery.fn = yQuery.prototype = {
-    constructor: yQuery,
+vQ.fn = vQ.prototype = {
+    constructor: vQ,
     length: 0,
     init: function (selector, context) {
 
@@ -29,26 +29,26 @@ yQuery.fn = yQuery.prototype = {
 
         //string
         if ('string' == typeof selector) {//字符串选择器
-            context = context instanceof yQuery ? context[0] : context;
+            context = context instanceof vQ ? context[0] : context;
             var nodeList = (context || document).querySelectorAll(selector);
             this.length = nodeList.length;
             for (var i = 0; i < this.length; i += 1) {
                 this[i] = nodeList[i];
             }
             //DOMElement
-        } else if (yt.isArray(selector)) {
+        } else if (verge.isArray(selector)) {
             this.length = selector.length;
             for (var i = 0; i < selector.length; i += 1) {
                 this[i] = selector[i];
             }
-        } else if (yt.isFunction(selector)) {
+        } else if (verge.isFunction(selector)) {
             //ready func
 
         } else if (selector.nodeType) {//DOM元素
             this[0] = selector;
             this.length = 1;
             return this;
-        } else if (selector instanceof yQuery) {
+        } else if (selector instanceof vQ) {
             return selector;
         }
         return this;
@@ -95,7 +95,7 @@ yQuery.fn = yQuery.prototype = {
         var len = this.length,
             j = +i + ( i < 0 ? len : 0 );
         if (j >= 0 && j < len) {
-            return yQuery(this[j]);
+            return vQ(this[j]);
         }
         return null;
     },
@@ -124,20 +124,20 @@ yQuery.fn = yQuery.prototype = {
         return matches;
     }
 };
-yQuery.fn.init.prototype = yQuery.fn;
+vQ.fn.init.prototype = vQ.fn;
 
-yQuery.extend = yQuery.fn.extend = function () {
-    yt.extend.apply(this, arguments);
+vQ.extend = vQ.fn.extend = function () {
+    verge.extend.apply(this, arguments);
 }
 
-yQuery.extend({
+vQ.extend({
     /**
      * 判断是否是Object
      * @param obj
      * @returns {boolean}
      */
     isPlainObject: function (obj) {
-        return yt.isPlainObject(obj);
+        return verge.isPlainObject(obj);
     },
     /**
      * 判断是否是空节点
@@ -145,7 +145,7 @@ yQuery.extend({
      * @returns {boolean}
      */
     isEmptyObject: function (obj) {
-        return yt.isEmptyObject(obj);
+        return verge.isEmptyObject(obj);
     },
     /**
      * 判断arr是否是Array
@@ -153,7 +153,7 @@ yQuery.extend({
      * @returns {boolean}
      */
     isArray: function (arr) {
-        return yt.isArray(arr);
+        return verge.isArray(arr);
         //Object.prototype.toString.call(arr) === '[object Array]';
     },
     /**
@@ -162,7 +162,7 @@ yQuery.extend({
      * @returns {boolean}
      */
     isFunction: function (fn) {
-        return yt.isFunction(fn);
+        return verge.isFunction(fn);
         //'[object Function]' === Object.prototype.toString.call(fn);
     },
     /**
@@ -211,21 +211,21 @@ yQuery.extend({
      * @returns {*}
      */
     merge: function (first, second) {
-        return yt.merge(first, second);
+        return verge.merge(first, second);
     }
 });
 
 
-yt.extend({
+verge.extend({
     /**
-     * 创建一个DOM元素并转换为yQuery对象
+     * 创建一个DOM元素并转换为vQ对象
      * @param tagName
      * @param attrs
      */
     create: function (tagName, attrs) {
         tagName = tagName || 'div';
         var ele = document.createElement(tagName);
-        var ret = yQuery(ele);
+        var ret = vQ(ele);
         if (attrs) {
             ret.attr(attrs);
         }
@@ -234,6 +234,6 @@ yt.extend({
     }
 });
 
-ytv.extend({
-    yQuery: yQuery
+vvp.extend({
+    vQ: vQ
 });

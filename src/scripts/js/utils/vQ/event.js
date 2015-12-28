@@ -8,7 +8,7 @@
  **/
 (function () {
 
-    var event = yt.objectCreate({
+    var event = verge.objectCreate({
         /**
          * 为元素绑定方法
          * @param element
@@ -21,12 +21,12 @@
             var own = this;
 
             //非DOM元素不处理 handler 非function 不处理
-            if (!(1 == element.nodeType || element.nodeType == 9 || !yQuery.isFunction(handler))) {
+            if (!(1 == element.nodeType || element.nodeType == 9 || !vQ.isFunction(handler))) {
                 return;
             }
 
             //多个事件处理
-            if (yQuery.isArray(type)) {
+            if (vQ.isArray(type)) {
                 return own._handleMultipleEvents(own.observe, element, type, handler);
             }
 
@@ -76,12 +76,12 @@
         unbind: function (element, type, handler) {
             var own = this;
             //非DOM元素不处理 handler 非function 不处理
-            if (!(1 == element.nodeType || element.nodeType == 9) || !yQuery.isFunction(handler)) {
+            if (!(1 == element.nodeType || element.nodeType == 9) || !vQ.isFunction(handler)) {
                 return;
             }
 
             //批量事件绑定
-            if (yQuery.isArray(type)) {
+            if (vQ.isArray(type)) {
                 return own._handleMultipleEvents(own.remove, element, type, handler);
             }
             //处理绑定了了context的事件
@@ -121,14 +121,14 @@
         one: function (element, type, handler, context) {
             var own = this;
             //非Dom元素不处理
-            if (!(1 == element.nodeType || element.nodeType == 9 || !yQuery.isFunction(handler))) {
+            if (!(1 == element.nodeType || element.nodeType == 9 || !vQ.isFunction(handler))) {
                 return;
             }
             //获取传入参数
             var args = slice.call(arguments);
 
             //批量绑定事件处理
-            if (yQuery.isArray(type)) {
+            if (vQ.isArray(type)) {
                 return own._handleMultipleEvents.apply(own, [own.one].concat(args));
                 //return own._handleMultipleEvents(own.one, element, type, handler);
             }
@@ -169,7 +169,7 @@
         _handleMultipleEvents: function (fn, elem, types) {
             var own = this;
             var args = Array.prototype.slice.call(arguments).slice(3);//动态截取fn所需参数
-            yQuery.each(types, function (inx, type) {
+            vQ.each(types, function (inx, type) {
                 fn.apply(own, [elem, type].concat(args));
             });
         },
@@ -309,7 +309,7 @@
         }
     });
 
-    yQuery.extend({
+    vQ.extend({
         /**
          * 绑定事件
          * @param ele
@@ -338,7 +338,7 @@
             event.one.apply(event,arguments);
         }
     });
-    yQuery.fn.extend({
+    vQ.fn.extend({
         /**
          * 绑定事件
          * @param type
@@ -347,7 +347,7 @@
          */
         bind: function (type, fun) {
             this.each(function (inx, ele) {
-                yQuery.bind(ele, type, fun);
+                vQ.bind(ele, type, fun);
             });
             return this;
         },
@@ -359,7 +359,7 @@
          */
         unbind: function (type, fun) {
             this.each(function (inx, ele) {
-                yQuery.unbind(ele, type, fun);
+                vQ.unbind(ele, type, fun);
             });
             return this;
         },
@@ -371,7 +371,7 @@
          */
         one: function (type, fun) {
             this.each(function (inx, ele) {
-                yQuery.one(ele, type, fun);
+                vQ.one(ele, type, fun);
             });
             return this;
         }

@@ -1,8 +1,8 @@
 /**
  * 多语言选择
- * @type {ytv.CoreObject|vjs.CoreObject}
+ * @type {vvp.CoreObject|vjs.CoreObject}
  */
-ytv.component.LanguePanel = yt.CoreObject.extend({
+vvp.component.LanguePanel = verge.CoreObject.extend({
     init:function(options){
         //<div class="x-localization pressed">
         //  <button class="x-control-btn">国语</button>
@@ -17,10 +17,10 @@ ytv.component.LanguePanel = yt.CoreObject.extend({
         //</div>
 
         //设置默认值
-        options = yQuery.merge({
+        options = vQ.merge({
 
         },options);
-        var root = yQuery.create('div',{
+        var root = vQ.create('div',{
             class:'x-localization pressed'
         });
 

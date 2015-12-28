@@ -6,7 +6,7 @@
  * @modify 2015/10/25.
  * @author zhengzk
  **/
-ytv.extend({
+vvp.extend({
     plugin:function(name,init){
         this.each(function(inx,player){
             player.expand({

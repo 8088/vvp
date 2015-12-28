@@ -1,10 +1,10 @@
-ytv.Player
+vvp.Player
 ===
-ytv.Player 为ytv内置播放核心对象,提供了以下的外部接口
+vvp.Player 为vvp内置播放核心对象,提供了以下的外部接口
 
 ```js
    //创建player对象
-   var myPlayer = new ytv.Player('#video_id',{
+   var myPlayer = new vvp.Player('#video_id',{
         autoplay:true
    });
    

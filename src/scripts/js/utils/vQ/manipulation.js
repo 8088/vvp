@@ -13,13 +13,13 @@
         rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:-]+)[^>]*)\/>/gi,
         rnoInnerhtml = /<script|<style|<link/i;
 
-    yQuery.extend({
+    vQ.extend({
         htmlPrefilter: function (html) {
             return html.replace(rxhtmlTag, "<$1></$2>");
         }
     });
 
-    yQuery.fn.extend({
+    vQ.fn.extend({
         /**
          * 移除节点
          * @returns {*}
@@ -41,7 +41,7 @@
             var node = this[0];
             //结点类型判断
             if (node.nodeType === 1 || node.nodeType === 11 || node.nodeType === 9) {
-                if(ele instanceof yQuery){
+                if(ele instanceof vQ){
                     ele.each(function(inx,ele){
                         node.appendChild(ele);
                     });
@@ -116,7 +116,7 @@
             var node = this[0];
             if (node.parentNode) {
                 var parent = node.parentNode;
-                if(ele instanceof yQuery){
+                if(ele instanceof vQ){
                     ele.each(function(inx,ele){
                         parent.replaceChild(ele, node);
                     });
@@ -142,7 +142,7 @@
             }
             if (typeof value === 'string' && !rnoInnerhtml.test(value)) {
                 try {
-                    value = yQuery.htmlPrefilter(value);
+                    value = vQ.htmlPrefilter(value);
                     for (; i < l; i++) {
                         elem = this[i] || {};
 

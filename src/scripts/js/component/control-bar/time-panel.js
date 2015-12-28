@@ -1,30 +1,30 @@
 /**
  * 播放时间view
- * @type {ytv.CoreObject|vjs.CoreObject}
+ * @type {vvp.CoreObject|vjs.CoreObject}
  */
-ytv.component.TimePanel = yt.CoreObject.extend({
+vvp.component.TimePanel = verge.CoreObject.extend({
     init:function(options){
         //    <div class="x-time-display">
         //        <span class="x-time-current">122:23</span>
         //        <span class="x-time-splite">/</span>
         //        <span class="x-time-duration">128:18</span>
         //    </div>
-        options = yQuery.merge({
+        options = vQ.merge({
             time:0,
             duration:0
         },options || {});
 
-        var root = yt.create('div',{
+        var root = verge.create('div',{
             class:'x-time-display'
         });
-        var current = yt.create('span',{
+        var current = verge.create('span',{
             class:'x-time-current'
         });
-        var sep = yt.create('span',{
+        var sep = verge.create('span',{
             class:'x-time-splite'
         });
         sep.text('/');
-        var duration = yt.create('span',{
+        var duration = verge.create('span',{
             class:'x-time-duration'
         });
         root.append(current);

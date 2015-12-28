@@ -7,7 +7,7 @@
  * @author zhengzk
  **/
 
-yt.extend({
+verge.extend({
     methods: {
         events: [//事件相关方法
             'bind' //绑定事件
@@ -33,7 +33,7 @@ yt.extend({
         callbacks: [//回掉函数名称
             'abort'
             , 'canPlay'
-            , 'canPlayThrough'
+            , 'canPlaythrough'
             , 'durationChange'
             , 'emptied'
             //,'ended'
@@ -71,7 +71,7 @@ yt.extend({
             , 'seekable' //视频可寻址部分 TimeRanges
             //,'seeking'  //是否正在视频中进行查找
             , 'networkState' //网络状态
-            , 'canPlayType'//能够播放指定的视频类型
+            , 'canPlaytype'//能够播放指定的视频类型
             , 'videoWidth'
             , 'videoHeight'
             //以下属性暂不支持

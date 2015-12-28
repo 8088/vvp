@@ -4,7 +4,7 @@
 设置选项
 ---------------
 
-ytv.js嵌入到页面的是一个简单的video标签，您可以通过选项的设置来使应用可以满足你的业务初始需求。
+vvp.js嵌入到页面的是一个简单的video标签，您可以通过选项的设置来使应用可以满足你的业务初始需求。
 
 首先可以使用video的属性来设置选项
 
@@ -18,10 +18,10 @@ ytv.js嵌入到页面的是一个简单的video标签，您可以通过选项的
 <video data-setup='{ "controls": true, "autoplay": false, "preload": "auto" }'...>
 ```
 
-最后，如果您不适用'data-setup'属性，你可以通过创建一个Javascript对象，并通过第二个参数传递给'ytv'一个JSON对象的方式来动态设置选项。
+最后，如果您不适用'data-setup'属性，你可以通过创建一个Javascript对象，并通过第二个参数传递给'vvp'一个JSON对象的方式来动态设置选项。
 
 ```js
-ytv("example_video_1", { "controls": true, "autoplay": false, "preload": "auto" });
+vvp("example_video_1", { "controls": true, "autoplay": false, "preload": "auto" });
 ```
 
 
@@ -116,10 +116,10 @@ or
 组件选项
 -----------------
 
-你可以为单独的ytv.js当中的组建设置初始化的状态设置选项。如果你想为视频初始设置静音的状态 查找节点`controlBar`找到子节点`muteToggle` , 对应值设置成false:
+你可以为单独的vvp.js当中的组建设置初始化的状态设置选项。如果你想为视频初始设置静音的状态 查找节点`controlBar`找到子节点`muteToggle` , 对应值设置成false:
 
 ```javascript
-var player = ytv('video-id', {
+var player = vvp('video-id', {
   children: {
     controlBar: {
       children: {
@@ -133,7 +133,7 @@ var player = ytv('video-id', {
 看起来这种每次查找子节点的方式有点啰嗦，可有简写，功能上是完全一样的。
 
 ```javascript
-var player = ytv('video-id', {
+var player = vvp('video-id', {
   controlBar: {
     muteToggle: false
   }

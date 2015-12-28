@@ -1,8 +1,8 @@
 /**
  * 进度条
- * @type {ytv.CoreObject|vjs.CoreObject}
+ * @type {vvp.CoreObject|vjs.CoreObject}
  */
-ytv.component.Progress = yt.CoreObject.extend({
+vvp.component.Progress = verge.CoreObject.extend({
     init:function(options){
         //<div class="x-progress">
         //    <div class="x-progress-track">
@@ -14,10 +14,10 @@ ytv.component.Progress = yt.CoreObject.extend({
         //    </div>
         //</div>
         //设置默认值
-        options = yQuery.merge({
+        options = vQ.merge({
 
         },options);
-        var root = yt.create('div',{
+        var root = verge.create('div',{
             class:'x-progress'
         });
 

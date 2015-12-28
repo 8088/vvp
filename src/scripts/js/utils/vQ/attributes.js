@@ -69,7 +69,7 @@
         return obj;
     }
 
-    yQuery.extend({
+    vQ.extend({
         /**
          * 设置or获取属性
          * @param element
@@ -113,7 +113,7 @@
         }
     });
 
-    yQuery.fn.extend({
+    vQ.fn.extend({
         /**
          * 设置or获取属性
          * @param element
@@ -148,7 +148,7 @@
          */
         contains: function (el) {
             this.forEach(function (inx, ele) {
-                var flag = yQuery.contains(ele, el);
+                var flag = vQ.contains(ele, el);
                 if (flag) {
                     return true;
                 }

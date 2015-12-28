@@ -1,7 +1,7 @@
 API
 ===
 
-ytv.js的API允许你通过Javascript进行控制交互。用HTML5、Flash或者其他任何浏览器支持的可供播放的技术都ytv.js都提供了一组API来对播放进行控制。
+vvp.js的API允许你通过Javascript进行控制交互。用HTML5、Flash或者其他任何浏览器支持的可供播放的技术都vvp.js都提供了一组API来对播放进行控制。
 
 引用Player
 ----------------------
@@ -9,11 +9,11 @@ ytv.js的API允许你通过Javascript进行控制交互。用HTML5、Flash或者
 
 ## Example
 ```js
-//Create a ytv player instance
-var myPlayer = ytv('example_video_1');
+//Create a vvp player instance
+var myPlayer = vvp('example_video_1');
 
-//Create a ytv player instance with options
-var myPlayer = ytv('example_video_1',{
+//Create a vvp player instance with options
+var myPlayer = vvp('example_video_1',{
     autoplay:false,
     poster:''
 });
@@ -27,7 +27,7 @@ var myPlayer = ytv('example_video_1',{
 
 ## Example
 ```js
-ytv("example_video_1").ready(function(){
+vvp("example_video_1").ready(function(){
   var myPlayer = this;
 
   // EXAMPLE: Start playing the video.
@@ -38,23 +38,23 @@ ytv("example_video_1").ready(function(){
 
 API 方法
 -----------
-构建好了播放器就可以通过API来对其进行操作控制，所有ytv.js的API都遵循HTML5的API [HTML5 media API](http://www.whatwg.org/specs/web-apps/current-work/multipage/the-video-element.html)
+构建好了播放器就可以通过API来对其进行操作控制，所有vvp.js的API都遵循HTML5的API [HTML5 media API](http://www.whatwg.org/specs/web-apps/current-work/multipage/the-video-element.html)
 
 ```js
 
 // setting a property on a bare HTML5 video element
 myVideoElement.currentTime = "120";
 
-// setting a property on a ytv.js player
+// setting a property on a vvp.js player
 myPlayer.currentTime(120);
 
 //getting a readonly property on bare HTML5 video element
 myVideoElement.duration 
 
-//getting a readonly property on a ytv.js player
+//getting a readonly property on a vvp.js player
 myPlayer.duration();
 
 ```
 
-更全面的文档情查看 [player API docs](../api/ytv.player.md).
+更全面的文档情查看 [player API docs](../api/vvp.player.md).
 

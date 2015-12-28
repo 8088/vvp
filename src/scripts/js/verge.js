@@ -18,7 +18,7 @@ if (typeof HTMLVideoElement === 'undefined') {
 var slice = [].slice,
     hasOwnProp = Object.prototype.hasOwnProperty;
 
-var yt = {
+var verge = {
     /**
      * 判断是否是Object
      * @param obj
@@ -65,7 +65,7 @@ var yt = {
  * 参考了 jQuery.extend
  * @type {extend}
  */
-yt.extend = function () {
+verge.extend = function () {
     var options, name, src, copy, copyIsArray, clone,
         target = arguments[0] || {},
         i = 1,
@@ -82,7 +82,7 @@ yt.extend = function () {
     }
 
     // Handle case when target is a string or something (possible in deep copy)
-    if (typeof target !== 'object' && !yt.isFunction(target)) {
+    if (typeof target !== 'object' && !verge.isFunction(target)) {
         target = {};
     }
 
@@ -108,19 +108,19 @@ yt.extend = function () {
                 }
 
                 // Recurse if we're merging plain objects or arrays
-                if (deep && copy && ( yt.isPlainObject(copy) ||
-                    ( copyIsArray = yt.isArray(copy) ) )) {
+                if (deep && copy && ( verge.isPlainObject(copy) ||
+                    ( copyIsArray = verge.isArray(copy) ) )) {
 
                     if (copyIsArray) {
                         copyIsArray = false;
-                        clone = src && yt.isArray(src) ? src : [];
+                        clone = src && verge.isArray(src) ? src : [];
 
                     } else {
-                        clone = src && yt.isPlainObject(src) ? src : {};
+                        clone = src && verge.isPlainObject(src) ? src : {};
                     }
 
                     // Never move original objects, clone them
-                    target[name] = yt.extend(deep, clone, copy);
+                    target[name] = verge.extend(deep, clone, copy);
 
                     // Don't bring in undefined values
                 } else if (copy !== undefined) {
@@ -134,7 +134,7 @@ yt.extend = function () {
     return target;
 };
 
-yt.extend({
+verge.extend({
     /**
      *
      * @param first {Object}
@@ -212,14 +212,14 @@ yt.extend({
         return ele && ele.nodeType === 1;
     },
     /**
-     * 创建一个DOM元素并转换为yQuery对象
+     * 创建一个DOM元素并转换为vQ对象
      * @param tagName
      * @param attrs
      */
 //    create: function (tagName, attrs) {
 //        tagName = tagName || 'div';
 //        var ele = document.createElement(tagName);
-//        var ret = yQuery(ele);
+//        var ret = vQ(ele);
 //        if (attrs) {
 //            ret.attr(attrs);
 //        }

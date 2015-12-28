@@ -27,7 +27,7 @@
      * @returns {boolean}
      */
     function isHidden(ele){
-        return currentStyle(ele,'display') === "none" || !yQuery.contains(ele.ownerDocument,ele);
+        return currentStyle(ele,'display') === "none" || !vQ.contains(ele.ownerDocument,ele);
     }
 
     /**
@@ -71,7 +71,7 @@
         sty.cssText = cssText + strCss;
     }
 
-yQuery.extend( {
+vQ.extend( {
     /**
      * 显示
      * @param ele
@@ -105,7 +105,7 @@ yQuery.extend( {
     }
 });
 
-yQuery.fn.extend( {
+vQ.fn.extend( {
     /**
      * 设置or获取css属性
      * @param arg
@@ -116,9 +116,9 @@ yQuery.fn.extend( {
         if(arguments.length == 1){
             if(typeof arg == 'string'){
                 return currentStyle(this[0],arg);
-            }else if(yQuery.isPlainObject(arg)){
+            }else if(vQ.isPlainObject(arg)){
                 var cssStr = '';
-                yQuery.each(arg,function(key,val){
+                vQ.each(arg,function(key,val){
                     cssStr += key + ':' + val + ';';
                 });
                 setStyle(this[0],cssStr);

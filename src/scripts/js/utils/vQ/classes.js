@@ -19,7 +19,7 @@ function hasClass (element, classToCheck) {
     return ((' ' + element.className + ' ').indexOf(' ' + classToCheck + ' ') !== -1);
 }
 
-yQuery.extend( {
+vQ.extend( {
     /**
      * 是否包含class
      * @param element
@@ -74,7 +74,7 @@ yQuery.extend( {
     }
 });
 
-yQuery.fn.extend( {
+vQ.fn.extend( {
     /**
      * 添加样式
      * @param classToAdd
@@ -82,7 +82,7 @@ yQuery.fn.extend( {
      */
     addClass:function(classToAdd){
         this.each(function(inx,ele){
-            yQuery.addClass(ele,classToAdd);
+            vQ.addClass(ele,classToAdd);
         });
         return this;
     },
@@ -93,7 +93,7 @@ yQuery.fn.extend( {
      */
     removeClass:function(classToRemove){
         this.each(function(inx,ele){
-            yQuery.removeClass(ele,classToRemove);
+            vQ.removeClass(ele,classToRemove);
         });
         return this;
     },
@@ -104,7 +104,7 @@ yQuery.fn.extend( {
      */
     toggleClass:function(element,classToToggle){
         this.each(function(inx,ele){
-            yQuery.toggleClass(ele,classToToggle);
+            vQ.toggleClass(ele,classToToggle);
         });
     }
 });

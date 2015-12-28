@@ -1,8 +1,8 @@
 /**
  * 清晰度
- * @type {ytv.CoreObject|vjs.CoreObject}
+ * @type {vvp.CoreObject|vjs.CoreObject}
  */
-ytv.component.QualityPanel = yt.CoreObject.extend({
+vvp.component.QualityPanel = verge.CoreObject.extend({
     init:function(options){
         //<div class="x-quality">
         //  <button class="x-control-btn" title="画质设置">标清</button>
@@ -16,7 +16,7 @@ ytv.component.QualityPanel = yt.CoreObject.extend({
         //</div>
 
         //设置默认值
-        options = yQuery.merge({
+        options = vQ.merge({
             title:'画质设置',
             qualitys:{
                 'mp4':'标清',
@@ -35,11 +35,11 @@ ytv.component.QualityPanel = yt.CoreObject.extend({
             'hd3':'x-quality-hd'
         }
 
-        var root = yt.create('div',{
+        var root = verge.create('div',{
             class:'x-quality'
         });
 
-        var btn = yt.create('button',{
+        var btn = verge.create('button',{
             class:'x-control-btn',
             title:options.title
         });
@@ -49,10 +49,10 @@ ytv.component.QualityPanel = yt.CoreObject.extend({
             panel.toggle();
         });
 
-        var panel = yt.create('div',{
+        var panel = verge.create('div',{
             class:'x-panel'
         });
-        var ul = yt.create('ul');
+        var ul = verge.create('ul');
         panel.append(ul);
         root.append(btn);
         root.append(panel);
@@ -74,11 +74,11 @@ ytv.component.QualityPanel = yt.CoreObject.extend({
                 options.quality = quality;
             }
             options.qualitys = qualitys;
-            var _ul = yt.create('ul');
+            var _ul = verge.create('ul');
 
-            yt.objectEach(qualitys,function(key,text){
-                var li = yt.create('li');//document.createElement('li');
-                var span = yt.create('span',{
+            verge.objectEach(qualitys,function(key,text){
+                var li = verge.create('li');//document.createElement('li');
+                var span = verge.create('span',{
                     class:styles[key]
                 });
                 span.text(text);

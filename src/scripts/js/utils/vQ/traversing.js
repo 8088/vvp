@@ -34,7 +34,7 @@
         return cur;
     }
 
-    yQuery.fn.extend({
+    vQ.fn.extend({
         // Determine the position of an element within the set
         /**
          * 下标
@@ -49,7 +49,7 @@
 
             // Index in selector
             if (typeof elem === 'string') {
-                return indexOf.call(yQuery(elem), this[0]);
+                return indexOf.call(vQ(elem), this[0]);
             }
 
             // Locate the position of the desired element
@@ -106,7 +106,7 @@
          */
         contents: function () {
             var elem = this[0];
-            return elem.contentDocument || yQuery.merge([], elem.childNodes);
+            return elem.contentDocument || vQ.merge([], elem.childNodes);
         }
     });
 }());

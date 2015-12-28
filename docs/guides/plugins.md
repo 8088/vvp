@@ -15,13 +15,13 @@ If you've built something cool with Video.js, you can easily share it with the r
       });
     };
 
-你可以利用ytv.js当中的API来创建插件 [ytv.js API](api.md)
+你可以利用vvp.js当中的API来创建插件 [vvp.js API](api.md)
 
 第二步: 注册插件
 -------------------------------
-一旦创建了插件，就需要向ytv.js里注册该插件才可以使用。
+一旦创建了插件，就需要向vvp.js里注册该插件才可以使用。
 
-    ytv.plugin('examplePlugin', examplePlugin);
+    vvp.plugin('examplePlugin', examplePlugin);
 
 请确保每个注册的插件的名称的唯一性。
 
@@ -29,7 +29,7 @@ If you've built something cool with Video.js, you can easily share it with the r
 ----------------------
 有两种方式来初始化插件，定义创建，和动态创建。
 
-    ytv('vidId', {
+    vvp('vidId', {
       plugins: {
         examplePlugin: {
           exampleOption: true
@@ -39,9 +39,9 @@ If you've built something cool with Video.js, you can easily share it with the r
 
 也可以动态的创建通过Javascript
 
-    var video = ytv('cool-vid');
+    var video = vvp('cool-vid');
     video.plugin({ exampleOption: true });
 
 第四步: 添加插件到wiki文档
 ----------------------
-然后添加该插件到wiki[ytv.js wiki](https://github.com/ytvjs/ytv.js/wiki/Plugins)方便查看和使用。
+然后添加该插件到wiki[vvp.js wiki](https://github.com/vvpjs/vvp.js/wiki/Plugins)方便查看和使用。

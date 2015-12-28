@@ -41,7 +41,7 @@ theme: colors
 [slide]
 ### HOW？
 ----
-ytv：使用方便、快捷、满足各种需求
+vvp：使用方便、快捷、满足各种需求
 
 [slide]
 ### WHAT

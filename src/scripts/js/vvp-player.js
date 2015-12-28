@@ -1,22 +1,22 @@
 /**
- * ytv进行拓展 使其支持多个player的处理
- * Copyright 2015, ytv.js
+ * vvp进行拓展 使其支持多个player的处理
+ * Copyright 2015, vvp.js
  * MIT Licensed
  * @since 2015/9/30.
  * @modify 2015/10/20.
  * @author zhengzk
  **/
 
-ytv.fn.extend(function () {
+vvp.fn.extend(function () {
     var ext = {},
-        methods = yt.methods,
-        callbacks = yt.callbacks,
-        attrs = yt.attrs;
+        methods = verge.methods,
+        callbacks = verge.callbacks,
+        attrs = verge.attrs;
     //    , 'attr'
     //    , 'plugin'
-    //可调用方法 无返回值 返回ytv
+    //可调用方法 无返回值 返回vvp
     //bind unbind one load
-    yt.objectEach(methods.events.concat(methods.native).concat(['plugin'])
+    verge.objectEach(methods.events.concat(methods.native).concat(['plugin'])
         , function (inx, fun) {
             ext[fun] = function () {
                 var args = slice.call(arguments);
@@ -29,11 +29,11 @@ ytv.fn.extend(function () {
 
     //回掉函数和方法重名处理
     //play pause
-    yt.objectEach(methods.specialNative
+    verge.objectEach(methods.specialNative
         , function (inx, fun) {
             ext[fun] = function (arg, flag) {
                 if (arguments.length > 0) {
-                    if (yt.isFunction(arg)) {//参数为function
+                    if (verge.isFunction(arg)) {//参数为function
                         var args = [fun].concat(slice.call(arguments));
                         this.each(function (i, player) {
                             player['bind'].apply(player, args);
@@ -53,7 +53,7 @@ ytv.fn.extend(function () {
 
     //需要返回值  只读属性
     //duration
-    yt.objectEach(attrs.readonly
+    verge.objectEach(attrs.readonly
         , function (inx, fun) {
             ext[fun] = function () {
                 var player = this[0];
@@ -66,11 +66,11 @@ ytv.fn.extend(function () {
 
     //ended seeking error
     //回掉函数和只读获取属性的方法重名处理
-    yt.objectEach(attrs.specialReadonly
+    verge.objectEach(attrs.specialReadonly
         , function (inx, attr) {
             ext[attr] = function (arg) {
                 if (arguments.length > 0) {
-                    if (yt.isFunction(arg)) {
+                    if (verge.isFunction(arg)) {
                         var args = [attr].concat(slice.call(arguments));
                         this.each(function (i, player) {
                             player.bind.apply(this, args);
@@ -87,7 +87,7 @@ ytv.fn.extend(function () {
 
     //可以设置or读取属性的方法
     //autoplay
-    yt.objectEach(attrs.readwrite.concat(attrs.specialReadwrite).concat(['attr'])
+    verge.objectEach(attrs.readwrite.concat(attrs.specialReadwrite).concat(['attr'])
         , function (inx, attr) {
             ext[attr] = function () {
                 var player = this[0];
@@ -101,7 +101,7 @@ ytv.fn.extend(function () {
     /**
      * 增加外部函数入口
      */
-    yt.objectEach(methods.callbacks
+    verge.objectEach(methods.callbacks
         , function (inx, fun) {
             ext[fun] = function () {
                 var args = [fun].concat(slice.call(arguments));

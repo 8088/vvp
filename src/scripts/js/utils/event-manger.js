@@ -7,14 +7,14 @@
  * @author zhengzk
  **/
 
-yt.EventManager = yt.CoreObject.extend({
+verge.EventManager = verge.CoreObject.extend({
     init:function(data){
         this._guid = 0;
         this._handlers = {};
         this._contexts = {};
         var own = this;
         if(data) {
-            yt.objectEach(data,function (type,handler) {
+            verge.objectEach(data,function (type,handler) {
                 own.observe(type,handler);
             });
         }
@@ -26,7 +26,7 @@ yt.EventManager = yt.CoreObject.extend({
      */
     bind:function(type,handler,context){
         var own = this;
-        if (yt.isArray(type)) {
+        if (verge.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[arguments.callee].concat(slice.call(arguments)));
             //return own._handleMultipleEvents(arguments.callee,type, handler);
         }
@@ -53,7 +53,7 @@ yt.EventManager = yt.CoreObject.extend({
      */
     unbind:function(type,handler,context){
         var own = this;
-        if (yt.isArray(type)) {
+        if (verge.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[arguments.callee].concat(slice.call(arguments)));
             //return own._handleMultipleEvents(arguments.callee,type, handler);
         }
@@ -84,7 +84,7 @@ yt.EventManager = yt.CoreObject.extend({
     one:function(type, handler,context) {
         var own = this;
         var args = slice.call(arguments);
-        if (yt.isArray(type)) {
+        if (verge.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[own.one].concat(args));
             //return own._handleMultipleEvents(arguments.callee, type, handler);
         }
@@ -118,7 +118,7 @@ yt.EventManager = yt.CoreObject.extend({
      */
     trigger:function(type,args,context){
         var own = this;
-        if (yt.isArray(type)) {
+        if (verge.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[arguments.callee].concat(slice.call(arguments)));
             //return own._handleMultipleEvents(arguments.callee,type,args,context);
         }
@@ -141,7 +141,7 @@ yt.EventManager = yt.CoreObject.extend({
     _handleMultipleEvents:function(fn,types){
         var own = this;
         var args = slice.call(arguments,2);//.slice(2);//动态截取fn所需参数
-        yt.objectEach(types,function(inx,type){
+        verge.objectEach(types,function(inx,type){
             fn.apply(own,[type].concat(args));
         });
     }
