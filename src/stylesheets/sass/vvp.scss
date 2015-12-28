@@ -1,6 +1,7 @@
 /*!
  * Verge Video Player(vvp) v1.0
  * Copyright 2015 - 2016 1Verge, Inc.
+ * Base on Bootstrap v3.36
  * Licensed under MIT
  */
 
@@ -12,22 +13,22 @@
 // 可触摸的默认字体大小为16px
 
 // Core variables and mixins
-@import "variables";
-@import "mixins";
+@import "variables";    // 全局变量
+@import "mixins";    // 全局方法
 
 // Reset and dependencies
-@import "normalize";
-//@import "print.less";
-@import "glyphicons";
+@import "normalize";    // 全局图标初始化
+//@import "print";    //<-- 打印样式暂不需要
+@import "glyphicons";    // 字体图标
 
 // Core CSS
 @import "scaffolding";
-//@import "type.less";
-//@import "code.less";
-//@import "grid.less";
+@import "type";
+//@import "code";    //<-- 代码样式暂不需要
+@import "grid";
 //@import "tables.less";
-//@import "forms.less";
-//@import "buttons.less";
+@import "forms.less";
+@import "buttons.less";
 
 // Components
 // @import "bootstrap/component-animations";

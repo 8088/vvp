@@ -46,7 +46,7 @@ $link-hover-decoration: underline !default;
 //
 //## Font, line-height, and color for vvp text, headings, and more 字体、行高、标题 等.
 
-$font-family-chinese:     "Microsoft YaHei", "微软雅黑", Arial, sans-serif !default;
+$font-family-chinese:     "Microsoft YaHei", "微软雅黑"  !default;
 $font-family-western:     Helvetica, Arial, sans-serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default; // 等宽字体

@@ -52,6 +52,6 @@ vvp.js 的代码是公开开源的(加密逻辑除外) [contributing guide](CONT
 
 ## 声明
 
-vvp.js is licensed under the Apache License, Version 2.0. [View the license file](LICENSE)
+vvp.js is licensed under the MIT. [View the license file](LICENSE)
 
-Copyright 2015 Youku.com
+Copyright 2015 1VERGE, Inc
