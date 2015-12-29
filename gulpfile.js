@@ -35,6 +35,7 @@ gulp.task('sass', function() {
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9',
             'opera 12.1', 'ios 6', 'android 4'))
         .pipe(gulp.dest('dev/stylesheets'))
+        .pipe(gulp.dest('test/stylesheets')) // <-- 临时使用
         .pipe(rename({
             suffix: '.min'
         }))
@@ -82,9 +83,21 @@ gulp.task('images', function() {
 
 //parse template
 gulp.task('templates', function() {
-    //处理 jade
-    return gulp.src('src/templates/jade/**/*')
-        .pipe(gulp.dest('dist'))
+    // 处理 jade
+    return gulp.src('src/templates/jade/index.jade')
+        .pipe(jade({
+            pretty: true,
+            //debug: true,
+            cache: false
+        }))
+        .pipe(gulp.dest('test/UItest/'))
+        .pipe(htmlmin({
+            collapseWhitespace: true
+        }))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest('test/UItest/')) // <-- 临时使用
         .pipe(livereload())
         .pipe(notify({
             message: 'Template task complete'
@@ -96,6 +109,7 @@ gulp.task('assets', function() {
     return gulp.src('src/assets/**/*')
         .pipe(changed('dev/assets'))
         .pipe(changed('dist/assets'))
+        .pipe(changed('test/assets')) // <-- 临时使用
         .pipe(notify({
             message: 'Assets task complete'
         }));
@@ -123,11 +137,14 @@ gulp.task('build', function() {
 
 // cleanup
 gulp.task('clean', function() {
-    return gulp.src(['dist/stylesheets', 'dist/scripts',
+    return gulp.src([
+            'dist/stylesheets',
+            'dist/scripts',
             'dist/images',
             'dist/*.html'
         ], {
             read: false
+
         })
         .pipe(clean());
 });

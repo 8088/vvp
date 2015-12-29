@@ -1,12 +1,20 @@
 {
-  "name": "vvp.js",
-  "version": "0.0.1",
-  "homepage": "https://github.com/yuanliang/ykv.js",
+  "name": "vvp",
+  "description": "Verge Video Player",
+  "main": "gulpfile.js",
   "authors": [
-    "Yuan Liang <yuanliang@me.com>"
+    "Yuan Liang"
   ],
-  "description": "YoukuTudou HTML5 Video Player",
   "license": "MIT",
+  "keywords": [
+    "video",
+    "sass",
+    "eslint",
+    "gulp",
+    "html5"
+  ],
+  "homepage": "https://github.com/vergeplayer/vvp",
+  "moduleType": [],
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,7 +23,8 @@
     "tests"
   ],
   "dependencies": {
-    "jQuery": "~2.1.4",
+    "jquery": "~2.1.4",
+    "modernizr": "~3.2.0",
     "zepto": "~1.1.6"
   }
 }

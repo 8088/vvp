@@ -10,8 +10,21 @@ js
  #### view:  视图层 DOM组件相关
  #### plugins: 插件
  #### service: 业务相关
- 
 
-### styles
+
+### stylesheets
 sass
 ----
+ #### variables: 基础变量
+ #### utilities: 工具方法
+ #### mixins: 函数方法
+ #### components: 组件
+
+
+### templates
+jade
+----
+ #### components: 组件
+ #### layout: 结构框架
+ #### plugin: 插件
+ #### service: 优土业务逻辑
