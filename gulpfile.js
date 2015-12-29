@@ -92,6 +92,7 @@ gulp.task('templates', function() {
         }))
         .pipe(gulp.dest('test/UItest/'))
         .pipe(htmlmin({
+            removeComments: true,
             collapseWhitespace: true
         }))
         .pipe(rename({
