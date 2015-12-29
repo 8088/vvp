@@ -5,6 +5,7 @@
 var gulp = require('gulp'),
     del = require('del'), //删除文件
     sass = require('gulp-sass'),
+    jade = require('gulp-jade'),
     autoprefixer = require('gulp-autoprefixer'),
     nano = require('gulp-cssnano'), // CSS压缩
     //eslint = require('gulp-eslint'),
@@ -22,7 +23,7 @@ var gulp = require('gulp'),
 
     pkg = require('./package.json'),
     //自定义的一些处理方法
-    build = require("./tools/build");//合并脚本
+    build = require("./tools/build"); //合并脚本
 
 // compile css from sass files
 gulp.task('sass', function() {
@@ -55,7 +56,7 @@ gulp.task('scripts', function() {
 });
 
 //build vQ.js
-gulp.task('vq', function () {
+gulp.task('vq', function() {
     //var config = require("./src/config.json");
     return build('src/scripts/js/vq/')
         .pipe(livereload())
@@ -80,21 +81,18 @@ gulp.task('images', function() {
 });
 
 //parse template
-gulp.task('template', function() {
-    // return gulp.src('src/templates/**/*')
-    //     .pipe(utils.paseData({
-    //         path: ''
-    //     }))
-    //     .pipe(gulp.dest('dist'))
-    //     .pipe(livereload())
-    //     .pipe(notify({
-    //         message: 'Template task complete'
-    //     }));
+gulp.task('templates', function() {
+    //处理 jade
+    return gulp.src('src/templates/jade/**/*')
+        .pipe(gulp.dest('dist'))
+        .pipe(livereload())
+        .pipe(notify({
+            message: 'Template task complete'
+        }));
 });
 
-//assets
+//assets 临时方法
 gulp.task('assets', function() {
-
     return gulp.src('src/assets/**/*')
         .pipe(changed('dev/assets'))
         .pipe(changed('dist/assets'))
@@ -136,11 +134,14 @@ gulp.task('clean', function() {
 
 // watch for changes in files
 gulp.task('default', ['clean'], function() {
-    gulp.start('sass', 'scripts', 'template', 'assets');
+    gulp.start('sass', 'scripts', 'templates', 'assets');
 });
 
 // monitoring 监听
 gulp.task('watch', function() {
+
+    // 监听所有.jade档
+    gulp.watch('src/templates/**/*.jade', ['templates']);
 
     // 监听所有.scss档
     gulp.watch('src/stylesheets/**/*.scss', ['styles']);

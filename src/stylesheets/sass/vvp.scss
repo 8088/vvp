@@ -27,8 +27,8 @@
 //@import "code";    //<-- 代码样式暂不需要
 @import "grid";
 //@import "tables.less";
-@import "forms.less";
-@import "buttons.less";
+@import "forms";
+@import "buttons";
 
 // Components
 // @import "bootstrap/component-animations";
@@ -60,5 +60,5 @@
 // @import "bootstrap/carousel";
 
 // Utility classes
-// @import "bootstrap/utilities";
+@import "utilities";
 // @import "bootstrap/responsive-utilities";
