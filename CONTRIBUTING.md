@@ -19,8 +19,6 @@
 想提交的时候执行test命令确保程序正常
 
     test
-
-    rake
     
 再再再然后你就可以 push 你的分支到 master 然后 
 
