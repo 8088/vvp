@@ -1,6 +1,6 @@
 # Contributing 
 
-只要遵守这个协议[code of conduct.]: https://thoughtbot.com/open-source-code-of-conduct , 我们希望任何人都可以参与到项目中来。
+只要遵守这个协议[code of conduct.](https://thoughtbot.com/open-source-code-of-conduct) , 我们希望任何人都可以参与到项目中来。
 
 创建分支, 添加代码到本地:
 
@@ -22,7 +22,7 @@
     
 再再再然后你就可以 push 你的分支到 master 然后 
 
-Push to your fork and [submit a pull request][pr].
+Push 你的 分支 然后 提交一个 [pull request][pr].
 
 [pr]: https://github.com/vergeplayer/vvp/compare/
 
