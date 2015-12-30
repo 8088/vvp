@@ -61,7 +61,7 @@
                     return;
                 }
 
-                verge.objectEach(readyList, function (inx, func) {
+                vQ.each(readyList, function (inx, func) {
                     func.apply(document, [vvp]);
                 });
 

@@ -188,7 +188,7 @@
      */
     CoreObject.create = function () {
         // 创建一个继承自该对象原型的新对象
-        var inst = verge.objectCreate(this.prototype);
+        var inst = ObjectCreate(this.prototype);
 
         // 将此构造函数用语新对象
         this.apply(inst, arguments);

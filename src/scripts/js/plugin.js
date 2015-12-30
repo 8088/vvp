@@ -11,7 +11,7 @@ vvp.extend({
         this.each(function(inx,player){
             player.expand({
                 name:init
-            })
+            });
         });
     }
 });

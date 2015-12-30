@@ -15,7 +15,7 @@ verge.extend({
             'one', //只执行一次的方法
             'trigger' //触发回掉方法
         ],
-        native: [//原生video事件
+        native: [//原生video可调用方法
             //'play',
             //'pause',
             'load'
@@ -71,9 +71,9 @@ verge.extend({
             'seekable', //视频可寻址部分 TimeRanges
             //,'seeking',  //是否正在视频中进行查找
             'networkState', //网络状态
-            'canPlayType',//能够播放指定的视频类型
             'videoWidth',
             'videoHeight',
+            'canPlayType'// video方法 特殊处理 能够播放指定的视频类型
             //以下属性暂不支持
             //'startDate', //当前时间偏移 Date
             //'textTracks', //文本轨道 TextTrackList

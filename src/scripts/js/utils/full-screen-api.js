@@ -1,6 +1,6 @@
 /**
  * 全屏事件api
- * Copyright 2015, jsonp.js
+ * Copyright 2015, full-screen-api.js
  * MIT Licensed
  * @since 2015/9/2.
  * @modify 2015/9/30.

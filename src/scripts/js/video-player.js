@@ -34,7 +34,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
         }
 
         if(options.attr){
-            verge.objectEach(options.attr,function(key,val){
+            vQ.each(options.attr,function(key,val){
                 op[key] = val;
             });
         }
@@ -43,7 +43,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
         if (options.plugins) {
             //var plugins = options.plugins;
 
-            verge.objectEach(options.plugins,function(name,param){
+            vQ.each(options.plugins,function(name,param){
                 if(verge.isFunction(this[name])){
                     this[name](param);
                 }else{
@@ -281,7 +281,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
     removeEvent: function () {
         var own = this;
         //遍历事件类型及函数，开始绑定
-        verge.objectEach(verge.callbacks, function (event, fun) {
+        vQ.each(verge.callbacks, function (event, fun) {
             var _fun = own[fun].eventTarget;
             vQ.unbind(own.video, event, _fun);
         });
@@ -293,7 +293,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
     bindEvents: function () {
         var own = this;
         //遍历事件类型及函数，开始绑定
-        verge.objectEach(verge.callbacks, function (event, fun) {
+        vQ.each(verge.callbacks, function (event, fun) {
             var _fun = function () {
                 var ret = own[fun].apply(own, arguments);//apply的方式 能确保当前对象是Player
                 if(typeof ret == 'undefined' || ret){
@@ -315,7 +315,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
             if(verge.isPlainObject(arg)){
                 //批量给属性赋值
                 var _arg = {};
-                verge.objectEach(arg,function(attr,val){
+                vQ.each(arg,function(attr,val){
                     var flag = false;
 
                     //用string的 indexof 替代？
@@ -375,13 +375,13 @@ vvp.VideoPlayer.expand(function(){
         attrs = verge.attrs,
         events = new verge.EventManager();//统一管理回掉
     //bind unbind one 事件处理
-    verge.objectEach(methods.events,function(inx,fun){
+    vQ.each(methods.events,function(inx,fun){
         extend[fun] = function() {
             var own = this;
             var args = slice.call(arguments);
             var funs = [];
             if(verge.isArray(args[0])){
-                verge.objectEach(args[0],function(inx,_fun){
+                vQ.each(args[0],function(inx,_fun){
                     if('on'.indexOf(_fun) < 0){
                         _fun = callbacks[_fun.toLowerCase()] || _fun;
                     }
@@ -403,7 +403,7 @@ vvp.VideoPlayer.expand(function(){
     });
 
     //play load pause video原生方法
-    verge.objectEach(methods.native.concat(methods.specialNative),function(inx,fun){
+    vQ.each(methods.native.concat(methods.specialNative),function(inx,fun){
         extend[fun] = function() {
             var own = this;
             own.video[fun].apply(own.video, arguments);
@@ -412,14 +412,18 @@ vvp.VideoPlayer.expand(function(){
     });
 
     //duration 等只读属性 转换为方法
-    verge.objectEach(attrs.readonly.concat(attrs.specialReadonly),function(inx,attr){
+    vQ.each(attrs.readonly.concat(attrs.specialReadonly),function(inx,attr){
         extend[attr] = function() {
-            return vQ.attr(this.video,attr);
+            var ret = vQ.attr(this.video,attr);
+            if(vQ.isFunction(ret)){
+              return ret.apply(this.video,arguments);
+            }
+            return ret;
         };
     });
 
     //autoplay 等设置&读取属性
-    verge.objectEach(attrs.readwrite,function(inx,attr){
+    vQ.each(attrs.readwrite,function(inx,attr){
         extend[attr] = function(val) {
             if (arguments.length > 0) {
                 return vQ.attr(this.video,attr,val);
@@ -429,7 +433,7 @@ vvp.VideoPlayer.expand(function(){
     });
 
     //回掉函数
-    verge.objectEach(methods.callbacks.concat(methods.specialNative).concat(attrs.specialReadonly),function(inx,fun){
+    vQ.each(methods.callbacks.concat(methods.specialNative).concat(attrs.specialReadonly),function(inx,fun){
         var _fun = verge.callbacks[fun.toLowerCase()] || fun;
         extend[_fun] = function() {
             log(_fun,arguments);

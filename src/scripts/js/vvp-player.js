@@ -17,7 +17,7 @@ vvp.fn.extend(function () {
 
     //可调用方法 无返回值 返回vvp
     //bind unbind one load
-    verge.objectEach(methods.events.concat(methods.native).concat(['plugin']), function (inx, fun) {
+    vQ.each(methods.events.concat(methods.native).concat(['plugin']), function (inx, fun) {
             ext[fun] = function () {
                 var args = slice.call(arguments);
                 this.each(function (i, player) {
@@ -29,7 +29,7 @@ vvp.fn.extend(function () {
 
     //回掉函数和方法重名处理
     //play pause
-    verge.objectEach(methods.specialNative, function (inx, fun) {
+    vQ.each(methods.specialNative, function (inx, fun) {
             ext[fun] = function (arg, flag) {
                 if (arguments.length > 0) {
                     if (verge.isFunction(arg)) {//参数为function
@@ -52,7 +52,7 @@ vvp.fn.extend(function () {
 
     //需要返回值  只读属性
     //duration
-    verge.objectEach(attrs.readonly, function (inx, fun) {
+    vQ.each(attrs.readonly, function (inx, fun) {
             ext[fun] = function () {
                 var player = this[0];
                 if (player) {
@@ -64,7 +64,7 @@ vvp.fn.extend(function () {
 
     //ended seeking error
     //回掉函数和只读获取属性的方法重名处理
-    verge.objectEach(attrs.specialReadonly, function (inx, attr) {
+    vQ.each(attrs.specialReadonly, function (inx, attr) {
             ext[attr] = function (arg) {
                 if (arguments.length > 0) {
                     if (verge.isFunction(arg)) {
@@ -84,7 +84,7 @@ vvp.fn.extend(function () {
 
     //可以设置or读取属性的方法
     //autoplay
-    verge.objectEach(attrs.readwrite.concat(attrs.specialReadwrite).concat(['attr']), function (inx, attr) {
+    vQ.each(attrs.readwrite.concat(attrs.specialReadwrite).concat(['attr']), function (inx, attr) {
             ext[attr] = function () {
                 var player = this[0];
                 if (player) {
@@ -97,10 +97,11 @@ vvp.fn.extend(function () {
     /**
      * 增加外部函数入口
      */
-    verge.objectEach(methods.callbacks, function (inx, fun) {
+    vQ.each(methods.callbacks, function (inx, fun) {
             ext[fun] = function () {
+                var own = this;
                 var args = [fun].concat(slice.call(arguments));
-                this.each(function (i, player) {
+                own.each(function (i, player) {
                     player['bind'].apply(player, args);
                 });
             };

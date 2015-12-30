@@ -25,16 +25,31 @@ vvp.fn = {
         var own = this;
         if (verge.isFunction(selector)) {
             //ready 时执行
+            own.ready(selector);
         } else {
             var targets = vQ(selector);
             //if(targets.length == 0){
             //    return this;
             //}
+            var Player = this.dispatch();
             targets.each(function (i, target) {
-                own[i] = new vvp.Player(target,options);
+                own[i] = new Player(target,options);
                 own.length++;
             });
             return this;
+        }
+    },
+    /*
+     * 播放器选择策略
+     */
+    dispatch:function(){
+        if (vvp.browser.isSupportH5M3U8 || vvp.browser.isSupportH5MP4){
+            //vvp.VideoPlayer 核心 无ui
+            return vvp.Player;//带ui
+        } else if (this.isSupportFlash){//使用flash播放器
+            throw new Error('Please Use Flash Player');
+        } else {
+            throw new Error('The Device not support');
         }
     },
     /**

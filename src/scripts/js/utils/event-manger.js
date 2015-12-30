@@ -14,7 +14,7 @@ verge.EventManager = vvp.CoreObject.extend({
         this._contexts = {};
         var own = this;
         if(data) {
-            verge.objectEach(data,function (type,handler) {
+            vQ.each(data,function (type,handler) {
                 own.observe(type,handler);
             });
         }
@@ -141,7 +141,7 @@ verge.EventManager = vvp.CoreObject.extend({
     _handleMultipleEvents:function(fn,types){
         var own = this;
         var args = slice.call(arguments,2);//.slice(2);//动态截取fn所需参数
-        verge.objectEach(types,function(inx,type){
+        vQ.each(types,function(inx,type){
             fn.apply(own,[type].concat(args));
         });
     }

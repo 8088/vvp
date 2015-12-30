@@ -120,7 +120,7 @@ vvp.Player = vvp.VideoPlayer.extend({
                     clearTimeout(own._show_ctl__timer);
                     delete own._show_ctl__timer;
                 }
-            }
+            };
             if(flag){
                 own.dashboard.show();
                 clearTimer();

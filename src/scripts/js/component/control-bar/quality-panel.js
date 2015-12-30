@@ -76,7 +76,7 @@ vvp.component.QualityPanel = vvp.CoreObject.extend({
             options.qualitys = qualitys;
             var _ul = verge.create('ul');
 
-            verge.objectEach(qualitys,function(key,text){
+            vQ.each(qualitys,function(key,text){
                 var li = verge.create('li');//document.createElement('li');
                 var span = verge.create('span',{
                     class:styles[key]

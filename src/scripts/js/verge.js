@@ -70,17 +70,7 @@ verge.extend({
      * @returns {F}
      * @constructor
      */
-    objectCreate: Object.create || function (obj) {
-        //Create a new function called 'F' which is just an empty object.
-        function F() {}
-
-        //the prototype of the 'F' function should point to the
-        //parameter of the anonymous function.
-        F.prototype = obj;
-
-        //create a new constructor function based off of the 'F' function.
-        return new F();
-    },
+    objectCreate: ObjectCreate,
     /**
      * 根据path创建路径
      * @param path string
