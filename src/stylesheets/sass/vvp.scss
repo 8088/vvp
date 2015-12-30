@@ -24,6 +24,7 @@
 // Core CSS
 @import "scaffolding";
 @import "type";
+@import "z-index";
 //@import "code";    //<-- 代码样式暂不需要
 //@import "grid";
 //@import "tables.less";
@@ -31,7 +32,7 @@
 //@import "buttons";
 
 // Components
-// @import "bootstrap/component-animations";
+@import "components/stream";
 // @import "bootstrap/dropdowns";
 // @import "bootstrap/button-groups";
 // @import "bootstrap/input-groups";
