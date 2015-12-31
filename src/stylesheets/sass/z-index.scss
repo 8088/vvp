@@ -2,6 +2,42 @@
 // z-index
 // --------------------------------------------------
 
+.vvp {
+    z-index: 1000;
+}
+
+// 主层级
+// ==================================================
 .vvp-stream {
     z-index: 1000;
+}
+
+.vvp-player {
+    z-index: 2000;
+}
+
+
+
+// 次层级 controls -> .vvp-player
+// --------------------------------------------------
+.vvp-controls {
+    z-index: 1000;
+}
+
+// mini进度条 .vvp-progress-mini -> controls -> .vvp-player
+// --------------------------------------------------
+.vvp-progress-mini {
+    z-index:100;
+}
+
+.vvp-progress-mini-track {
+    z-index: 10;
+}
+
+.vvp-progress-mini-buffer {
+    z-index: 20;
+}
+
+.vvp-progress-mini-play {
+    z-index: 30;
 }

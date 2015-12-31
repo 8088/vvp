@@ -26,19 +26,26 @@
     }
 }
 
-
-// 字体图标对应的字符值
-.vvp-ico{
+.vvp-ico {
     position: relative;
     top: 1px;
     display: inline-block;
+    font-size: 200%; // <--临时设置
     font-family: 'vvp';
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+
+    /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-// Individual icons
+// icons
 .vvp-ico-play               { &:before { content: "\c0"; } }
+.vvp-ico-pause              { &:before { content: "\c1"; } }
+.vvp-ico-fullscreen         { &:before { content: "\c7"; } }
+.vvp-ico-exitfullscreen     { &:before { content: "\c8"; } }
+.vvp-ico-volume-large       { &:before { content: "\c9"; } }
+.vvp-ico-volume-small       { &:before { content: "\ca"; } }
+.vvp-ico-mute               { &:before { content: "\cb"; } }
