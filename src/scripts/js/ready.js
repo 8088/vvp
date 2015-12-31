@@ -45,7 +45,7 @@
          * @param arg
          */
         ready: function (arg) {
-            if (verge.isFunction(arg)) {
+            if (vQ.isFunction(arg)) {
                 if (!vvp.isReady) {
                     readyList.push(arg);
                 } else {

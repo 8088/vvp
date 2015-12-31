@@ -7,70 +7,13 @@
  * @modify 2015/10/25.
  * @author zhengzk
  **/
-//var vQ = vQ || {};
-//var slice = [].slice,
-//    hasOwnProp = Object.prototype.hasOwnProperty;
-
-var verge = {
-    /**
-     * 判断是否是Object
-     * @param obj
-     * @returns {boolean}
-     */
-    isPlainObject:vQ.isPlainObject,
-    /**
-     * 判断是否是空节点
-     * @param obj
-     * @returns {boolean}
-     */
-    isEmptyObject:vQ.isEmptyObject,
-    /**
-     * 判断arr是否是Array
-     * @param arr Array
-     * @returns {boolean}
-     */
-    isArray:vQ.isArray,
-    /**
-     * 判断fn是否是Function
-     * @param fn Function
-     * @returns {boolean}
-     */
-    isFunction:vQ.isFunction
-};
-
-/***
- * 拓展
- * 参考了 jQuery.extend
- * @type {extend}
+/**
+ * verge 公用方法
+ * Q：verge为什么与vQ合并or对vQ进行扩展？
+ *   保持vQ的职责单一  vQ用法接口等与jQuery保持一致
+ * @type {{routes: Function, isDOMElement: Function, create: Function, getClientLeft: Function}}
  */
-verge.extend = function () {
-    vQ.extend.apply(this, arguments);
-};
-
-verge.extend({
-    /**
-     *
-     * @param first {Object}
-     * @param second {Object}
-     * @returns {*}
-     */
-    merge: vQ.merge,
-    /**
-     * Loop through each property in an object and call a function
-     * whose arguments are (key,value)
-     * @param  {Object}   obj Object of properties
-     * @param  {Function} fn  Function to be called on each property.
-     * @this {*}
-     * @private
-     */
-    objectEach: vQ.each,
-    /**
-     * 创建一个object
-     * @param obj
-     * @returns {F}
-     * @constructor
-     */
-    objectCreate: ObjectCreate,
+var verge = {
     /**
      * 根据path创建路径
      * @param path string
@@ -135,4 +78,12 @@ verge.extend({
         }
         return left;
     }
-});
+};
+
+/***
+ * 拓展
+ * @type {extend}
+ */
+verge.extend = function () {
+    vQ.extend.apply(this, arguments);
+};

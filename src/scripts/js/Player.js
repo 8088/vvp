@@ -11,7 +11,7 @@ vvp.Player = vvp.VideoPlayer.extend({
     //player -->{video videobutton loading dashboard}
     init: function (target, options) {
         //初始化参数
-        options = verge.merge({
+        options = vQ.merge({
             autoplay: false, /*将会传递至video*/
             loop: false, /*将会传递至video*/
             preload: false, /*将会传递至video*/
@@ -39,7 +39,6 @@ vvp.Player = vvp.VideoPlayer.extend({
         });
         //创建必要节点
         this._createVideo();
-        this._super(this.video,options);
         this._createVideoButton();
         this._createLoading();  //options.poster;
         this._createPoster(options.poster);
@@ -47,6 +46,7 @@ vvp.Player = vvp.VideoPlayer.extend({
         this._createPrompt();
         this._createTrigger();
         vQ(target).append(this.root);
+        this._super(this.video,options);
 
         own.bind('onFullscreenChange',function(flag){
             if(flag){
@@ -301,12 +301,12 @@ vvp.Player = vvp.VideoPlayer.extend({
         }
         own.bind('onFullscreenChange',function(flag){
             if (flag) {
-                if (vvp.isIPAD) {
+                if (vvp.browser.isIPAD) {
                     parent.addClass('x-fs-console');
                 }
                 own.controls(false);
             } else {
-                if (vvp.isIPAD) {
+                if (vvp.browser.isIPAD) {
                     parent.removeClass('x-fs-console');
                 }
                 own.controls(true);

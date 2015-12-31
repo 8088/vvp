@@ -32,7 +32,7 @@ vvp.fn.extend(function () {
     vQ.each(methods.specialNative, function (inx, fun) {
             ext[fun] = function (arg, flag) {
                 if (arguments.length > 0) {
-                    if (verge.isFunction(arg)) {//参数为function
+                    if (vQ.isFunction(arg)) {//参数为function
                         var args1 = [fun].concat(slice.call(arguments));
                         this.each(function (i, player) {
                             player['bind'].apply(player, args1);
@@ -67,7 +67,7 @@ vvp.fn.extend(function () {
     vQ.each(attrs.specialReadonly, function (inx, attr) {
             ext[attr] = function (arg) {
                 if (arguments.length > 0) {
-                    if (verge.isFunction(arg)) {
+                    if (vQ.isFunction(arg)) {
                         var args = [attr].concat(slice.call(arguments));
                         this.each(function (i, player) {
                             player.bind.apply(this, args);

@@ -8,22 +8,35 @@
  **/
 
 vvp.VideoPlayer = vvp.CoreObject.extend({
+    /**
+     * init构造VideoPlayer对象时会执行该方法
+     * @param video
+     * @param options
+     */
     init: function (video,options) {
         var own = this;
         own.video = video;
-        options = verge.merge({
+        options = vQ.merge({
             isWeixin:vvp.browser.isWeixin
         },options);
         own._initOptions(options);
         own.bindEvents();
     },
+    /**
+     * 处理options 设置默认值等
+     * @param options
+     * @private
+     */
     _initOptions:function(options){
+        //不用merge处理 避免多余属性污染
         var op = {
-            autoplay: options.autoplay, /*将会传递至video*/
-            loop: options.loop, /*将会传递至video*/
-            muted: options.muted, /*将会传递至video*/
-            preload: options.preload/*将会传递至video*/
+            autoplay: options.autoplay || false, /*将会传递至video*/
+            loop: options.loop || false, /*将会传递至video*/
+            muted: options.muted || false, /*将会传递至video*/
+            preload: options.preload || false,/*将会传递至video*/
+            controls:options.controls || false
         };
+        this.options = vQ.merge(options,op);
 
         if (options.src) {
             op.src = options.src;
@@ -33,18 +46,19 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
             op['webkit-playsinline'] = '';
         }
 
-        if(options.attr){
+        if(options.attr){//这样attr中属性会对之前属性进行覆盖
             vQ.each(options.attr,function(key,val){
                 op[key] = val;
             });
         }
+
         this.attr(op);
         // Load plugins
         if (options.plugins) {
             //var plugins = options.plugins;
 
             vQ.each(options.plugins,function(name,param){
-                if(verge.isFunction(this[name])){
+                if(vQ.isFunction(this[name])){
                     this[name](param);
                 }else{
                     log.error('Unable to find plugin:', name);
@@ -52,6 +66,13 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
             },this);
         }
     },
+    /**
+     * 设置or获取当前时间方法
+     * 重新实现：增加跳转后执行callback & 容错处理
+     * @param time
+     * @param callback
+     * @returns {*|vvp.VideoPlayer.video.currentTime}
+     */
     currentTime: function (time, callback) {
         var own = this;
         if (arguments.length > 0) {
@@ -65,7 +86,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
 
             var timefun = function () {
                 own.video.currentTime = time;
-                if (verge.isFunction(callback)) {
+                if (vQ.isFunction(callback)) {
                     callback();
                 }
 
@@ -103,7 +124,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
      */
     src: function (src) {
         if (arguments.length > 0) {
-            var prepaused = false;//!this.options.autoplay;
+            var prepaused = !this.options.autoplay;
             if(this.video.src){
                 prepaused = this.video.paused;
             }
@@ -132,14 +153,14 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
         if(arguments.length > 0 && flag != this.isFullscreen){
             var own = this;
             if(flag){
-                if(vvp.isIPAD){//PAD 走css全屏
+                if(vvp.browser.isIPAD){//PAD 走css全屏
                     own._enterFullWindow();
                     own.trigger('onFullscreenChange', [own.isFullWindow]);
                 }else{
                     this.requestFullscreen();
                 }
             }else{
-                if(vvp.isIPAD) {
+                if(vvp.browser.isIPAD) {
                     own._exitFullWindow();
                     own.trigger('onFullscreenChange', [own.isFullWindow]);
                 }else{
@@ -211,7 +232,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
      * css方式进入全屏
      * @private
      */
-    _enterFullWindow:function(){
+    _enterFullWindow:function(){ //无ui时css的处理还需优化
         var own = this;
         own.isFullWindow = true;
 
@@ -287,7 +308,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
         });
     },
     /**
-     * 绑定视频的各种响应事件
+     * 绑定视频的各种回掉响应事件
      * @private
      */
     bindEvents: function () {
@@ -312,7 +333,7 @@ vvp.VideoPlayer = vvp.CoreObject.extend({
         var readonlyAttrs = verge.attrs.readonly.concat(verge.attrs.specialReadonly);
         var readwriteAttrs = verge.attrs.readwrite.concat(verge.attrs.specialReadwrite);
         var own = this;
-            if(verge.isPlainObject(arg)){
+            if(vQ.isPlainObject(arg)){
                 //批量给属性赋值
                 var _arg = {};
                 vQ.each(arg,function(attr,val){
@@ -373,14 +394,14 @@ vvp.VideoPlayer.expand(function(){
         methods = verge.methods,
         callbacks = verge.callbacks,
         attrs = verge.attrs,
-        events = new verge.EventManager();//统一管理回掉
+        events = new verge.EventManager();//统一管理回掉 定义成局部 避免player绑定过多对象及变量污染
     //bind unbind one 事件处理
     vQ.each(methods.events,function(inx,fun){
         extend[fun] = function() {
             var own = this;
             var args = slice.call(arguments);
             var funs = [];
-            if(verge.isArray(args[0])){
+            if(vQ.isArray(args[0])){
                 vQ.each(args[0],function(inx,_fun){
                     if('on'.indexOf(_fun) < 0){
                         _fun = callbacks[_fun.toLowerCase()] || _fun;
@@ -432,7 +453,7 @@ vvp.VideoPlayer.expand(function(){
         };
     });
 
-    //回掉函数
+    //定义默认回掉函数 onPlay等
     vQ.each(methods.callbacks.concat(methods.specialNative).concat(attrs.specialReadonly),function(inx,fun){
         var _fun = verge.callbacks[fun.toLowerCase()] || fun;
         extend[_fun] = function() {

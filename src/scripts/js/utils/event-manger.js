@@ -26,7 +26,7 @@ verge.EventManager = vvp.CoreObject.extend({
      */
     bind:function(type,handler,context){
         var own = this;
-        if (verge.isArray(type)) {
+        if (vQ.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[arguments.callee].concat(slice.call(arguments)));
             //return own._handleMultipleEvents(arguments.callee,type, handler);
         }
@@ -53,7 +53,7 @@ verge.EventManager = vvp.CoreObject.extend({
      */
     unbind:function(type,handler,context){
         var own = this;
-        if (verge.isArray(type)) {
+        if (vQ.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[arguments.callee].concat(slice.call(arguments)));
             //return own._handleMultipleEvents(arguments.callee,type, handler);
         }
@@ -84,7 +84,7 @@ verge.EventManager = vvp.CoreObject.extend({
     one:function(type, handler,context) {
         var own = this;
         var args = slice.call(arguments);
-        if (verge.isArray(type)) {
+        if (vQ.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[own.one].concat(args));
             //return own._handleMultipleEvents(arguments.callee, type, handler);
         }
@@ -118,7 +118,7 @@ verge.EventManager = vvp.CoreObject.extend({
      */
     trigger:function(type,args,context){
         var own = this;
-        if (verge.isArray(type)) {
+        if (vQ.isArray(type)) {
             return own._handleMultipleEvents.apply(own,[arguments.callee].concat(slice.call(arguments)));
             //return own._handleMultipleEvents(arguments.callee,type,args,context);
         }

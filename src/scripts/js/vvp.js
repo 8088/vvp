@@ -23,7 +23,7 @@ vvp.fn = {
     length:0,
     init: function (selector, options) {
         var own = this;
-        if (verge.isFunction(selector)) {
+        if (vQ.isFunction(selector)) {
             //ready 时执行
             own.ready(selector);
         } else {
