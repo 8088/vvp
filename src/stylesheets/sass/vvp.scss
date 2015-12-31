@@ -26,13 +26,20 @@
 @import "type";
 @import "z-index";
 //@import "code";    //<-- 代码样式暂不需要
-//@import "grid";
-//@import "tables.less";
-//@import "forms";
-//@import "buttons";
+
+@import "grid";
+//@import "tables";
+@import "forms";
+@import "buttons";
 
 // Components
-@import "components/stream";
+@import "components/stream"; // 播放器
+// 控制面板
+@import "components/dashboard/dashboard";
+@import "components/dashboard/controls";
+@import "components/dashboard/controls/fullscreen";
+@import "components/dashboard/controls/play-btn";
+@import "components/dashboard/progress-mini";
 // @import "bootstrap/dropdowns";
 // @import "bootstrap/button-groups";
 // @import "bootstrap/input-groups";

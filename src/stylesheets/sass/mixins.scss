@@ -2,7 +2,7 @@
 // --------------------------------------------------
 
 // Utilities
-@import "mixins/hide-text";
+@import "mixins/text-hide";
 @import "mixins/opacity";
 @import "mixins/image";
 @import "mixins/labels";
@@ -17,24 +17,17 @@
 @import "mixins/vendor-prefixes";
 
 // Components
-// @import "mixins/alerts";
 @import "mixins/buttons";
-// @import "mixins/panels";
-// @import "mixins/pagination";
-// @import "mixins/list-group";
-// @import "mixins/nav-divider";
 @import "mixins/forms";
 @import "mixins/progress-bar";
-// @import "mixins/table-row";
 
 // Skins
 @import "mixins/background-variant";
-// @import "mixins/border-radius";
-// @import "mixins/gradients";
+@import "mixins/border-radius";
+@import "mixins/gradients";
 
 // Layout
 @import "mixins/clearfix";
 @import "mixins/center-block";
-// @import "mixins/nav-vertical-align";
-// @import "mixins/grid-framework";    // <-- 需要开启栅格布局时开启
-// @import "mixins/grid";    // <-- 需要开启栅格布局时开启
+@import "mixins/grid-framework";    // <-- 需要开启栅格布局时开启
+@import "mixins/grid";    // <-- 需要开启栅格布局时开启
