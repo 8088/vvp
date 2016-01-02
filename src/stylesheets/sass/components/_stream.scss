@@ -1,0 +1,13 @@
+//
+// Stream (video player)
+// --------------------------------------------------
+
+.vvp-stream {
+    h1 {
+        @include text-hide();
+    }
+    video {
+        width: 100%;
+        height: 100%;
+    }
+}

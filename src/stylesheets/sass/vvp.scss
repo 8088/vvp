@@ -14,32 +14,33 @@
 
 // Core variables and mixins
 @import "variables";    // 全局变量
+@import "utilities";    // 工具
 @import "mixins";    // 全局方法
 
 // Reset and dependencies
-@import "normalize";    // 全局图标初始化
+@import "normalize";    // 全局初始化reset
 //@import "print";    //<-- 打印样式暂不需要
 @import "glyphicons";    // 字体图标
 
 // Core CSS
-@import "scaffolding";
-@import "type";
-@import "z-index";
+//@import "scaffolding";
+//@import "type";
+//@import "z-index";
 //@import "code";    //<-- 代码样式暂不需要
 
-@import "grid";
+//@import "grid";
 //@import "tables";
-@import "forms";
-@import "buttons";
+//@import "forms";
+//@import "buttons";
 
 // Components
-@import "components/stream"; // 播放器
+//@import "components/stream"; // 播放器
 // 控制面板
-@import "components/dashboard/dashboard";
-@import "components/dashboard/controls";
-@import "components/dashboard/controls/fullscreen";
-@import "components/dashboard/controls/play-btn";
-@import "components/dashboard/progress-mini";
+//@import "components/dashboard/dashboard";
+//@import "components/dashboard/controls";
+//@import "components/dashboard/controls/fullscreen";
+//@import "components/dashboard/controls/play-btn";
+//@import "components/dashboard/progress-mini";
 // @import "bootstrap/dropdowns";
 // @import "bootstrap/button-groups";
 // @import "bootstrap/input-groups";
@@ -68,5 +69,5 @@
 // @import "bootstrap/carousel";
 
 // Utility classes
-@import "utilities";
+//@import "utilities";
 // @import "bootstrap/responsive-utilities";
