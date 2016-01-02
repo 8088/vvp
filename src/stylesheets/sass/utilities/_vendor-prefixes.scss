@@ -16,6 +16,7 @@
 
 
 // Animations
+// 动画
 @mixin animation($animation) {
   -webkit-animation: $animation;
        -o-animation: $animation;
@@ -53,7 +54,6 @@
 // Backface visibility
 // Prevent browsers from flickering when using CSS 3D transforms.
 // Default value is `visible`, but can be changed to `hidden`
-
 @mixin backface-visibility($visibility) {
   -webkit-backface-visibility: $visibility;
      -moz-backface-visibility: $visibility;
@@ -64,7 +64,7 @@
 //
 // Note: Deprecated `.box-shadow()` as of v3.1.0 since all of Bootstrap's
 // supported browsers that have box shadow capabilities now support it.
-
+// 阴影
 @mixin box-shadow($shadow...) {
   -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
           box-shadow: $shadow;
@@ -181,7 +181,6 @@
 
 
 // Transitions
-
 @mixin transition($transition...) {
   -webkit-transition: $transition;
        -o-transition: $transition;
@@ -213,7 +212,6 @@
 
 // User select
 // For selecting text on the page
-
 @mixin user-select($select) {
   -webkit-user-select: $select;
      -moz-user-select: $select;

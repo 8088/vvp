@@ -24,7 +24,7 @@ $color-info:            #5bc0de !default; // 信息颜色
 $color-warning:         #f0ad4e !default; // 警告颜色
 $color-danger:          #d9534f !default; // 危险提示颜色
 $color-track:           #555555 !default; // 轨道颜色
-$color-progress:        #eb3c10 !default; // 进度颜色
+$color-played:          #eb3c10 !default; // 进度颜色
 $color-buffer:          #909090 !default; // 缓冲颜色
 $color-pay:             #ff822e !default; // 付费颜色
 $color-code:            #c7254e !default; // 代码颜色
@@ -39,7 +39,7 @@ $color-code:            #c7254e !default; // 代码颜色
 
 //** Background color for vvp
 // 主体背景色.
-$color-bg:               $color !default;
+$color-bg:              $color !default;
 //** Global text color on vvp
 // 主体文本色.
 $text-color:            $color-dark !default;
@@ -67,7 +67,11 @@ $font-family-western:     Helvetica, Arial, sans-serif !default; // 英文字体
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default; // 等宽字体 用于页面包含代码情况 如 url
 $font-family-base:        join($font-family-chinese, $font-family-western); // 默认基础字体
 
-$font-size-base:          14px !default; //基础字号
+// Start with 10px for base font size so other dimensions can be em based and
+// easily calculable.
+// 用于基础em值的计算 10像素比较方便计算
+$font-size-em:            10px !default;
+$font-size-base:          14px !default; // 基础字号
 $font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
 
@@ -80,11 +84,11 @@ $font-size-h6:            ceil(($font-size-base * 0.85)) !default; // ~12px
 
 //** Unit `line-height` for use in components like buttons.
 // 基础行高
-$line-height-base:      1.428571429 !default;
+$line-height-base:        1.428571429 !default;
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
 $line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
 
-//** By default, this inherits from the `<vvp>`.
+//** By default, this inherits from the `vvp`.
 $headings-font-family:    inherit !default;
 $headings-font-weight:    500 !default;
 $headings-line-height:    1.1 !default;
@@ -281,7 +285,7 @@ $dropdown-bg:                    $color-lightest !default;
 $dropdown-border:                rgba(0,0,0,.15) !default;
 //** Dropdown menu `border-color` **for IE8**.
 // 边框色 for PC
-// $dropdown-fallback-border:       $color-light !default;
+// $dropdown-fallback-border:    $color-light !default;
 //** Divider color for between dropdown items.
 // 间隔色
 $dropdown-divider-bg:            $color-lighter !default;
@@ -477,9 +481,9 @@ $alert-pay-border:            $state-pay-border !default;
 
 //== Progress bars
 //
-//##
+//## the whole  progress bar component
 //
-//==
+//== 通用进度条 非视频进度条
 //
 
 //** Background color of the whole progress component
@@ -501,6 +505,22 @@ $progress-bar-danger-bg:      $color-danger !default;
 $progress-bar-info-bg:        $color-info !default;
 //** Pay progress bar color
 $progress-bar-pay-bg:         $color-pay !default;
+
+//== Player progress bars
+//
+//## video player progress bar
+//
+//== 视频播放器进度条
+//
+
+//** Background color of the video player
+$progress-video-bg:                 $color-darker !default;
+//** Track progress bar color
+$progress-video-track:              $color-track !default;
+//** Buffer progress bar color
+$progress-video-buffer:             $color-buffer !default;
+//** Played progress bar color
+$progress-video-played:             $color-played !default;
 
 //== List group
 //

@@ -3,10 +3,53 @@
 // --------------------------------------------------
 
 .vvp-controls {
-    display: flex;
-    width: 100%; // <-- 临时设置
-    height: 3em;
-    align-items: center;
-    padding: 10px; // <-- 临时设置
-    background: red; // <-- 临时设置
+    padding-top: 1em;
+    @include display-flex();
+    @include size(100%, 100%)
+}
+
+.vvp-player-btn,
+.vvp-player-time,
+.vvp-quality,
+.vvp-playshow,
+.vvp-localization,
+.vvp-fullscreen,
+.vvp-speed,
+.vvp-next,
+.vvp-previous,
+.vvp-extend {
+    display: none;
+    @include size(5em, 100%);
+    @include display-flex('center', 'center');
+}
+.vvp-play-btn {
+    order: 10;
+}
+.vvp-previous {
+    order: 20;
+}
+.vvp-next {
+    order: 30;
+}
+.vvp-speed {
+    order: 40;
+}
+.vvp-player-time {
+    flex: 1;
+    order: 50;
+}
+.vvp-extend {
+    order: 60;
+}
+.vvp-playshow {
+    order: 70;
+}
+.vvp-localization {
+    order: 80;
+}
+.vvp-quality {
+    order: 90;
+}
+.vvp-fullscreen {
+    order: 100;
 }

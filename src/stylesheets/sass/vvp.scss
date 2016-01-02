@@ -1,7 +1,6 @@
 /*!
  * Verge Video Player(vvp) v1.0
  * Copyright 2015 - 2016 1Verge, Inc.
- * Base on Bootstrap v3.36
  * Licensed under MIT
  */
 
@@ -18,14 +17,14 @@
 @import "mixins";    // 全局方法
 
 // Reset and dependencies
-@import "normalize";    // 全局初始化reset
+@import "common/normalize";    // 全局初始化reset
 //@import "print";    //<-- 打印样式暂不需要
-@import "glyphicons";    // 字体图标
+@import "common/glyphicons";    // 字体图标
 
 // Core CSS
-//@import "scaffolding";
-//@import "type";
-//@import "z-index";
+@import "common/scaffolding";
+@import "common/type";
+@import "common/z-index";
 //@import "code";    //<-- 代码样式暂不需要
 
 //@import "grid";
@@ -34,13 +33,13 @@
 //@import "buttons";
 
 // Components
-//@import "components/stream"; // 播放器
-// 控制面板
-//@import "components/dashboard/dashboard";
-//@import "components/dashboard/controls";
-//@import "components/dashboard/controls/fullscreen";
-//@import "components/dashboard/controls/play-btn";
-//@import "components/dashboard/progress-mini";
+@import "components/stream"; // 播放器
+@import "components/dashboard";
+@import "components/dashboard/controls";
+@import "components/dashboard/controls/fullscreen";
+@import "components/dashboard/controls/player-btn";
+@import "components/dashboard/controls/player-time";
+@import "components/dashboard/progress";
 // @import "bootstrap/dropdowns";
 // @import "bootstrap/button-groups";
 // @import "bootstrap/input-groups";
