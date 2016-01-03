@@ -8,8 +8,8 @@
     @include size(100%, 100%)
 }
 
-.vvp-player-btn,
-.vvp-player-time,
+.vvp-play-btn,
+.vvp-time-display,
 .vvp-quality,
 .vvp-playshow,
 .vvp-localization,
@@ -21,6 +21,14 @@
     display: none;
     @include size(5em, 100%);
     @include display-flex('center', 'center');
+}
+.vvp-controls-btn {
+    color: $color-lighter;
+    display: inline-block;
+    line-height: 2em;
+    border-radius: 0.3em;
+    @include size(3.5em, 2em);
+    @include gradient-vertical-three-colors($color-light, $color, 50%, $color-dark)
 }
 .vvp-play-btn {
     order: 10;
@@ -34,9 +42,10 @@
 .vvp-speed {
     order: 40;
 }
-.vvp-player-time {
+.vvp-time-display {
     flex: 1;
     order: 50;
+
 }
 .vvp-extend {
     order: 60;

@@ -16,7 +16,7 @@ $color-dark:            lighten($color-base, 20%) !default;   // #333
 $color:                 lighten($color-base, 33.5%) !default; // $555
 $color-light:           lighten($color-base, 46.7%) !default; // #777
 $color-lighter:         lighten($color-base, 93.5%) !default; // #eee
-$color-lightest:        lighten($color-base, 100%) !default;  // $color-lightest
+$color-lightest:        lighten($color-base, 100%) !default;  // #fff
 
 $color-primary:         #2c8ce0 !default; // 主颜色
 $color-success:         #5cb85c !default; // 成功颜色
