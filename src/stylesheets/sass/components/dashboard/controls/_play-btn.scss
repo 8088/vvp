@@ -3,12 +3,25 @@
 // --------------------------------------------------
 
 .vvp-play-btn {
+    .vvp-ico {
+        position: relative;
+        @include background-clip(text);
+        @include text-fill-color(transparent)
+    }
+    .vvp-ico-play {
+        position: absolute;
+        font-size: 1.4em;
+        left: 1.39em;
+        top: 1.7em;
+        @include gradient-vertical($color-play-btn-start, $color-play-btn-end)
+    }
+    .vvp-ico-pause {
+        @include gradient-vertical($color-pause-btn-start, $color-pause-btn-end)
+        @include background-clip(text);
+        @include text-fill-color(transparent)
+    }
 }
-.vvp-ico-play {
-    //-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(#7f7f7f), to(#565656));
-     //background-image: -webkit-gradient(linear, left top, left bottom, from(#7f7f7f), to(#565656));
-    //background: -webkit-radial-gradient(at 60%,red,yellow,green);
-    //background: radial-gradient(at 60%,red,yellow,green);
-     -webkit-background-clip: text;
-     -webkit-text-fill-color: transparent;
+.vvp-ico-youku-play {
+    font-size: 3.2em;
+    @include gradient-radial(circle 0.38em, transparent, $color-play-btn-cricle)
 }

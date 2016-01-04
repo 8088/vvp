@@ -108,6 +108,10 @@ gulp.task('templates', function() {
 //assets 临时方法
 gulp.task('assets', function() {
     return gulp.src('src/assets/**/*')
+        // 首次使用开启
+        // .pipe(gulp.dest('dev/assets'))
+        // .pipe(gulp.dest('dist/assets'))
+        // .pipe(gulp.dest('test/assets')) // <-- 临时使用
         .pipe(changed('dev/assets'))
         .pipe(changed('dist/assets'))
         .pipe(changed('test/assets')) // <-- 临时使用

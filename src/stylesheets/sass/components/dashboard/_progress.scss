@@ -36,11 +36,11 @@
 .vvp-progress-handle{
     background: $color-lighter;
     border: 0.3em solid $progress-video-played;
-    border-radius: 1.6em;
+    border-radius: 1.3em;
     box-shadow: 0.1em 0.1em $color-dark;
-    top: -0.8em;
+    top: -0.6em;
     cursor: pointer;;
-    @include size(2.4em, 2.4em)
+    @include size(2em, 2em)
 }
 
 //

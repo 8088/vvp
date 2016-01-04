@@ -209,6 +209,22 @@
           transition: transform $transition;
 }
 
+// Background
+@mixin background-clip($value) {
+  -webkit-background-clip: $value;
+     -moz-background-clip: $value;
+      -ms-background-clip: $value; // IE10+
+          background-clip: $value;
+}
+
+// Text
+@mixin text-fill-color($value) {
+  -webkit-text-fill-color: $value;
+     -moz-text-fill-color: $value;
+      -ms-text-fill-color: $value; // IE10+
+          text-fill-color: $value;
+}
+
 
 // User select
 // For selecting text on the page

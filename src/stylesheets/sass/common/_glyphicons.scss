@@ -42,6 +42,7 @@
 }
 
 // icons
+.vvp-ico-youku-play         { &:before { content: "\30"; } } // 播放
 .vvp-ico-play               { &:before { content: "\c0"; } } // 播放
 .vvp-ico-pause              { &:before { content: "\c1"; } } // 暂停
 .vvp-ico-fullscreen         { &:before { content: "\c7"; } } // 全屏

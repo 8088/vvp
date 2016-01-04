@@ -26,8 +26,16 @@ $color-danger:          #d9534f !default; // 危险提示颜色
 $color-track:           #555555 !default; // 轨道颜色
 $color-played:          #eb3c10 !default; // 进度颜色
 $color-buffer:          #909090 !default; // 缓冲颜色
-$color-pay:             #ff822e !default; // 付费颜色
 $color-code:            #c7254e !default; // 代码颜色
+
+// for youku skin
+// 优酷皮肤适用
+$color-pay:             #ff822e !default; // 付费颜色
+$color-play-btn-start:  #f3442e !default; // 播放按钮渐变
+$color-play-btn-end:    #cf311f !default; //
+$color-play-btn-cricle: #8ed8f8 !default; // 外圈
+$color-pause-btn-start: #1fb0e4 !default; // 暂停按钮渐变
+$color-pause-btn-end:   #0697cb !default; // 暂停按钮渐变
 
 
 //== Scaffolding

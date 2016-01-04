@@ -7,6 +7,7 @@
 @import "utilities/opacity"; // 透明度
 @import "utilities/image"; // 图片设置
 @import "utilities/labels"; // 标签设置
+@import "utilities/gradients"; // 渐变
 // @import "utilities/reset-filter";    // <-- 需要支持小于IE9项目打开此项
 @import "utilities/resize"; // 可变元素宽高设置
 @import "utilities/responsive-visibility"; // 响应式显示
@@ -16,4 +17,3 @@
 @import "utilities/text-emphasis";  // 重点文本设置
 @import "utilities/text-overflow"; // 文本溢出设置
 @import "utilities/vendor-prefixes"; // 兼容前缀相关
-@import "utilities/linear-gradient"; // 线性渐变
