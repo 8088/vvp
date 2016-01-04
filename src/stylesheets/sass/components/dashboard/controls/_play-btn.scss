@@ -1,0 +1,14 @@
+//
+// Play button
+// --------------------------------------------------
+
+.vvp-play-btn {
+}
+.vvp-ico-play {
+    //-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(#7f7f7f), to(#565656));
+     //background-image: -webkit-gradient(linear, left top, left bottom, from(#7f7f7f), to(#565656));
+    //background: -webkit-radial-gradient(at 60%,red,yellow,green);
+    //background: radial-gradient(at 60%,red,yellow,green);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+}
