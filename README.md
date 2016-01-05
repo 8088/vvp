@@ -1,9 +1,9 @@
 
-![Verge Video Player logo](http://r4.ykimg.com/0510000053F30DC76737B3340203B682)
+![Verge Video Player logo](https://avatars2.githubusercontent.com/u/15995058?v=3&s=200)
 
 # vvp - Verge Video Player
 
-> vvp.js 是基于HTML5的通用播放器解决方案。目前只支持高级的浏览器和移动端设备的浏览器上使用。
+> vvp 是基于HTML5的通用播放器解决方案。目前只支持高级的浏览器和移动端设备的浏览器上使用。
 
 ## 新手指南
 
