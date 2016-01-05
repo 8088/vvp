@@ -7,6 +7,8 @@
 
 ## 开发者指南
 
+从github上把项目的代码拷贝到本地
+
 ```bash
 git clone git@github.com:vergeplayer/vvp.git
 ```
@@ -34,17 +36,19 @@ gulp
 ```
 
 
-## 新手指南
+## 使用者指南
 
-一下代码添加至
+
+从 dist 目录里把合并后的 vvp.min.css、 vvp.min.js添加至HTML页面当中,并部署文件。
 `<head>`:
 
 ```html
-<link href="http://player.youku.com/vvp/0.1.0/css/vvp.css" rel="stylesheet">
-<script src="http://player.youku.com/vvp/0.1.0/js/vvp.min.js"></script>
+<link href="http://yourdomian.com/css/vvp.min.css" rel="stylesheet">
+<script src="http://yourdomian.com/js/vvp.min.js"></script>
 ```
 
 然后您可以在页面任何地方添加 `<video>` 标签，需要在标签增加一个 `data-setup`属性，属性的值是一个JSON格式的对象。包含所有Video的初始参数设置。
+并添加一个必要的`class="vvp vvp-skin"` 属性。
 
 ```html
 <video id="VVP" class="vvp vvp-skin" controls
@@ -62,13 +66,13 @@ gulp
 
 ```javascript
 var player = vvp('VVP', { /* Options */ }, function() {
-  console.log('Good to go!');
+  console.log('完成');
 
   this.play(); // if you don't trust autoplay for some reason
 
   // How about an event listener?
   this.bind('ended', function() {
-    console.log('awww...over so soon?');
+    console.log('搞定');
   });
 });
 ```
