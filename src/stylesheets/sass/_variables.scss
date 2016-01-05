@@ -37,6 +37,10 @@ $color-play-btn-cricle: #8ed8f8 !default; // 外圈
 $color-pause-btn-start: #1fb0e4 !default; // 暂停按钮渐变
 $color-pause-btn-end:   #0697cb !default; // 暂停按钮渐变
 
+//## Background Alpha
+// 默认背景透明度
+$bg-alpha-number:    ceil(0);
+$bg-alpha-base:      0.7;
 
 //== Scaffolding
 //

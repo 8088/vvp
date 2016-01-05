@@ -21,9 +21,9 @@
     position: relative;
     display: none;
     @include size(6em, 100%);
-    @include display-flex('center', 'center');
+    @include display-flex('center', 'center')
 }
-.vvp-controls-btn {
+.vvp-txt-btn {
     color: $color-lighter;
     display: inline-block;
     line-height: 2em;
@@ -32,34 +32,34 @@
     @include gradient-vertical-three-colors($color-light, $color, 50%, $color-dark)
 }
 .vvp-play-btn {
-    order: 10;
+    order: 10
 }
 .vvp-previous {
-    order: 20;
+    order: 20
 }
 .vvp-next {
-    order: 30;
+    order: 30
 }
 .vvp-speed {
-    order: 40;
+    order: 40
 }
 .vvp-time-display {
     flex: 1;
-    order: 50;
+    order: 50
 
 }
 .vvp-extend {
-    order: 60;
+    order: 60
 }
 .vvp-playshow {
-    order: 70;
+    order: 70
 }
 .vvp-localization {
-    order: 80;
+    order: 80
 }
 .vvp-quality {
-    order: 90;
+    order: 90
 }
 .vvp-fullscreen {
-    order: 100;
+    order: 100
 }

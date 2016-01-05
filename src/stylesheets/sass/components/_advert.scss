@@ -1,6 +1,7 @@
 //
-// Stream (video player)
+// Advert 广告
 // --------------------------------------------------
 
-.vvp-stream {
+.vvp-advert {
+    @include hide-display();
 }
