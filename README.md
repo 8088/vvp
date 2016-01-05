@@ -48,7 +48,7 @@ var player = vvp('VVP', { /* Options */ }, function() {
 [player API docs](docs/api/vvp.Player.md)
 
 ## 开源贡献
-vvp 的代码是公开开源的(加密逻辑除外) [contributing guide](CONTRIBUTING.md).
+vvp 的代码是公开开源的 [contributing guide](CONTRIBUTING.md).
 
 ## 声明
 

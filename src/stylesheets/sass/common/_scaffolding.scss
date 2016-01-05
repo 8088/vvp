@@ -18,7 +18,6 @@
     direction: ltr;
     text-align: left;
     outline: none;
-    @include box-sizing(border-box);
     @include user-select(none);
 
     // Fix for Firefox 9 fullscreen (only if it is enabled). Not needed when
@@ -50,7 +49,9 @@
     left: 0;
     top: 0;
 }
-
+.vvp-player {
+    flex-direction: column
+}
 .vvp {
     // * 不建议使用, 兼容性相关暂时使用
     * {

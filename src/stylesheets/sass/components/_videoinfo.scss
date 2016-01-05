@@ -17,9 +17,6 @@
     }
     .vvp-video-more {
         text-align: right;
-        @include size(8em, auto);
-        a {
-            color: $color-lighter;
-        }
+        @include size(8em, auto)
     }
 }
