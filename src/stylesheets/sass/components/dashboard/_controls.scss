@@ -18,8 +18,9 @@
 .vvp-next,
 .vvp-previous,
 .vvp-extend {
+    position: relative;
     display: none;
-    @include size(5em, 100%);
+    @include size(6em, 100%);
     @include display-flex('center', 'center');
 }
 .vvp-controls-btn {

@@ -19,14 +19,14 @@
 // 次层级 controls -> .vvp-player
 // --------------------------------------------------
 .vvp-controls {
-    z-index: 100
+    z-index: 200
 }
 
 // 进度条 .vvp-progress(mini)  -> .vvp-controls -> .vvp-player
 // --------------------------------------------------
 .vvp-progress,
 .vvp-progress-mini {
-    z-index:200
+    z-index:100
 }
 .vvp-progress-track
 .vvp-progress-mini-track {

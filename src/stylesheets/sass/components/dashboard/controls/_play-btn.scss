@@ -3,6 +3,7 @@
 // --------------------------------------------------
 
 .vvp-play-btn {
+    position: relative;
     .vvp-ico {
         position: relative;
         @include background-clip(text);
@@ -11,8 +12,8 @@
     .vvp-ico-play {
         position: absolute;
         font-size: 1.4em;
-        left: 1.39em;
-        top: 1.7em;
+        left: 41%;
+        top: 1em;
         @include gradient-vertical($color-play-btn-start, $color-play-btn-end)
     }
     .vvp-ico-pause {
