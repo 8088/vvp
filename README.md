@@ -5,6 +5,35 @@
 
 > vvp 是基于HTML5的通用播放器解决方案。目前只支持高级的浏览器和移动端设备的浏览器上使用。
 
+## 开发者指南
+
+```bash
+git clone git@github.com:vergeplayer/vvp.git
+```
+
+确保本地环境安装了node 、 npm  可以执行一下命令查看node 和 npm的版本(vvp需要node 4.0以上，npm 2.1以上）
+
+```bash
+node -v
+4.2.4
+
+npm -v
+2.1.4
+```
+
+执行 npm install 安装所需要的依赖
+
+```bash
+npm install
+```
+
+执行gulp 任务
+
+```bash
+gulp
+```
+
+
 ## 新手指南
 
 一下代码添加至
