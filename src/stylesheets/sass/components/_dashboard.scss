@@ -3,7 +3,8 @@
 // --------------------------------------------------
 
 .vvp-dashboard {
-    background: $color-darker;
+    background: $bg-dashboard;
+    border-bottom: 1px solid $color-lighter;
     color: $color;
     position: absolute;
     bottom: 0;

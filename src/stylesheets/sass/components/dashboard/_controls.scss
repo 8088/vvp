@@ -29,7 +29,7 @@
     line-height: 2em;
     border-radius: 0.3em;
     @include size(3.5em, 2em);
-    @include gradient-vertical-three-colors($color-light, $color, 50%, $color-dark)
+    @include gradient-vertical($color-light, $color)
 }
 .vvp-play-btn {
     order: 10
