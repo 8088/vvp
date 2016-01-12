@@ -1,0 +1,8 @@
+{
+  "prefix":"vvp.component",
+  "translate":{
+    "factory":"vvp.CoreObject.extend",
+    "utils":"verge",
+    "base":"vvp.view"
+  }
+}

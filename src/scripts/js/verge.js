@@ -77,6 +77,43 @@ var verge = {
             parentNode = parentNode.offsetParent;
         }
         return left;
+    },
+    /**
+     * 把style属性转换成object
+     * @param style
+     * @returns {*}
+     */
+    mapStyle:function(style){
+        if(typeof style == "object") return style;
+        var defs = (style+"").split(";");
+        style = {};
+        for(var def in defs){
+            def = defs[def].split(":");
+            style[def[0]] = def[1];
+        }
+        return style;
+    },
+    /**
+     * mixin
+     * @param source
+     * @param target
+     */
+    mixin:function(source,target){
+        for(var key in source){
+            target[key] = source[key];
+        }
+    },
+    /**
+     * mixinAttributes
+     * @param target
+     * @param blocks
+     * @returns {*}
+     */
+    mixinAttributes:function (target,blocks){
+        for(var i = 0; i < blocks.length; i++){
+            verge.mixin(blocks[i],target);
+        }
+        return target;
     }
 };
 

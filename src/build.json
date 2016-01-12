@@ -1,0 +1,41 @@
+{
+  "name": "vvp",
+  "version": "0.1.0",
+  "description": "Verge Video Player",
+  "author": "zhengzk",
+  "exports": "window",
+  "templates": {
+    "base":"templates/jade/",
+    "src":[
+        "components/**/*.jade",
+        "layout/player.jade",
+        "layout/stage.jade",
+        "verge/verge.jade"
+    ]
+  },
+  "scripts": {
+    "base":"scripts/js/",
+    "lib": [
+      "base/**/*.js"
+    ],
+    "dependencies": {
+      "vQ": "vq/"
+    },
+    "src": [
+      "log.js",
+      "verge.js",
+      "vvp.js",
+      "core/**/*.js",
+      "utils/**/*.js",
+      "video-player.js",
+      "VIEW",
+      "components/**/*.js",
+      "plugins/**/*.js",
+      "player.js",
+      "plugin.js",
+      "vvp-player.js",
+      "ready.js",
+      "exports.js"
+    ]
+  }
+}

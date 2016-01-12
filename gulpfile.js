@@ -49,7 +49,7 @@ gulp.task('sass', function() {
 
 // concatenate & minify js
 gulp.task('scripts', function() {
-    return build('src/scripts/js/')
+    return build('src/')
         .pipe(livereload())
         .pipe(notify({
             message: 'Scripts task complete'
