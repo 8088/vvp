@@ -36,6 +36,7 @@
     "hippie": "^0.4.0",
     "imagemin": "~3.2.0",
     "jade2script": "0.0.1",
+    "jasmine-reporters": "^2.1.1",
     "jasmine-spec-reporter": "^2.4.0",
     "stream-combiner2": "^1.1.1",
     "streamqueue": "^1.1.1",

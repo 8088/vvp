@@ -1,4 +1,3 @@
-
 /**
  * 基础公共方法
  * Copyright 2015, video-player.js
@@ -19,7 +18,7 @@ var verge = {
      * @param path string
      * @returns {Object}
      */
-    routes: function (path) {
+    routes: function(path) {
         var arr = path.split('.');
         var length = arr.length;
         if (length <= 0) return;
@@ -27,7 +26,8 @@ var verge = {
         var i = 1;
         var ns = arr[0];
         do {
-            eval('if(typeof(' + ns + ') == "undefined") ' + ns + ' = new Object();');
+            eval('if(typeof(' + ns + ') == "undefined") ' + ns +
+                ' = new Object();');
             ns += '.' + arr[i++];
         } while (length >= i);
         return eval(ns);
@@ -37,7 +37,7 @@ var verge = {
      * @param ele
      * @returns {*|boolean}
      */
-    isDOMElement: function (ele) {
+    isDOMElement: function(ele) {
         return ele && ele.nodeType === 1;
     },
     /**
@@ -45,7 +45,7 @@ var verge = {
      * @param tagName
      * @param attrs
      */
-    create: function (tagName, attrs) {
+    create: function(tagName, attrs) {
         tagName = tagName || 'div';
         var ele = document.createElement(tagName);
         var ret = vQ(ele);
@@ -60,7 +60,7 @@ var verge = {
      * @param ele
      * @returns {options.offsetLeft|*}
      */
-    getClientLeft: function (ele) {//有bug? 后续修复
+    getClientLeft: function(ele) { //有bug? 后续修复
         if (null == ele) {
             return;
         }
@@ -83,11 +83,11 @@ var verge = {
      * @param style
      * @returns {*}
      */
-    mapStyle:function(style){
-        if(typeof style == "object") return style;
-        var defs = (style+"").split(";");
+    mapStyle: function(style) {
+        if (typeof style == "object") return style;
+        var defs = (style + "").split(";");
         style = {};
-        for(var def in defs){
+        for (var def in defs) {
             def = defs[def].split(":");
             style[def[0]] = def[1];
         }
@@ -98,8 +98,8 @@ var verge = {
      * @param source
      * @param target
      */
-    mixin:function(source,target){
-        for(var key in source){
+    mixin: function(source, target) {
+        for (var key in source) {
             target[key] = source[key];
         }
     },
@@ -109,18 +109,19 @@ var verge = {
      * @param blocks
      * @returns {*}
      */
-    mixinAttributes:function (target,blocks){
-        for(var i = 0; i < blocks.length; i++){
-            verge.mixin(blocks[i],target);
+    mixinAttributes: function(target, blocks) {
+        for (var i = 0; i < blocks.length; i++) {
+            verge.mixin(blocks[i], target);
         }
         return target;
     }
 };
-
+verge.routes('vvp.view');
+verge.routes('vvp.component');
 /***
  * 拓展
  * @type {extend}
  */
-verge.extend = function () {
+verge.extend = function() {
     vQ.extend.apply(this, arguments);
 };

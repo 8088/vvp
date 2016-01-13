@@ -20,6 +20,8 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     browserSync = require('browser-sync'), // 浏览器同步
+    jasmine = require('gulp-jasmine'), // 测试相关
+    reporters = require('jasmine-reporters'), // 测试相关
 
     pkg = require('./package.json'),
     //自定义的一些处理方法
@@ -117,6 +119,16 @@ gulp.task('assets', function() {
         .pipe(changed('test/assets')) // <-- 临时使用
         .pipe(notify({
             message: 'Assets task complete'
+        }));
+});
+
+//Test 测试 <-- 目前只包含js测试  UI测试待开发
+gulp.task('test', function() {
+    return gulp.src('test/spec/*Spec.js')
+        .pipe(jasmine({
+            verbose: true,
+            includeStackTrace: true,
+            reporter: new reporters.JUnitXmlReporter()
         }));
 });
 
