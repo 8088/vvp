@@ -14,14 +14,14 @@ if (typeof HTMLVideoElement === 'undefined') {
     document.createElement('track');
 }
 
-var vvp = function (selector, options) {
-        return new vvp.fn.init(selector, options);
-    };
+var vvp = function(selector, options) {
+    return new vvp.fn.init(selector, options);
+};
 
 vvp.fn = {
     constructor: vvp,
-    length:0,
-    init: function (selector, options) {
+    length: 0,
+    init: function(selector, options) {
         var own = this;
         if (vQ.isFunction(selector)) {
             //ready 时执行
@@ -32,8 +32,8 @@ vvp.fn = {
             //    return this;
             //}
             var Player = this.dispatch();
-            targets.each(function (i, target) {
-                own[i] = new Player(target,options);
+            targets.each(function(i, target) {
+                own[i] = new Player(target, options);
                 own.length++;
             });
             return this;
@@ -42,11 +42,11 @@ vvp.fn = {
     /*
      * 播放器选择策略
      */
-    dispatch:function(){
-        if (vvp.browser.isSupportH5M3U8 || vvp.browser.isSupportH5MP4){
+    dispatch: function() {
+        if (vvp.browser.isSupportH5M3U8 || vvp.browser.isSupportH5MP4) {
             //vvp.VideoPlayer 核心 无ui
-            return vvp.Player;//带ui
-        } else if (this.isSupportFlash){//使用flash播放器
+            return vvp.Player; //带ui
+        } else if (this.isSupportFlash) { //使用flash播放器
             throw new Error('Please Use Flash Player');
         } else {
             throw new Error('The Device not support');
@@ -57,8 +57,9 @@ vvp.fn = {
      * @param fn
      * @returns {vvp.fn}
      */
-    each: function (fn) {
-        var i = 0, length = this.length;
+    each: function(fn) {
+        var i = 0,
+            length = this.length;
         for (; i < length; i += 1) {
             fn.call(this[i], i, this[i]);
         }
@@ -67,7 +68,7 @@ vvp.fn = {
 };
 vvp.fn.init.prototype = vvp.fn;
 
-vvp.extend = vvp.fn.extend = function () {
+vvp.extend = vvp.fn.extend = function() {
     verge.extend.apply(this, arguments);
 };
 
@@ -80,3 +81,5 @@ verge.routes('vvp.component');
 //window.vvp = window.vvp = vvp;
 window['@NAME'.toUpperCase()] = window['@NAME'] = vvp;
 
+verge.routes('vvp.view.a');
+verge.routes('vvp.component.a');

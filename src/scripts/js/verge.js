@@ -116,8 +116,7 @@ var verge = {
         return target;
     }
 };
-verge.routes('vvp.view');
-verge.routes('vvp.component');
+
 /***
  * 拓展
  * @type {extend}
