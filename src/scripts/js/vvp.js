@@ -80,6 +80,3 @@ verge.routes('vvp.component');
 // Expose vvp to the global object
 //window.vvp = window.vvp = vvp;
 window['@NAME'.toUpperCase()] = window['@NAME'] = vvp;
-
-verge.routes('vvp.view.a');
-verge.routes('vvp.component.a');

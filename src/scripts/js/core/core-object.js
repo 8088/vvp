@@ -201,7 +201,7 @@
      * @param object
      */
     CoreObject.expand = function (object) {
-        verge.extend.apply(this.prototype, arguments);
+        vQ.extend.apply(this.prototype, arguments);
     };
 
     exports.CoreObject = CoreObject;

@@ -6,6 +6,7 @@
 
 'use strict';
 var fs = require('fs'),
+    path = require('path'),
 
 //import 载入外挂
     gulp = require('gulp'),
@@ -33,11 +34,18 @@ var config_file = "build.json";
 var parseViewComponent = function (options) {
     //console.log('options:',options);
     return utils.modify(function (data, file) {
+        //var _name = "vvp.view."+ file.relative.replace(".jade","").replace(/\//g,'.');
+        var _name = "vvp.view."+path.basename(file.relative,".jade");
         return jade2script.compile(data,
-            utils.merge(options, {
-                file: {
-                    relative: file.relative,
-                    path: file.path
+            utils.merge(options,{
+                name:_name,
+                translate:function(data,name){
+                    return utils.translate(data,name);
+                },
+                parseName:function(_path){
+                    //_path = path.dirname(path.dirname(file.relative) + "/" + _path);
+                    //return "view."+_path.replace(/\//g,'.');
+                    return "vvp.view."+path.basename(_path);
                 }
             })
         );
@@ -50,7 +58,8 @@ var parseViewComponent = function (options) {
  * @returns {*}
  */
 var parseComponent = function (_path, _config) {
-    var options = require("./components.json");
+
+    var options = require("./config.json");
     var _path = _config.base ? _path + _config.base : _path;
 
     return gulp.src(parsePath(_path, _config.src || []))

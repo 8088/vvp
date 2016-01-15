@@ -25,27 +25,6 @@ function modify(modifier) {
 }
 
 /**
- * 获取当前时间字符串
- **/
-//function getCurrentTime() {
-//    var time = new Date();
-//    var _parse = function (num) {
-//        return num < 10 ? '0' + num : num;
-//    }
-//    var year = _parse(time.getFullYear());
-//    var month = _parse(time.getMonth() + 1);
-//    var date = _parse(time.getDate());
-//    var hours = _parse(time.getHours());
-//    var minutes = _parse(time.getMinutes());
-//    var seconds = _parse(time.getSeconds());
-//    var milliseconds = time.getMilliseconds();
-//    var sep1 = "/";
-//    var sep2 = ":"
-//    var timeStr = "" + year + sep1 + month + sep1 + date + " " + hours + sep2 + minutes + sep2 + seconds + sep2 + milliseconds;
-//    return timeStr;
-//}
-
-/**
  * 转换数据
  **/
 var paseData = function (data,options) {
@@ -104,4 +83,15 @@ exports.merge = function (first, second) {
         }
     }
     return first;
+};
+
+exports.translate = function(data,name){
+    return "vvp.CoreObject.extend({\n"
+        +"\t init:function(options){\n"
+        +"\t\t this.options = options || {};\n"
+        +"\t\t this.fragment = this._createView(options);\n"
+        +"\t},\n"
+        +"\t _createView:"
+        + data
+        + "\n});\n"
 };
